@@ -1,0 +1,19 @@
+.dropdown-menu {
+  left: auto;
+  right: 0;
+}
+
+.navbar {
+  margin-bottom: 1em;
+}
+
+.question-button {
+  background-color: transparent;
+  border: none;
+  padding: 5px;
+}
+
+.question-modal {
+  top: 50%;
+  transform: translateY(-50%);
+}
