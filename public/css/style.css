@@ -3,6 +3,10 @@
   right: 0;
 }
 
+.dropdown-item.disabled {
+  color: #000;
+}
+
 .navbar {
   margin-bottom: 1em;
 }

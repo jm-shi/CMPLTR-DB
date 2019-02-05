@@ -12,10 +12,11 @@
 </head>
 
 <body>
+
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">
-      Back
+    <a class="navbar-brand" href="javascript:history.back()">
+      <i class="fas fa-long-arrow-alt-left"></i>
     </a>
 
     <span class="mx-auto navbar-brand">Create Routine</span>
@@ -23,14 +24,15 @@
     <div class="nav-item dropdown">
       <a class="navbar-brand dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
-        John Doe
         <i class="fas fa-user"></i>
       </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="#">Profile</a>
-        <a class="dropdown-item" href="#">Help</a>
+        <div class="dropdown-item disabled"><strong>Welcome, John</strong></div>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Logout</a>
+        <a class="dropdown-item" href="profile">Profile</a>
+        <a class="dropdown-item" href="help">Help</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="login">Logout</a>
       </div>
     </div>
   </nav>
@@ -74,7 +76,7 @@
       </div>
 
       <div class="text-center">
-        <button type="submit" class="btn btn-lg btn-primary">Save</button>
+        <button type="submit" class="btn btn-lg btn-dark">Save</button>
       </div>
     </form>
   </div>
