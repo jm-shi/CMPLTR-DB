@@ -3,17 +3,20 @@
  * Module dependencies.
  */
 
-var express = require('express');
-var http = require('http');
-var path = require('path');
-var handlebars = require('express3-handlebars')
+const express = require('express');
+const http = require('http');
+const path = require('path');
+const handlebars = require('express-handlebars')
 
-var index = require('./routes/index');
-var createRoutine = require('./routes/createRoutine');
+const index = require('./routes/index');
+const createRoutine = require('./routes/createRoutine');
+const help = require('./routes/help');
+const login = require('./routes/login');
+const profile = require('./routes/profile');
 // Example route
-// var user = require('./routes/user');
+// const user = require('./routes/user');
 
-var app = express();
+const app = express();
 
 // All environments
 app.set('port', process.env.PORT || 3000);
@@ -37,6 +40,9 @@ if ('development' == app.get('env')) {
 
 app.get('/', index.view);
 app.get('/createRoutine', createRoutine.view);
+app.get('/help', help.view);
+app.get('/login', login.view);
+app.get('/profile', profile.view);
 // Example route
 // app.get('/users', user.list);
 
