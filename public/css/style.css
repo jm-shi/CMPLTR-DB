@@ -1,3 +1,7 @@
+.divider {
+  margin: 0 0 1em 0;
+}
+
 .dropdown-menu {
   left: auto;
   right: 0;
@@ -17,7 +21,29 @@
   padding: 5px;
 }
 
-.question-modal {
-  top: 50%;
-  transform: translateY(-50%);
+.clock {
+  text-align: center;
+}
+
+.alarm {
+  border-radius: 5px;
+  border-style: solid;
+  font-size: 3em;
+  padding-left: 0.7em;
+  text-align: center;
+}
+
+.alarm-btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.alarm-btn {
+  border-color: #000;
+  border-radius: 100%;
+  height: 40px;
+  width: 80px;
+  margin: 0 2px;
 }

@@ -10,6 +10,7 @@ const handlebars = require('express-handlebars')
 
 const index = require('./routes/index');
 const createRoutine = require('./routes/createRoutine');
+const currentRoutines = require('./routes/currentRoutines');
 const help = require('./routes/help');
 const login = require('./routes/login');
 const profile = require('./routes/profile');
@@ -40,6 +41,7 @@ if ('development' == app.get('env')) {
 
 app.get('/', index.view);
 app.get('/createRoutine', createRoutine.view);
+app.get('/currentRoutines', currentRoutines.view);
 app.get('/help', help.view);
 app.get('/login', login.view);
 app.get('/profile', profile.view);

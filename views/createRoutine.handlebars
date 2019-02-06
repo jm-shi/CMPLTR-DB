@@ -12,54 +12,59 @@
 </head>
 
 <body>
-  {{> navbar headline='Headline'}}
+  {{> navbar}}
 
   <!-- Form -->
   <div class="container">
-    <form>
+    <form class="needs-validation" action="currentRoutines" novalidate>
       <div class="form-group">
         <label for="title">Title</label>
         <button type="button" class="question-button" data-toggle="modal" data-target="#titleModal">
           <i class="fas fa-question-circle"></i>
         </button>
-        <input type="text" class="form-control" id="title" placeholder="Gym">
+        <input type="text" class="form-control" id="title" placeholder="Gym" required>
+        <div class="invalid-feedback">Please enter a title.</div>
       </div>
       <div class="form-group">
         <label for="goals">Goals</label>
         <button type="button" class="question-button" data-toggle="modal" data-target="#goalsModal">
           <i class="fas fa-question-circle"></i>
         </button>
-        <input type="text" class="form-control" id="goals" placeholder="Lose 10 pounds">
+        <input type="text" class="form-control" id="goals" placeholder="Lose 10 pounds" required>
+        <div class="invalid-feedback">Please enter a goal(s).</div>
       </div>
       <div class="form-group">
         <label for="goalReward">Goal Reward</label>
         <button type="button" class="question-button" data-toggle="modal" data-target="#goalRewardModal">
           <i class="fas fa-question-circle"></i>
         </button>
-        <input type="text" class="form-control" id="goalReward" placeholder="Watch a movie">
+        <input type="text" class="form-control" id="goalReward" placeholder="Watch a movie" required>
+        <div class="invalid-feedback">Please enter a goal reward.</div>
       </div>
-
       <div class="form-group">
-        <button type="button" class="btn btn-dark">Set Alarm</button>
+        <!--<a class="btn btn-dark" href="/setAlarm" role="button">Set Alarm</a>-->
+        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#alarmModal">
+          Set Alarm
+        </button>
         <small id="emailHelp" class="form-text text-muted">Alarm has not been set.</small>
       </div>
-
       <div class="form-group">
         <label for="daysToComplete">Days to Complete</label>
         <button type="button" class="question-button" data-toggle="modal" data-target="#daysToCompleteModal">
           <i class="fas fa-question-circle"></i>
         </button>
-        <input type="number" class="form-control" id="daysToComplete" placeholder="30">
+        <input type="number" class="form-control" id="daysToComplete" placeholder="30" required>
+        <div class="invalid-feedback">Please enter the number of days to complete the routine.</div>
       </div>
-
       <div class="text-center">
-        <button type="submit" class="btn btn-lg btn-dark">Save</button>
+        <button type="submit" class="btn btn-lg btn-dark" href="/currentRoutines">Save</button>
       </div>
     </form>
   </div>
 
   <!-- Title Modal -->
-  {{> modal modalId="titleModal" modalTitle="Title" modalLabel="titleModalLabel" definition="The name for a routine."
+  {{> modal modalId="titleModal" modalTitle="Title" modalLabel="titleModalLabel" definition="The name for a
+  routine."
   examples="Ex: go to gym, study math"}}
 
   <!-- Goals Modal -->
@@ -77,12 +82,79 @@
   {{> modal modalId="daysToCompleteModal" modalTitle="Days to Complete" modalLabel="daysToCompleteModalLabel"
   definition="The number of work days to finish the routine. Does not include rest days."}}
 
+  <!-- Set Alarm Modal -->
+  <div class="modal fade" id="alarmModal" tabindex="-1" role="dialog" aria-labelledby="alarmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="alarmModalLabel">Set Alarm</h5>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="clock">
+              <input class="alarm" type="time" id="alarm" name="alarm" value="12:00" required />
+            </div>
+
+            <hr />
+            <div class="divider"><strong>Repeat</strong></div>
+            <div class="alarm-btns">
+              <button type="button" class="btn btn-light alarm-btn">Mo</button>
+              <button type="button" class="btn btn-light alarm-btn">Tu</button>
+              <button type="button" class="btn btn-light alarm-btn">We</button>
+              <button type="button" class="btn btn-light alarm-btn">Th</button>
+              <button type="button" class="btn btn-light alarm-btn">Fr</button>
+              <button type="button" class="btn btn-light alarm-btn">Sa</button>
+              <button type="button" class="btn btn-light alarm-btn">Su</button>
+            </div>
+
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" />
+              <label class="form-check-label" for="otherDayCheck">Every other day</label>
+            </div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-dark">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
     crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
     crossorigin="anonymous"></script>
+
+  <script>
+    $(".alarm-btn").click(function () {
+      $(this).toggleClass("btn-dark");
+    });
+
+    // Code below taken courtesy of Bootstrap documentation (https://getbootstrap.com/docs/4.0/components/forms/)
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+      'use strict';
+      window.addEventListener('load', function () {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function (form) {
+          form.addEventListener('submit', function (event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+  </script>
+
 </body>
 
 </html>
