@@ -18,12 +18,26 @@
   <div class="container">
     <form class="needs-validation" action="currentRoutines" novalidate>
       <div class="form-group">
-        <label for="title">Title</label>
+        <label for="title">Title*</label>
         <button type="button" class="question-button" data-toggle="modal" data-target="#titleModal">
           <i class="fas fa-question-circle"></i>
         </button>
         <input type="text" class="form-control" id="title" placeholder="Gym" required>
         <div class="invalid-feedback">Please enter a title.</div>
+      </div>
+      <div class="form-group">
+        <label for="daysToComplete">Days to Complete*</label>
+        <button type="button" class="question-button" data-toggle="modal" data-target="#daysToCompleteModal">
+          <i class="fas fa-question-circle"></i>
+        </button>
+        <input type="number" class="form-control" id="daysToComplete" placeholder="30" required>
+        <div class="invalid-feedback">Please enter the number of days to complete the routine.</div>
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-dark large-btn" data-toggle="modal" data-target="#alarmModal">
+          Set Alarm
+        </button>
+        <small id="emailHelp" class="form-text text-muted">Alarm has not been set.</small>
       </div>
       <div class="form-group">
         <label for="goals">Goals</label>
@@ -41,23 +55,11 @@
         <input type="text" class="form-control" id="goalReward" placeholder="Watch a movie" required>
         <div class="invalid-feedback">Please enter a goal reward.</div>
       </div>
-      <div class="form-group">
-        <!--<a class="btn btn-dark" href="/setAlarm" role="button">Set Alarm</a>-->
-        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#alarmModal">
-          Set Alarm
-        </button>
-        <small id="emailHelp" class="form-text text-muted">Alarm has not been set.</small>
-      </div>
-      <div class="form-group">
-        <label for="daysToComplete">Days to Complete</label>
-        <button type="button" class="question-button" data-toggle="modal" data-target="#daysToCompleteModal">
-          <i class="fas fa-question-circle"></i>
-        </button>
-        <input type="number" class="form-control" id="daysToComplete" placeholder="30" required>
-        <div class="invalid-feedback">Please enter the number of days to complete the routine.</div>
-      </div>
+
       <div class="text-center">
-        <button type="submit" class="btn btn-lg btn-dark" href="/currentRoutines">Save</button>
+        <button type="submit" class="btn btn-dark large-btn" href="/currentRoutines">
+          Save
+        </button>
       </div>
     </form>
   </div>
