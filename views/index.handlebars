@@ -13,17 +13,28 @@
 </head>
 
 <body>
-	{{> navbar}}
-	<div align="center"><button type="button" class="btn btn-dark" onclick="window.location.href = 'createRoutine';">Create
-			Routine</button></div>
-	<p></p>
-	<!----to add a blank space between buttons--->
-	<div align="center"><button type="button" class="btn btn-dark">Current Routines</button></div>
-	<p></p>
-	<!----to add a blank space between buttons--->
-	<div align="center"><button type="button" class="btn btn-dark">Previous Routine</button></div>
-	<p></p>
-	<!----to add a blank space between buttons--->
+	{{> navbar noBackBtn="true"}}
+
+	<div class="logo">
+		<h1>CMPLTR</h1>
+	</div>
+
+	<div class="container">
+		<a class="btn btn-dark large-btn home-btn" href="createRoutine">Create Routine</a>
+		<a class="btn btn-dark large-btn home-btn" href="currentRoutines">Current Routines</a>
+		<a class="btn btn-dark large-btn home-btn" href="previousRoutines">Previous Routine</a>
+	</div>
+
+	<hr class="divider" />
+
+	<marquee class="community-feed-marquee">
+		<i class="fas fa-user-circle fa-2x marquee-item"></i>
+		<div class="marquee-item">Jim completed day 5 of his "Go swimming" routine!</div>
+	</marquee>
+
+	<div class="container">
+		<a class="btn btn-dark large-btn community-feed-btn" href="previousRoutines">View Community Feed</a>
+	</div>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 	 crossorigin="anonymous"></script>

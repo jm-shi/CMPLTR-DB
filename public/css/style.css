@@ -1,5 +1,5 @@
 .divider {
-  margin: 0 0 1em 0;
+  margin: 0 0 0.5em 0;
 }
 
 .dropdown-menu {
@@ -56,4 +56,35 @@
 
 .container input::placeholder { 
  color: rgba(200, 200, 200, 0.9);
+}
+
+.logo {
+  text-align: center;
+  padding: 1.5em;
+}
+
+.logo h1 {
+  font-size: 4.5em;
+}
+
+.home-btn {
+  margin-bottom: 1.5em;
+  padding: .5em;
+  font-size: 1.5em;
+}
+
+.community-feed-marquee {
+  display: inline-block;
+  vertical-align: middle;
+  margin-bottom: 0.25em;
+}
+
+.community-feed-btn {
+  font-size: 1em;
+  margin-bottom: 0.5em;
+}
+
+.marquee-item {
+  display: inline-block;
+  vertical-align: middle;
 }

@@ -3,7 +3,5 @@
  */
 
 exports.view = function (req, res) {
-  res.render('index', {
-    navbarTitle: 'CMPLTR Home'
-  });
+  res.render('index');
 };
