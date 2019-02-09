@@ -1,0 +1,22 @@
+{
+  "routines": [
+    {
+      "title": "Learn guitar",
+      "daysToComplete": 30,
+      "goals": "Play Thunderstruck",
+      "goalReward": "Have apple pie"
+    },
+    {
+      "title": "Go to gym",
+      "daysToComplete": 60,
+      "goals": "Lose 10 pounds",
+      "goalReward": "Watch a movie"
+    },
+    {
+      "title": "Study math",
+      "daysToComplete": 100,
+      "goals": "Get A on exam",
+      "goalReward": "Binge Netflix for a weekend"
+    }
+  ]
+}

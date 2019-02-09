@@ -1,10 +1,10 @@
 {
-  "name": "IntroHCI",
+  "name": "CMPLTR",
   "version": "0.0.1",
-  "author": "Intro HCI Staff",
+  "author": "Focused Learners",
   "repository": {
     "type": "git",
-    "url": "https://github.com/IntroHCI/lab4"
+    "url": "https://github.com/jm-shi/CMPLTR"
   },
   "license": "MIT",
   "private": true,
@@ -14,7 +14,7 @@
   "dependencies": {
     "express": "3.x",
     "express-handlebars": "^3.0.0",
-    "mongodb": "*",
+    "mongodb": "^3.1.13",
     "mongoose": "*"
   },
   "engines": {

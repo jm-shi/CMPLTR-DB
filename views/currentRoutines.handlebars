@@ -4,27 +4,250 @@
   <title>Current Routines</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="css/style.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
 
 <body>
   {{> navbar}}
 
-  <h1>Current Routines placeholder screen</h1>
+  {{#each data.routines}}
+  <!--<div>{{title}}</div>
+  <div>{{daysToComplete}}</div>
+  <div>{{goals}}</div>
+  <div>{{goalReward}}</div>-->
+  <div class="container" style="margin-bottom:1em;">
+    <div class="routines">
+      <div class="white">{{title}}</div>
+      <div>
+        <button type="button" class="btn btn-info btn-rounded btn-sm routine-btn">
+          <i class="fas fa-edit"> <span style="font-family:Helvetica">Edit</span></i>
+        </button>
+        <button type="button" class="btn btn-danger btn-rounded btn-sm">
+          <i class="fas fa-trash"><span style="font-family:Helvetica">Delete</span></i>
+        </button>
+      </div>
+    </div>
+  </div>
 
-  <a href="javascript:history.back()">
-    Back
-  </a>
+  {{/each}}
 
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  <div class="container">
+    <table class="table table-striped table-dark">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Progress</th>
+          <!--<th scope="col">View</th>-->
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Go to gym</td>
+          <td>0/7 days</td>
+          <!--<td>
+            <button type="button" class="btn btn-basic btn-rounded btn-sm"><i class="fas fa-eye"></i> </button>
+          </td>-->
+          <td>
+            <button type="button" class="btn btn-info btn-rounded btn-sm"><i class="fas fa-edit"></i> </button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger btn-rounded btn-sm"><i class="fas fa-trash"></i> </button>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Do yoga</td>
+          <td>3/4 days</td>
+          <!--<td>
+            <button type="button" class="btn btn-basic btn-rounded btn-sm"><i class="fas fa-eye"></i> </button>
+          </td>-->
+          <td>
+            <button type="button" class="btn btn-info btn-rounded btn-sm"><i class="fas fa-edit"></i> </button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger btn-rounded btn-sm"><i class="fas fa-trash"></i> </button>
+          </td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Study</td>
+          <td>5/7 days</td>
+          <!--<td>
+            <button type="button" class="btn btn-basic btn-rounded btn-sm"><i class="fas fa-eye"></i> </button>
+          </td>-->
+          <td>
+            <button type="button" class="btn btn-info btn-rounded btn-sm"><i class="fas fa-edit"></i> </button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger btn-rounded btn-sm"><i class="fas fa-trash"></i> </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div class="container">
+    <table class="table table-striped table-dark">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Progress</th>
+          <th scope="col">Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Go to gym</td>
+          <td>0/7 days</td>
+          <td>
+            <button type="button" class="btn btn-info btn-rounded btn-sm"><i class="fas fa-edit"></i> </button>
+            <button type="button" class="btn btn-danger btn-rounded btn-sm"><i class="fas fa-trash"></i> </button>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Do yoga</td>
+          <td>3/4 days</td>
+          <td>
+            <button type="button" class="btn btn-info btn-rounded btn-sm"><i class="fas fa-edit"></i> </button>
+            <button type="button" class="btn btn-danger btn-rounded btn-sm"><i class="fas fa-trash"></i> </button>
+          </td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Study</td>
+          <td>5/7 days</td>
+          <td>
+            <button type="button" class="btn btn-info btn-rounded btn-sm"><i class="fas fa-edit"></i> </button>
+            <button type="button" class="btn btn-danger btn-rounded btn-sm"><i class="fas fa-trash"></i> </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div class="container">
+    <table class="table table-striped table-dark">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Progress</th>
+          <th align="right" scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Go to gym</td>
+          <td>0/7 days</td>
+          <td>
+            <button type="button" class="btn btn-basic btn-rounded btn-sm"><i class="fas fa-eye"></i> View</button>
+            <button type="button" class="btn btn-info btn-rounded btn-sm"><i class="fas fa-edit"></i> Edit</button>
+            <button type="button" class="btn btn-danger btn-rounded btn-sm"><i class="fas fa-trash"></i> Delete</button>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Do yoga</td>
+          <td>3/4 days</td>
+          <td>
+            <button type="button" class="btn btn-basic btn-rounded btn-sm"><i class="fas fa-eye"></i> View</button>
+            <button type="button" class="btn btn-info btn-rounded btn-sm"><i class="fas fa-edit"></i> Edit</button>
+            <button type="button" class="btn btn-danger btn-rounded btn-sm"><i class="fas fa-trash"></i> Delete</button>
+          </td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Study</td>
+          <td>5/7 days</td>
+          <td>
+            <button type="button" class="btn btn-basic btn-rounded btn-sm"><i class="fas fa-eye"></i> View</button>
+            <button type="button" class="btn btn-info btn-rounded btn-sm"><i class="fas fa-edit"></i> Edit</button>
+            <button type="button" class="btn btn-danger btn-rounded btn-sm"><i class="fas fa-trash"></i> Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container">
+    <table class="table table-striped table-dark">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Progress</th>
+          <th scope="col">Date Started</th>
+          <th scope="col">Days</th>
+          <th scope="col">Alarm Time</th>
+          <th align="right" scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Go to gym</td>
+          <td>0/7 days</td>
+          <td>1/4/19</td>
+          <td>M/Tu/W</td>
+          <td>5:00AM</td>
+          <td>
+            <button type="button" class="btn btn-basic btn-rounded btn-sm"><i class="fas fa-eye"></i></button>
+            <button type="button" class="btn btn-info btn-rounded btn-sm"><i class="fas fa-edit"></i></button>
+            <button type="button" class="btn btn-danger btn-rounded btn-sm"><i class="fas fa-trash"></i></button>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Do yoga</td>
+          <td>3/4 days</td>
+          <td>1/2/19</td>
+          <td>M/Tu/Th</td>
+          <td>6:30AM</td>
+          <td>
+            <button type="button" class="btn btn-basic btn-rounded btn-sm"><i class="fas fa-eye"></i></button>
+            <button type="button" class="btn btn-info btn-rounded btn-sm"><i class="fas fa-edit"></i></button>
+            <button type="button" class="btn btn-danger btn-rounded btn-sm"><i class="fas fa-trash"></i></button>
+          </td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Study</td>
+          <td>5/7 days</td>
+          <td>1/5/19</td>
+          <td>Sa/Su</td>
+          <td>8:00PM</td>
+          <td>
+            <button type="button" class="btn btn-basic btn-rounded btn-sm"><i class="fas fa-eye"></i></button>
+            <button type="button" class="btn btn-info btn-rounded btn-sm"><i class="fas fa-edit"></i></button>
+            <button type="button" class="btn btn-danger btn-rounded btn-sm"><i class="fas fa-trash"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
     crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
     crossorigin="anonymous"></script>
 </body>
 

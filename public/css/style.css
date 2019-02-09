@@ -1,3 +1,50 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.alarm {
+  border-radius: 5px;
+  border-style: solid;
+  font-size: 2em;
+  /*padding-left: 0.7em;*/
+  text-align: center;
+}
+
+.alarm-btn {
+  border-color: #000;
+  border-radius: 100%;
+  padding: 0;
+  height: 50px;
+  margin: 0 2px;
+  width: 50px;
+}
+
+.alarm-btns {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+
+.clock {
+  text-align: center;
+}
+
+.community-feed-btn {
+  font-size: 1em;
+  margin-bottom: 0.5em;
+}
+
+.community-feed-marquee {
+  display: inline-block;
+  margin-bottom: 0.5em;
+  vertical-align: middle;
+}
+
+.container input::placeholder { 
+  color: rgba(200, 200, 200, 0.9);
+ }
+
 .divider {
   margin: 0 0 0.5em 0;
 }
@@ -8,83 +55,62 @@
 }
 
 .dropdown-item.disabled {
-  color: #000;
+  color: rgb(0,0,0);
 }
 
-.navbar {
-  margin-bottom: 1em;
-}
-
-.question-button {
-  background-color: transparent;
-  border: none;
-  padding: 5px;
-}
-
-.clock {
-  text-align: center;
-}
-
-.alarm {
-  border-radius: 5px;
-  border-style: solid;
-  font-size: 3em;
-  padding-left: 0.7em;
-  text-align: center;
-}
-
-.alarm-btns {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 1em;
-}
-
-.alarm-btn {
-  border-color: #000;
-  border-radius: 100%;
-  padding: 0;
-  height: 50px;
-  width: 50px;
-  margin: 0 2px;
+.home-btn {
+  font-size: 1.5em;
+  margin-bottom: 1.5em;
+  padding: .5em;
 }
 
 .large-btn {
-  width: 100%;
   font-size: 1em;
-}
-
-.container input::placeholder { 
- color: rgba(200, 200, 200, 0.9);
+  width: 100%;
 }
 
 .logo {
-  text-align: center;
   padding: 1.5em;
+  text-align: center;
 }
 
 .logo h1 {
   font-size: 4.5em;
 }
 
-.home-btn {
-  margin-bottom: 1.5em;
-  padding: .5em;
-  font-size: 1.5em;
-}
-
-.community-feed-marquee {
-  display: inline-block;
-  vertical-align: middle;
-  margin-bottom: 0.5em;
-}
-
-.community-feed-btn {
-  font-size: 1em;
-  margin-bottom: 0.5em;
-}
-
 .marquee-item {
   display: inline-block;
   vertical-align: middle;
+}
+
+.navbar {
+  margin-bottom: 1em;
+}
+
+.question-btn {
+  background-color: transparent;
+  border: none;
+  padding: 5px;
+}
+
+.red {
+  color: rgb(230, 0, 0);
+}
+
+.routines {
+  align-items: center;
+  background: rgb(35,35,35);
+  border-radius: 0.5em;
+  box-shadow: 0px 5px 20px 0 rgba(0,0,0,0.5); 
+  display: flex;
+  justify-content: space-between; 
+  padding: 2em;
+}
+
+.routine-btn {
+  margin-right: 1em;
+}
+
+.white {
+  color: rgb(255,255,255);
 }

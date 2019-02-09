@@ -4,11 +4,11 @@
   <title>Create Routine</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="css/style.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
 
 <body>
@@ -16,21 +16,21 @@
 
   <!-- Form -->
   <div class="container">
-    <form class="needs-validation" action="currentRoutines" novalidate>
+    <form class="needs-validation" method="post" action="/addRoutine" novalidate>
       <div class="form-group">
-        <label for="title">Title*</label>
-        <button type="button" class="question-button" data-toggle="modal" data-target="#titleModal">
+        <label for="title">Title<span class="red">*</span></label>
+        <button type="button" class="question-btn" data-toggle="modal" data-target="#titleModal">
           <i class="fas fa-question-circle"></i>
         </button>
-        <input type="text" class="form-control" id="title" placeholder="Gym" required>
+        <input type="text" class="form-control" id="title" name="title" placeholder="Gym" required>
         <div class="invalid-feedback">Please enter a title.</div>
       </div>
       <div class="form-group">
-        <label for="daysToComplete">Days to Complete*</label>
-        <button type="button" class="question-button" data-toggle="modal" data-target="#daysToCompleteModal">
+        <label for="daysToComplete">Days to Complete<span class="red">*</span></label>
+        <button type="button" class="question-btn" data-toggle="modal" data-target="#daysToCompleteModal">
           <i class="fas fa-question-circle"></i>
         </button>
-        <input type="number" class="form-control" id="daysToComplete" placeholder="30" required>
+        <input type="number" class="form-control" id="daysToComplete" name="daysToComplete" placeholder="30" required>
         <div class="invalid-feedback">Please enter the number of days to complete the routine.</div>
       </div>
       <div class="form-group">
@@ -41,25 +41,24 @@
       </div>
       <div class="form-group">
         <label for="goals">Goals</label>
-        <button type="button" class="question-button" data-toggle="modal" data-target="#goalsModal">
+        <button type="button" class="question-btn" data-toggle="modal" data-target="#goalsModal">
           <i class="fas fa-question-circle"></i>
         </button>
-        <input type="text" class="form-control" id="goals" placeholder="Lose 10 pounds" required>
+        <input type="text" class="form-control" id="goals" name="goals" placeholder="Lose 10 pounds">
         <div class="invalid-feedback">Please enter a goal(s).</div>
       </div>
       <div class="form-group">
         <label for="goalReward">Goal Reward</label>
-        <button type="button" class="question-button" data-toggle="modal" data-target="#goalRewardModal">
+        <button type="button" class="question-btn" data-toggle="modal" data-target="#goalRewardModal">
           <i class="fas fa-question-circle"></i>
         </button>
-        <input type="text" class="form-control" id="goalReward" placeholder="Watch a movie" required>
+        <input type="text" class="form-control" id="goalReward" name="goalReward" placeholder="Watch a movie">
         <div class="invalid-feedback">Please enter a goal reward.</div>
       </div>
 
       <div class="text-center">
-        <button type="submit" class="btn btn-dark large-btn" href="/currentRoutines">
-          Save
-        </button>
+        <input type="submit" class="btn btn-dark large-btn" value="Save">
+        </input>
       </div>
     </form>
   </div>
@@ -85,7 +84,8 @@
   definition="The number of work days to finish the routine. Does not include rest days."}}
 
   <!-- Set Alarm Modal -->
-  <div class="modal fade" id="alarmModal" tabindex="-1" role="dialog" aria-labelledby="alarmModalLabel" aria-hidden="true">
+  <div class="modal fade" id="alarmModal" tabindex="-1" role="dialog" aria-labelledby="alarmModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -124,11 +124,14 @@
     </div>
   </div>
 
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
     crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
     crossorigin="anonymous"></script>
 
   <script>

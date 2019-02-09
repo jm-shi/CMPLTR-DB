@@ -16,8 +16,6 @@ const previousRoutines = require('./routes/previousRoutines');
 const help = require('./routes/help');
 const login = require('./routes/login');
 const profile = require('./routes/profile');
-// Example route
-// const user = require('./routes/user');
 
 const app = express();
 
@@ -49,9 +47,22 @@ app.get('/previousRoutines', previousRoutines.view);
 app.get('/help', help.view);
 app.get('/login', login.view);
 app.get('/profile', profile.view);
-// Example route
-// app.get('/users', user.list);
+app.post('/addRoutine', createRoutine.addRoutine);
 
 http.createServer(app).listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+// const MongoClient = require('mongodb').MongoClient;
+// const assert = require('assert');
+// // Connection URL
+// const url = 'mongodb://localhost:27017';
+// // Database Name
+// const dbName = 'cmpltr';
+// // Use connect method to connect to the server
+// MongoClient.connect(url, { useNewUrlParser: true }, function (err, client) {
+//   assert.equal(null, err);
+//   console.log("Connected successfully to server");
+//   const db = client.db(dbName);
+//   client.close();
+// });
