@@ -17,6 +17,7 @@ const help = require('./routes/help');
 const login = require('./routes/login');
 const profile = require('./routes/profile');
 const routine = require('./routes/routine');
+const notFound = require('./routes/notFound');
 
 const app = express();
 
@@ -44,12 +45,13 @@ app.get('/', index.view);
 app.get('/createRoutine', createRoutine.view);
 app.get('/communityFeed', communityFeed.view);
 app.get('/currentRoutines', currentRoutines.view);
+app.post('/currentRoutines', createRoutine.addRoutine);
 app.get('/previousRoutines', previousRoutines.view);
 app.get('/help', help.view);
 app.get('/login', login.view);
 app.get('/profile', profile.view);
 app.get('/routine/:id', routine.viewCurrentRoutine);
-app.post('/currentRoutines', createRoutine.addRoutine);
+app.use(notFound.view); // 404 route
 
 http.createServer(app).listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));

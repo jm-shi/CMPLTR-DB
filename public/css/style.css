@@ -31,6 +31,13 @@ body {
   text-align: center;
 }
 
+.center-xy {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .community-feed-btn {
   font-size: 1em;
   margin-bottom: 0.5em;
