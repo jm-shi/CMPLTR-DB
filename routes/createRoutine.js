@@ -24,6 +24,7 @@ exports.addRoutine = function (req, res) {
   const repeatFriday = req.body.repeatFriday;
   const repeatSaturday = req.body.repeatSaturday;
   const repeatSunday = req.body.repeatSunday;
+  const everyOtherDay = req.body.everyOtherDay;
   const goals = req.body.goals;
   const goalReward = req.body.goalReward;
   console.log(req.body);
@@ -41,6 +42,7 @@ exports.addRoutine = function (req, res) {
       repeatFriday,
       repeatSaturday,
       repeatSunday,
+      everyOtherDay,
       goals,
       goalReward,
     });
