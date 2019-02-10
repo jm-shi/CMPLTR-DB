@@ -1,12 +1,12 @@
 <!doctype html>
 
 <head>
-  <title>Current Routines</title>
+  <title>Current Routine</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="../css/style.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
@@ -14,26 +14,19 @@
 <body>
   {{> navbar}}
 
-  {{#each data.routines}}
-  <!--<div>{{title}}</div>
-  <div>{{daysToComplete}}</div>
-  <div>{{goals}}</div>
-  <div>{{goalReward}}</div>-->
-  <div class="container" style="margin-bottom:1em;">
-    <div class="routines">
-      <a class="hidden" href="/routine/{{id}}"></a>
-      <div class="white">{{title}}</div>
-      <div>
-        <button type="button" class="btn btn-info btn-rounded btn-sm edit-btn">
-          <i class="fas fa-edit"> <span style="font-family:Helvetica"> Edit</span></i>
-        </button>
-        <button type="button" class="btn btn-danger btn-rounded btn-sm">
-          <i class="fas fa-trash"><span style="font-family:Helvetica"> Delete</span></i>
-        </button>
-      </div>
-    </div>
-  </div>
-  {{/each}}
+  <h1>Title: {{currentRoutineData.title}}</h1>
+  <div>Days to complete: {{currentRoutineData.daysToComplete}}</div>
+  <div>Alarm: {{currentRoutineData.alarm}}</div>
+  <div>Repeat Monday: {{currentRoutineData.repeatMonday}}</div>
+  <div>Repeat Tuesday: {{currentRoutineData.repeatTuesday}}</div>
+  <div>Repeat Wednesday: {{currentRoutineData.repeatWednesday}}</div>
+  <div>Repeat Thursday: {{currentRoutineData.repeatThursday}}</div>
+  <div>Repeat Friday: {{currentRoutineData.repeatFriday}}</div>
+  <div>Repeat Saturday: {{currentRoutineData.repeatSaturday}}</div>
+  <div>Repeat Sunday: {{currentRoutineData.repeatSunday}}</div>
+  <div>Goals: {{currentRoutineData.goals}}</div>
+  <div>Goal Reward: {{currentRoutineData.goalReward}}</div>
+  <div>Created on: {{currentRoutineData.createdAt}}</div>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -44,11 +37,6 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
     integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
     crossorigin="anonymous"></script>
-  <script>
-    $(".routines").click(function (e) {
-      window.location = $(this).find("a").attr("href");
-    });
-  </script>
 </body>
 
 </html>

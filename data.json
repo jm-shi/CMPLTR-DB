@@ -1,19 +1,33 @@
 {
   "routines": [
     {
+      "id": "e81f2e68-b6b4-447b-9e83-3ae4323f1cc4",
+      "createdAt": "2/2/2019",
       "title": "Learn guitar",
       "daysToComplete": 30,
+      "alarm": "15:00",
+      "repeatMonday": "on",
+      "repeatWednesday": "on",
+      "repeatFriday": "on",
       "goals": "Play Thunderstruck",
       "goalReward": "Have apple pie"
     },
     {
+      "id": "4e53ad54-0a17-4b29-bfcd-c49438b0547c",
+      "createdAt": "2/8/2019",
       "title": "Go to gym",
       "daysToComplete": 60,
+      "alarm": "10:00",
+      "repeatMonday": "on",
       "goals": "Lose 10 pounds",
       "goalReward": "Watch a movie"
     },
     {
+      "id": "33af38ec-f6ec-473f-99bf-72d6bab0785b",
+      "createdAt": "2/9/2019",
       "title": "Study math",
+      "alarm": "7:30",
+      "repeatSaturday": "on",
       "daysToComplete": 100,
       "goals": "Get A on exam",
       "goalReward": "Binge Netflix for a weekend"

@@ -6,7 +6,7 @@
 const express = require('express');
 const http = require('http');
 const path = require('path');
-const handlebars = require('express-handlebars')
+const handlebars = require('express-handlebars');
 
 const index = require('./routes/index');
 const communityFeed = require('./routes/communityFeed');
@@ -16,6 +16,7 @@ const previousRoutines = require('./routes/previousRoutines');
 const help = require('./routes/help');
 const login = require('./routes/login');
 const profile = require('./routes/profile');
+const routine = require('./routes/routine');
 
 const app = express();
 
@@ -47,7 +48,8 @@ app.get('/previousRoutines', previousRoutines.view);
 app.get('/help', help.view);
 app.get('/login', login.view);
 app.get('/profile', profile.view);
-app.post('/addRoutine', createRoutine.addRoutine);
+app.get('/routine/:id', routine.viewCurrentRoutine);
+app.post('/currentRoutines', createRoutine.addRoutine);
 
 http.createServer(app).listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));

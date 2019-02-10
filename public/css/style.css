@@ -6,8 +6,9 @@ body {
   border-radius: 5px;
   border-style: solid;
   font-size: 2em;
-  /*padding-left: 0.7em;*/
+  /* padding-left: 0.7em; */
   text-align: center;
+  width: 100%;
 }
 
 .alarm-btn {
@@ -26,7 +27,7 @@ body {
   margin-bottom: 1em;
 }
 
-.clock {
+.center {
   text-align: center;
 }
 
@@ -45,6 +46,10 @@ body {
   color: rgba(200, 200, 200, 0.9);
  }
 
+/* .container input[type=date]:invalid {
+  color: rgba(200, 200, 200, 0.9);
+} */
+
 .divider {
   margin: 0 0 0.5em 0;
 }
@@ -56,6 +61,10 @@ body {
 
 .dropdown-item.disabled {
   color: rgb(0,0,0);
+}
+
+.hidden {
+  display: none;
 }
 
 .home-btn {
@@ -107,7 +116,11 @@ body {
   padding: 2em;
 }
 
-.routine-btn {
+.routines:hover {
+  background: rgba(34, 34, 34, 0.9);
+}
+
+.routines .edit-btn {
   margin-right: 1em;
 }
 
