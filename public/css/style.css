@@ -11,7 +11,7 @@ body {
   width: 100%;
 }
 
-.alarm-btn {
+.circular-btn {
   border-color: #000;
   border-radius: 100%;
   padding: 0;
@@ -20,14 +20,14 @@ body {
   width: 50px;
 }
 
-.alarm-btns {
+.circular-btns {
   align-items: center;
   display: flex;
   justify-content: center;
   margin-bottom: 1em;
 }
 
-.center {
+.center-text {
   text-align: center;
 }
 
@@ -68,6 +68,11 @@ body {
 
 .dropdown-item.disabled {
   color: rgb(0,0,0);
+}
+
+.goals-box {
+  border: 2px solid black;
+  padding-top: 1em;
 }
 
 .hidden {
@@ -111,6 +116,12 @@ body {
 
 .red {
   color: rgb(230, 0, 0);
+}
+
+.routine .circular-btn {
+  height: 60px;
+  margin-bottom: 1em;
+  width: 60px;
 }
 
 .routines {

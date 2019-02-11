@@ -33,37 +33,6 @@
         <input type="number" class="form-control" id="daysToComplete" name="daysToComplete" placeholder="30" required>
         <div class="invalid-feedback">Please enter the number of days to complete the routine.</div>
       </div>
-      <!--
-      <div class="form-group">
-        <label for="startDate">Start Date<span class="red">*</span></label>
-        <button type="button" class="question-btn" data-toggle="modal" data-target="#startDateModal">
-          <i class="fas fa-question-circle"></i>
-        </button>
-        {{!-- <input type="date" class="form-control" id="startDate" name="startDate" required> --}}
-        <input type="text" id="datepicker" required>
-        <div class="invalid-feedback">Please enter the start day for the routine.</div>
-      </div>-->
-
-      <!--<div class="form-group">
-        <label for="repeat">Repeat</label>
-        <div class="alarm-btns">
-          <button type="button" class="btn btn-light alarm-btn monday">Mo</button>
-          <button type="button" class="btn btn-light alarm-btn tuesday">Tu</button>
-          <button type="button" class="btn btn-light alarm-btn wednesday">We</button>
-          <button type="button" class="btn btn-light alarm-btn thursday">Th</button>
-          <button type="button" class="btn btn-light alarm-btn friday">Fr</button>
-          <button type="button" class="btn btn-light alarm-btn saturday">Sa</button>
-          <button type="button" class="btn btn-light alarm-btn sunday">Su</button>
-          <input type="checkbox" name="repeatMonday" class="monday hidden">
-          <input type="checkbox" name="repeatTuesday" class="tuesday hidden">
-          <input type="checkbox" name="repeatWednesday" class="wednesday hidden">
-          <input type="checkbox" name="repeatThursday" class="thursday hidden">
-          <input type="checkbox" name="repeatFriday" class="friday hidden">
-          <input type="checkbox" name="repeatSaturday" class="saturday hidden">
-          <input type="checkbox" name="repeatSunday" class="sunday hidden">
-        </div>
-      </div>-->
-
       <div class="form-group">
         <button type="button" class="btn btn-dark large-btn" data-toggle="modal" data-target="#alarmModal">
           Set Alarm
@@ -80,20 +49,20 @@
               </div>
               <div class="modal-body">
                 <div class="container">
-                  <div class="center">
+                  <div class="center-text">
                     <input class="alarm" type="time" id="alarm" name="alarm" />
                   </div>
 
                   <hr />
                   <div class="divider"><strong>Repeat</strong></div>
-                  <div class="alarm-btns">
-                    <button type="button" class="btn btn-light alarm-btn monday">Mo</button>
-                    <button type="button" class="btn btn-light alarm-btn tuesday">Tu</button>
-                    <button type="button" class="btn btn-light alarm-btn wednesday">We</button>
-                    <button type="button" class="btn btn-light alarm-btn thursday">Th</button>
-                    <button type="button" class="btn btn-light alarm-btn friday">Fr</button>
-                    <button type="button" class="btn btn-light alarm-btn saturday">Sa</button>
-                    <button type="button" class="btn btn-light alarm-btn sunday">Su</button>
+                  <div class="circular-btns">
+                    <button type="button" class="btn btn-light circular-btn monday">Mo</button>
+                    <button type="button" class="btn btn-light circular-btn tuesday">Tu</button>
+                    <button type="button" class="btn btn-light circular-btn wednesday">We</button>
+                    <button type="button" class="btn btn-light circular-btn thursday">Th</button>
+                    <button type="button" class="btn btn-light circular-btn friday">Fr</button>
+                    <button type="button" class="btn btn-light circular-btn saturday">Sa</button>
+                    <button type="button" class="btn btn-light circular-btn sunday">Su</button>
                     <input type="checkbox" name="repeatMonday" class="monday hidden">
                     <input type="checkbox" name="repeatTuesday" class="tuesday hidden">
                     <input type="checkbox" name="repeatWednesday" class="wednesday hidden">

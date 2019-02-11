@@ -14,20 +14,44 @@
 <body>
   {{> navbar}}
 
-  <h1>Title: {{currentRoutineData.title}}</h1>
-  <div>Days to complete: {{currentRoutineData.daysToComplete}}</div>
-  <div>Alarm: {{currentRoutineData.alarm}}</div>
-  <div>Repeat Monday: {{currentRoutineData.repeatMonday}}</div>
-  <div>Repeat Tuesday: {{currentRoutineData.repeatTuesday}}</div>
-  <div>Repeat Wednesday: {{currentRoutineData.repeatWednesday}}</div>
-  <div>Repeat Thursday: {{currentRoutineData.repeatThursday}}</div>
-  <div>Repeat Friday: {{currentRoutineData.repeatFriday}}</div>
-  <div>Repeat Saturday: {{currentRoutineData.repeatSaturday}}</div>
-  <div>Repeat Sunday: {{currentRoutineData.repeatSunday}}</div>
-  <div>Every other day: {{currentRoutineData.everyOtherDay}}</div>
-  <div>Goals: {{currentRoutineData.goals}}</div>
-  <div>Goal Reward: {{currentRoutineData.goalReward}}</div>
-  <div>Created on: {{currentRoutineData.createdAt}}</div>
+  <div class="container">
+
+    <h2 class="text-center">{{currentRoutineData.title}}</h2>
+    <h4>Goals:</h4>
+    <div class="goals-box rounded">
+      <ul>
+        <li>{{currentRoutineData.goals}}</li>
+      </ul>
+    </div>
+
+    <br />
+
+    <h4>Alarm: {{currentRoutineData.alarm}}</h4>
+
+    <br />
+    <div class="routine circular-btns" style="flex-wrap: wrap">
+      <button type="button" class="btn btn-light circular-btn">Feb 2</button>
+      <button type="button" class="btn btn-light circular-btn">Feb 4</button>
+      <button type="button" class="btn btn-light circular-btn">Feb 6</button>
+      <button type="button" class="btn btn-light circular-btn">Feb 8</button>
+      <button type="button" class="btn btn-light circular-btn">Feb 10</button>
+      <button type="button" class="btn btn-light circular-btn">Feb 12</button>
+      <button type="button" class="btn btn-light circular-btn">Feb 14</button>
+      <button type="button" class="btn btn-light circular-btn">Feb 16</button>
+    </div>
+    <div>Days to complete: {{currentRoutineData.daysToComplete}}</div>
+    <div>Alarm: {{currentRoutineData.alarm}}</div>
+    <div>Repeat Monday: {{currentRoutineData.repeatMonday}}</div>
+    <div>Repeat Tuesday: {{currentRoutineData.repeatTuesday}}</div>
+    <div>Repeat Wednesday: {{currentRoutineData.repeatWednesday}}</div>
+    <div>Repeat Thursday: {{currentRoutineData.repeatThursday}}</div>
+    <div>Repeat Friday: {{currentRoutineData.repeatFriday}}</div>
+    <div>Repeat Saturday: {{currentRoutineData.repeatSaturday}}</div>
+    <div>Repeat Sunday: {{currentRoutineData.repeatSunday}}</div>
+    <div>Every other day: {{currentRoutineData.everyOtherDay}}</div>
+    <div>Goal Reward: {{currentRoutineData.goalReward}}</div>
+    <div>Created on: {{currentRoutineData.createdAt}}</div>
+  </div>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
