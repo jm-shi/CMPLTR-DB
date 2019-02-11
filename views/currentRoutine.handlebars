@@ -19,9 +19,13 @@
     <h2 class="text-center">{{currentRoutineData.title}}</h2>
     <h4>Goals:</h4>
     <div class="goals-box rounded">
+      {{#if currentRoutineData.goals}}
       <ul>
         <li>{{currentRoutineData.goals}}</li>
       </ul>
+      {{else}}
+      <ul>You did not set any goals.</ul>
+      {{/if}}
     </div>
 
     <br />
@@ -30,16 +34,11 @@
 
     <br />
     <div class="routine circular-btns" style="flex-wrap: wrap">
-      <button type="button" class="btn btn-light circular-btn">Feb 2</button>
-      <button type="button" class="btn btn-light circular-btn">Feb 4</button>
-      <button type="button" class="btn btn-light circular-btn">Feb 6</button>
-      <button type="button" class="btn btn-light circular-btn">Feb 8</button>
-      <button type="button" class="btn btn-light circular-btn">Feb 10</button>
-      <button type="button" class="btn btn-light circular-btn">Feb 12</button>
-      <button type="button" class="btn btn-light circular-btn">Feb 14</button>
-      <button type="button" class="btn btn-light circular-btn">Feb 16</button>
     </div>
-    <div>Days to complete: {{currentRoutineData.daysToComplete}}</div>
+
+    <div id="#daysToComplete">{{currentRoutineData.daysToComplete}}</div>
+    <div id="#startDate">{{currentRoutineData.createdAt}}</div>
+
     <div>Alarm: {{currentRoutineData.alarm}}</div>
     <div>Repeat Monday: {{currentRoutineData.repeatMonday}}</div>
     <div>Repeat Tuesday: {{currentRoutineData.repeatTuesday}}</div>
@@ -50,9 +49,9 @@
     <div>Repeat Sunday: {{currentRoutineData.repeatSunday}}</div>
     <div>Every other day: {{currentRoutineData.everyOtherDay}}</div>
     <div>Goal Reward: {{currentRoutineData.goalReward}}</div>
-    <div>Created on: {{currentRoutineData.createdAt}}</div>
   </div>
 
+  <script src="../js/calendar.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
@@ -62,6 +61,20 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
     integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
     crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function () {
+      const daysToComplete = parseInt(document.getElementById("#daysToComplete").innerHTML);
+      const startDate = JSON.parse(document.getElementById("#startDate").innerHTML);
+      const month = startDate.month;
+      const date = startDate.date;
+      const year = startDate.year;
+      const workDays = getWorkDays(month, date, year, daysToComplete);
+      console.log(workDays);
+      workDays.forEach(function (workDay) {
+        $(".circular-btns").append(`<button type="button" class="btn btn-light circular-btn">${workDay}</button>`)
+      });
+    })
+  </script>
 </body>
 
 </html>

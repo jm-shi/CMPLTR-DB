@@ -2,7 +2,7 @@
   "routines": [
     {
       "id": "e81f2e68-b6b4-447b-9e83-3ae4323f1cc4",
-      "createdAt": "2/2/2019",
+      "createdAt": "{\"day\":2,\"month\":0,\"date\":8,\"year\":2019}",
       "title": "Learn guitar",
       "daysToComplete": 30,
       "alarm": "15:00",
@@ -14,7 +14,7 @@
     },
     {
       "id": "4e53ad54-0a17-4b29-bfcd-c49438b0547c",
-      "createdAt": "2/8/2019",
+      "createdAt": "{\"day\":3,\"month\":0,\"date\":23,\"year\":2019}",
       "title": "Go to gym",
       "daysToComplete": 60,
       "alarm": "10:00",
@@ -24,7 +24,7 @@
     },
     {
       "id": "33af38ec-f6ec-473f-99bf-72d6bab0785b",
-      "createdAt": "2/9/2019",
+      "createdAt": "{\"day\":5,\"month\":1,\"date\":1,\"year\":2019}",
       "title": "Study math",
       "alarm": "7:30",
       "repeatSaturday": "on",

@@ -204,8 +204,17 @@
       }
     });
 
+    const date = new Date();
+    const startDate = {
+      day: date.getDay(),
+      month: date.getMonth(),
+      date: date.getDate(),
+      year: date.getFullYear()
+    }
+    const startDateString = JSON.stringify(startDate);
+
     // Set createdAt to current date
-    $("#createdAt").val(new Date().toLocaleDateString("en-US"));
+    $("#createdAt").val(startDateString);
 
     // Generate unique ID
     $("#uuid").val(uuidv4());
