@@ -1,12 +1,12 @@
 <!doctype html>
 
 <head>
-  <title>Create Routine</title>
+  <title>Edit Routine</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="../css/style.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
@@ -22,7 +22,7 @@
         <button type="button" class="question-btn" data-toggle="modal" data-target="#titleModal">
           <i class="fas fa-question-circle"></i>
         </button>
-        <input type="text" class="form-control" id="title" name="title" placeholder="Gym" required>
+        <input type="text" class="form-control" id="title" name="title" value="{{currentRoutineData.title}}" required>
         <div class="invalid-feedback">Please enter a title.</div>
       </div>
       <div class="form-group">
@@ -30,7 +30,8 @@
         <button type="button" class="question-btn" data-toggle="modal" data-target="#daysToCompleteModal">
           <i class="fas fa-question-circle"></i>
         </button>
-        <input type="number" class="form-control" id="daysToComplete" name="daysToComplete" placeholder="30" required>
+        <input type="number" class="form-control" id="daysToComplete" name="daysToComplete"
+          value="{{currentRoutineData.daysToComplete}}" required>
         <div class="invalid-feedback">Please enter the number of days to complete the routine.</div>
       </div>
       <div class="form-group">
@@ -50,30 +51,47 @@
               <div class="modal-body">
                 <div class="container">
                   <div class="center-text">
-                    <input class="alarm" type="time" id="alarm" name="alarm" />
+                    <input class="alarm" type="time" id="alarm" name="alarm" value="{{currentRoutineData.alarm}}" />
                   </div>
 
                   <hr />
                   <div class="divider"><strong>Repeat</strong></div>
                   <div class="circular-btns">
-                    <button type="button" class="btn btn-light circular-btn monday">Mo</button>
-                    <button type="button" class="btn btn-light circular-btn tuesday">Tu</button>
-                    <button type="button" class="btn btn-light circular-btn wednesday">We</button>
-                    <button type="button" class="btn btn-light circular-btn thursday">Th</button>
-                    <button type="button" class="btn btn-light circular-btn friday">Fr</button>
-                    <button type="button" class="btn btn-light circular-btn saturday">Sa</button>
-                    <button type="button" class="btn btn-light circular-btn sunday">Su</button>
-                    <input type="checkbox" name="repeatMonday" class="monday hidden">
-                    <input type="checkbox" name="repeatTuesday" class="tuesday hidden">
-                    <input type="checkbox" name="repeatWednesday" class="wednesday hidden">
-                    <input type="checkbox" name="repeatThursday" class="thursday hidden">
-                    <input type="checkbox" name="repeatFriday" class="friday hidden">
-                    <input type="checkbox" name="repeatSaturday" class="saturday hidden">
-                    <input type="checkbox" name="repeatSunday" class="sunday hidden">
+
+                    <button type="button" class="btn circular-btn monday 
+                       {{#if currentRoutineData.repeatMonday}}btn-dark{{else}}btn-light{{/if}}">Mo</button>
+                    <button type="button" class="btn circular-btn tuesday 
+                      {{#if currentRoutineData.repeatTuesday}}btn-dark{{else}}btn-light{{/if}}">Tu</button>
+                    <button type="button" class="btn circular-btn wednesday
+                      {{#if currentRoutineData.repeatWednesday}}btn-dark{{else}}btn-light{{/if}}">We</button>
+                    <button type="button" class="btn circular-btn thursday
+                     {{#if currentRoutineData.repeatThursday}}btn-dark{{else}}btn-light{{/if}}">Th</button>
+                    <button type="button" class="btn circular-btn friday
+                      {{#if currentRoutineData.repeatFriday}}btn-dark{{else}}btn-light{{/if}}">Fr</button>
+                    <button type="button" class="btn circular-btn saturday
+                       {{#if currentRoutineData.repeatSaturday}}btn-dark{{else}}btn-light{{/if}}">Sa</button>
+                    <button type="button" class="btn circular-btn sunday
+                       {{#if currentRoutineData.repeatSunday}}btn-dark{{else}}btn-light{{/if}}">Su</button>
+
+                    <input type="checkbox" name="repeatMonday" class="monday hidden"
+                      {{#if currentRoutineData.repeatMonday}}checked{{/if}}>
+                    <input type="checkbox" name="repeatTuesday" class="tuesday hidden"
+                      {{#if currentRoutineData.repeatTuesday}}checked{{/if}}>
+                    <input type="checkbox" name="repeatWednesday" class="wednesday hidden"
+                      {{#if currentRoutineData.repeatWednesday}}checked{{/if}}>
+                    <input type="checkbox" name="repeatThursday" class="thursday hidden"
+                      {{#if currentRoutineData.repeatThursday}}checked{{/if}}>
+                    <input type="checkbox" name="repeatFriday" class="friday hidden"
+                      {{#if currentRoutineData.repeatFriday}}checked{{/if}}>
+                    <input type="checkbox" name="repeatSaturday" class="saturday hidden"
+                      {{#if currentRoutineData.repeatSaturday}}checked{{/if}}>
+                    <input type="checkbox" name="repeatSunday" class="sunday hidden"
+                      {{#if currentRoutineData.repeatSunday}}checked{{/if}}>
                   </div>
 
                   <div class="form-check">
-                    <input type="checkbox" name="everyOtherDay" class="form-check-input" />
+                    <input type="checkbox" name="everyOtherDay" class="form-check-input"
+                      {{#if currentRoutineData.everyOtherDay}}checked{{/if}} />
                     <label class="form-check-label" for="otherDayCheck">Every other day</label>
                   </div>
 
@@ -93,7 +111,7 @@
         <button type="button" class="question-btn" data-toggle="modal" data-target="#goalsModal">
           <i class="fas fa-question-circle"></i>
         </button>
-        <input type="text" class="form-control" id="goals" name="goals" placeholder="Lose 10 pounds">
+        <input type="text" class="form-control" id="goals" name="goals" value="{{currentRoutineData.goals}}">
         <div class="invalid-feedback">Please enter a goal(s).</div>
       </div>
       <div class="form-group">
@@ -101,12 +119,13 @@
         <button type="button" class="question-btn" data-toggle="modal" data-target="#goalRewardModal">
           <i class="fas fa-question-circle"></i>
         </button>
-        <input type="text" class="form-control" id="goalReward" name="goalReward" placeholder="Watch a movie">
+        <input type="text" class="form-control" id="goalReward" name="goalReward"
+          value="{{currentRoutineData.goalReward}}">
         <div class="invalid-feedback">Please enter a goal reward.</div>
       </div>
 
-      <input class="hidden" type="text" name="id" id="uuid" readonly>
-      <input class="hidden" type="text" name="createdAt" id="createdAt">
+      <input class="hidden" type="text" name="id" id="uuid" value={{currentRoutineData.id}} readonly>
+      <input class="hidden" type="text" name="createdAt" id="createdAt" value={{currentRoutineData.createdAt}}>
 
       <div class="text-center">
         <input type="submit" class="btn btn-dark large-btn" value="Save">
@@ -139,6 +158,7 @@
   {{> modal modalId="daysToCompleteModal" modalTitle="Days to Complete" modalLabel="daysToCompleteModalLabel"
   definition="The number of work days to finish the routine. Does not include rest days."}}
 
+  <script src="../js/calendar.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
@@ -149,32 +169,6 @@
     integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
     crossorigin="anonymous"></script>
   <script src="../js/forms.js"></script>
-
-  <script>
-    const date = new Date();
-    const startDate = {
-      day: date.getDay(),
-      month: date.getMonth(),
-      date: date.getDate(),
-      year: date.getFullYear()
-    }
-    const startDateString = JSON.stringify(startDate);
-
-    // Set createdAt to current date
-    $("#createdAt").val(startDateString);
-
-    // Generate unique ID
-    $("#uuid").val(uuidv4());
-
-    // Differentiate routines by associating each of them with a unique ID
-    // The function below, written by broofa, generates a unique ID
-    // Source: https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
-    function uuidv4() {
-      return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
-        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-      )
-    }
-  </script>
 
 </body>
 
