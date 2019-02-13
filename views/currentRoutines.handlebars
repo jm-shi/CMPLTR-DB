@@ -24,12 +24,16 @@
       <a class="hidden" href="/routine/{{id}}"></a>
       <div class="white">{{title}}</div>
       <div>
-        <button type="button" class="btn btn-info btn-rounded btn-sm edit-btn">
-          <i class="fas fa-edit"> <span style="font-family:Helvetica"> Edit</span></i>
-        </button>
-        <button type="button" class="btn btn-danger btn-rounded btn-sm">
-          <i class="fas fa-trash"><span style="font-family:Helvetica"> Delete</span></i>
-        </button>
+        <a href="/editRoutine/{{id}}">
+          <button type="button" class="btn btn-info btn-rounded btn-sm edit-btn">
+            <i class="fas fa-edit"> <span style="font-family:Helvetica"> Edit</span></i>
+          </button>
+        </a>
+        <a href="/currentRoutines">
+          <button type="button" class="btn btn-danger btn-rounded btn-sm">
+            <i class="fas fa-trash"><span style="font-family:Helvetica"> Delete</span></i>
+          </button>
+        </a>
       </div>
     </div>
   </div>

@@ -26,7 +26,7 @@
       "id": "33af38ec-f6ec-473f-99bf-72d6bab0785b",
       "createdAt": "{\"day\":5,\"month\":1,\"date\":1,\"year\":2019}",
       "title": "Study math",
-      "alarm": "7:30",
+      "alarm": "07:30",
       "repeatSaturday": "on",
       "daysToComplete": 100,
       "goals": "Get A on exam",

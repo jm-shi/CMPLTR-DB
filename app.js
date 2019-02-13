@@ -1,4 +1,3 @@
-
 /*
  * Module dependencies.
  */
@@ -43,6 +42,7 @@ app.get('/communityFeed', communityFeed.view);
 app.get('/createRoutine', routine.viewCreateRoutine);
 app.get('/currentRoutines', routine.viewAllCurrentRoutines);
 app.post('/currentRoutines', routine.addRoutine);
+app.get('/editRoutine/:id', routine.viewEditRoutine);
 app.get('/previousRoutines', routine.viewAllPreviousRoutines);
 app.get('/help', help.view);
 app.get('/login', login.view);
@@ -50,6 +50,6 @@ app.get('/profile', profile.view);
 app.get('/routine/:id', routine.viewCurrentRoutine);
 app.use(notFound.view); // 404 route
 
-http.createServer(app).listen(app.get('port'), function () {
+http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });

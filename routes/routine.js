@@ -1,13 +1,13 @@
 var data = require('../data.json');
 
-exports.viewCreateRoutine = function (req, res) {
+exports.viewCreateRoutine = function(req, res) {
   res.render('createRoutine', {
     navbarTitle: 'Create Routine',
     data
   });
 };
 
-exports.addRoutine = function (req, res) {
+exports.addRoutine = function(req, res) {
   const id = req.body.id;
   const createdAt = req.body.createdAt;
   const title = req.body.title;
@@ -40,7 +40,7 @@ exports.addRoutine = function (req, res) {
       repeatSunday,
       everyOtherDay,
       goals,
-      goalReward,
+      goalReward
     });
     res.render('currentRoutines', {
       navbarTitle: 'Current Routines',
@@ -49,10 +49,21 @@ exports.addRoutine = function (req, res) {
   }
 };
 
-exports.viewCurrentRoutine = function (req, res) {
+exports.viewEditRoutine = function(req, res) {
+  const id = req.params.id;
+  const currentRoutineData = data.routines.find(function(routine) {
+    return routine.id === id;
+  });
+  res.render('editRoutine', {
+    navbarTitle: 'Edit Routine',
+    currentRoutineData
+  });
+};
+
+exports.viewCurrentRoutine = function(req, res) {
   const id = req.params.id;
 
-  const currentRoutineData = data.routines.find(function (routine) {
+  const currentRoutineData = data.routines.find(function(routine) {
     return routine.id === id;
   });
 
@@ -64,14 +75,14 @@ exports.viewCurrentRoutine = function (req, res) {
   });
 };
 
-exports.viewAllCurrentRoutines = function (req, res) {
+exports.viewAllCurrentRoutines = function(req, res) {
   res.render('currentRoutines', {
     navbarTitle: 'Current Routines',
     data
   });
 };
 
-exports.viewAllPreviousRoutines = function (req, res) {
+exports.viewAllPreviousRoutines = function(req, res) {
   res.render('previousRoutines', {
     navbarTitle: 'Previous Routines'
   });
