@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="javascript:history.back()">
+  <a class="navbar-brand" href={{#if back}}{{back}}{{else}}"javascript:history.back()"{{/if}}>
     {{#if noBackBtn}}
     {{else}}
     <i class="fas fa-long-arrow-alt-left fa-2x"></i>

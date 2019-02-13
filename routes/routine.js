@@ -8,11 +8,13 @@ exports.viewCreateRoutine = function(req, res) {
 };
 
 exports.addRoutine = function(req, res) {
+  console.log('the req body is', req.body);
   const id = req.body.id;
   const createdAt = req.body.createdAt;
   const title = req.body.title;
   const daysToComplete = req.body.daysToComplete;
-  const completionChart = req.body.completionChart;
+  let completionChart = [];
+  for (let i = 0; i < daysToComplete; i++) completionChart.push(0);
   const alarm = req.body.alarm;
   const repeatMonday = req.body.repeatMonday;
   const repeatTuesday = req.body.repeatTuesday;
