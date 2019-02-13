@@ -39,7 +39,9 @@
           Set Alarm
         </button>
 
-        <small id="emailHelp" class="form-text text-muted">Alarm has not been set.</small>
+        <div id="alarmStatus">
+          <small id="emailHelp" class="form-text text-muted">Alarm has not been set.</small>
+        </div>
 
         <!-- Set Alarm Modal -->
         <div class="modal fade" id="alarmModal" tabindex="-1" role="dialog" aria-labelledby="alarmModalLabel"
@@ -52,7 +54,7 @@
               <div class="modal-body">
                 <div class="container">
                   <div class="center-text">
-                    <input class="alarm" type="time" id="alarm" name="alarm" />
+                    <input class="alarm" type="time" id="alarm" name="alarm" onchange="updateAlarmText()" />
                   </div>
 
                   <hr />
@@ -153,8 +155,19 @@
   <script src="../js/jquery.timepicker.min.js"></script>
 
   <script>
-    if ($('#alarm')[0].type != 'date') {
+    if ($('#alarm')[0].type != 'time') {
       $('#alarm').timepicker();
+    }
+
+    function updateAlarmText() {
+      const alarmTime = $('#alarm').val();
+      if (alarmTime === '') {
+        console.log('is empty');
+        $('#alarmStatus').html(`<small id="emailHelp" class="form-text text-muted">Alarm has not been set.</small>`);
+      } else {
+        console.log('not empty');
+        $('#alarmStatus').html(`<small id="emailHelp" class="form-text text-success">Alarm has been set to ${alarmTime}.</small>`);
+      }
     }
 
     const date = new Date();
