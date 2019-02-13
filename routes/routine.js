@@ -93,6 +93,16 @@ exports.deleteRoutine = function(req, res) {
   return res.redirect('/currentRoutines');
 };
 
+exports.deletePreviousRoutine = function(req, res) {
+  const id = req.params.id;
+  previousRoutines.routines = previousRoutines.routines.filter(function(
+    routine
+  ) {
+    return routine.id !== id;
+  });
+  return res.redirect('/previousRoutines');
+};
+
 exports.updateCompletionLog = function(req, res) {
   console.log('Update completion log', req.body);
 
@@ -132,6 +142,21 @@ exports.viewCurrentRoutine = function(req, res) {
   res.render('currentRoutine', {
     navbarTitle: 'Current Routine',
     currentRoutineData
+  });
+};
+
+exports.viewPreviousRoutine = function(req, res) {
+  const id = req.params.id;
+
+  const previousRoutineData = previousRoutines.routines.find(function(routine) {
+    return routine.id === id;
+  });
+
+  console.log('Previous routine data:', previousRoutineData);
+
+  res.render('previousRoutine', {
+    navbarTitle: 'Previous Routine',
+    previousRoutineData
   });
 };
 

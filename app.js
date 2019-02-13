@@ -46,12 +46,14 @@ app.post('/routine/add', routine.addRoutine);
 app.get('/editRoutine/:id', routine.viewEditRoutine);
 app.post('/routine/edit/:id', routine.editRoutine);
 app.post('/routine/delete/:id', routine.deleteRoutine);
+app.post('/routine/delete/previous/:id', routine.deletePreviousRoutine);
 app.get('/previousRoutines', routine.viewAllPreviousRoutines);
 app.get('/help', help.view);
 app.get('/login', login.view);
 app.get('/profile', profile.view);
 app.get('/tutorial', tutorial.view);
 app.get('/routine/:id', routine.viewCurrentRoutine);
+app.get('/routine/previous/:id', routine.viewPreviousRoutine);
 app.post('/routine/:id', routine.updateCompletionLog);
 app.use(notFound.view); // 404 route
 

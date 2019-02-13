@@ -36,11 +36,11 @@
     <div class="routine circular-btns" style="flex-wrap: wrap">
     </div>
 
-    <div id="completionChart">{{currentRoutineData.completionChart}}</div>
-    <div id="daysToComplete">{{currentRoutineData.daysToComplete}}</div>
-    <div id="startDate">{{currentRoutineData.createdAt}}</div>
+    <div id="completionChart" class="hidden">{{currentRoutineData.completionChart}}</div>
+    <div id="daysToComplete" class="hidden">{{currentRoutineData.daysToComplete}}</div>
+    <div id="startDate" class="hidden">{{currentRoutineData.createdAt}}</div>
 
-    <div>Alarm: {{currentRoutineData.alarm}}</div>
+    <!--
     <div>Repeat Monday: {{currentRoutineData.repeatMonday}}</div>
     <div>Repeat Tuesday: {{currentRoutineData.repeatTuesday}}</div>
     <div>Repeat Wednesday: {{currentRoutineData.repeatWednesday}}</div>
@@ -50,11 +50,10 @@
     <div>Repeat Sunday: {{currentRoutineData.repeatSunday}}</div>
     <div>Every other day: {{currentRoutineData.everyOtherDay}}</div>
     <div>Goal Reward: {{currentRoutineData.goalReward}}</div>
+    -->
 
     <div id="routineId" class="hidden">{{currentRoutineData.id}}</div>
   </div>
-
-
 
   <script src="../js/calendar.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

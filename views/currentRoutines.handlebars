@@ -54,7 +54,7 @@
     });
 
     $("button.delete").click(function () {
-      if (confirm('Are you sure you want to delete this routine?')) {
+      if (confirm('Are you sure you want to delete this routine ?')) {
         $.post(`/routine/delete/${this.id}`);
         $('.container#' + this.id).addClass('hidden');
       }
