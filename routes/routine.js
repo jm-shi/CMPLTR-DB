@@ -65,7 +65,6 @@ exports.viewEditRoutine = function(req, res) {
 exports.editRoutine = function(req, res) {
   const id = req.params.id;
   const allRoutines = data.routines;
-  console.log('edit routine', req.body);
   allRoutines.some(function(routine) {
     if (routine.id === id) {
       routine.title = req.body.title;
@@ -84,6 +83,14 @@ exports.editRoutine = function(req, res) {
     }
   });
 
+  return res.redirect('/currentRoutines');
+};
+
+exports.deleteRoutine = function(req, res) {
+  const id = req.params.id;
+  data.routines = data.routines.filter(function(routine) {
+    return routine.id !== id;
+  });
   return res.redirect('/currentRoutines');
 };
 

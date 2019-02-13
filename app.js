@@ -45,6 +45,7 @@ app.get('/currentRoutines', routine.viewAllCurrentRoutines);
 app.post('/routine/add', routine.addRoutine);
 app.get('/editRoutine/:id', routine.viewEditRoutine);
 app.post('/routine/edit/:id', routine.editRoutine);
+app.post('/routine/delete/:id', routine.deleteRoutine);
 app.get('/previousRoutines', routine.viewAllPreviousRoutines);
 app.get('/help', help.view);
 app.get('/login', login.view);
