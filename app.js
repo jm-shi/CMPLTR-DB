@@ -14,6 +14,7 @@ const login = require('./routes/login');
 const profile = require('./routes/profile');
 const routine = require('./routes/routine');
 const notFound = require('./routes/notFound');
+const tutorial = require('./routes/tutorial');
 
 const app = express();
 
@@ -48,6 +49,7 @@ app.get('/help', help.view);
 app.get('/login', login.view);
 app.get('/profile', profile.view);
 app.get('/routine/:id', routine.viewCurrentRoutine);
+app.get('/tutorial',tutorial.view);
 app.use(notFound.view); // 404 route
 
 http.createServer(app).listen(app.get('port'), function() {
