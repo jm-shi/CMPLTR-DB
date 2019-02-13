@@ -1,0 +1,55 @@
+{
+  "routines": [
+    {
+      "id": "83ea08a0-fcf3-4ab1-869e-12e10d85ab00",
+      "createdAt": "{\"day\":6,\"month\":11,\"date\":8,\"year\":2018}",
+      "title": "Learn C++",
+      "daysToComplete": 10,
+      "completionChart": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      "alarm": "12:00",
+      "repeatMonday": "on",
+      "repeatTuesday": "on",
+      "repeatWednesday": "on",
+      "repeatThursday": "on",
+      "repeatFriday": "on",
+      "repeatSaturday": "on",
+      "repeatSunday": "on",
+      "goals": "Implement a binary search tree",
+      "goalReward": "Attend Warriors game"
+    },
+    {
+      "id": "b570a105-50af-4b7e-a827-7ac1778c93a4",
+      "createdAt": "{\"day\":2,\"month\":7,\"date\":23,\"year\":2018}",
+      "title": "Learn Photoshop CS6",
+      "daysToComplete": 14,
+      "completionChart": [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1],
+      "alarm": "10:00",
+      "repeatMonday": "on",
+      "repeatFriday": "on",
+      "goals": "Finish Udemy course on Photoshop",
+      "goalReward": "Buy a new video game"
+    },
+    {
+      "id": "d3cf7fc2-b6b7-4369-bdeb-286edc1a8d99",
+      "createdAt": "{\"day\":3,\"month\":2,\"date\":1,\"year\":2018}",
+      "title": "Study biology",
+      "alarm": "2:30",
+      "repeatSaturday": "on",
+      "daysToComplete": 8,
+      "completionChart": [1, 1, 1, 0, 1, 1, 1, 1],
+      "goals": "Pass the final exam",
+      "goalReward": "Go on a cruise"
+    },
+    {
+      "id": "fb12f6a0-0353-4979-abb1-9b3726940a21",
+      "createdAt": "{\"day\":7,\"month\":8,\"date\":5,\"year\":2017}",
+      "title": "Practice typing",
+      "alarm": "8:30",
+      "repeatSunday": "on",
+      "daysToComplete": 16,
+      "completionChart": [1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1],
+      "goals": "Be able to type at least 80 words per minute",
+      "goalReward": "Buy a new phone"
+    }
+  ]
+}

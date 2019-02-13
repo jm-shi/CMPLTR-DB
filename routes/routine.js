@@ -1,14 +1,14 @@
-var data = require('../data.json');
+let currentRoutines = require('../currentRoutines.json');
+let previousRoutines = require('../previousRoutines.json');
 
 exports.viewCreateRoutine = function(req, res) {
   res.render('createRoutine', {
     navbarTitle: 'Create Routine',
-    data
+    currentRoutines
   });
 };
 
 exports.addRoutine = function(req, res) {
-  console.log('the req body is', req.body);
   const id = req.body.id;
   const createdAt = req.body.createdAt;
   const title = req.body.title;
@@ -26,9 +26,8 @@ exports.addRoutine = function(req, res) {
   const everyOtherDay = req.body.everyOtherDay;
   const goals = req.body.goals;
   const goalReward = req.body.goalReward;
-  console.log(req.body);
   if (title && daysToComplete) {
-    data.routines.push({
+    currentRoutines.routines.push({
       id,
       createdAt,
       title,
@@ -53,7 +52,7 @@ exports.addRoutine = function(req, res) {
 
 exports.viewEditRoutine = function(req, res) {
   const id = req.params.id;
-  const currentRoutineData = data.routines.find(function(routine) {
+  const currentRoutineData = currentRoutines.routines.find(function(routine) {
     return routine.id === id;
   });
   res.render('editRoutine', {
@@ -64,7 +63,7 @@ exports.viewEditRoutine = function(req, res) {
 
 exports.editRoutine = function(req, res) {
   const id = req.params.id;
-  const allRoutines = data.routines;
+  const allRoutines = currentRoutines.routines;
   allRoutines.some(function(routine) {
     if (routine.id === id) {
       routine.title = req.body.title;
@@ -88,7 +87,7 @@ exports.editRoutine = function(req, res) {
 
 exports.deleteRoutine = function(req, res) {
   const id = req.params.id;
-  data.routines = data.routines.filter(function(routine) {
+  currentRoutines.routines = currentRoutines.routines.filter(function(routine) {
     return routine.id !== id;
   });
   return res.redirect('/currentRoutines');
@@ -100,7 +99,7 @@ exports.updateCompletionLog = function(req, res) {
   const index = req.body.index;
   const isComplete = req.body.isComplete === 'on' ? 1 : 0;
   const id = req.params.id;
-  const allRoutines = data.routines;
+  const allRoutines = currentRoutines.routines;
 
   const currentRoutineData = allRoutines.find(function(routine) {
     return routine.id === id;
@@ -124,7 +123,7 @@ exports.updateCompletionLog = function(req, res) {
 exports.viewCurrentRoutine = function(req, res) {
   const id = req.params.id;
 
-  const currentRoutineData = data.routines.find(function(routine) {
+  const currentRoutineData = currentRoutines.routines.find(function(routine) {
     return routine.id === id;
   });
 
@@ -139,12 +138,13 @@ exports.viewCurrentRoutine = function(req, res) {
 exports.viewAllCurrentRoutines = function(req, res) {
   res.render('currentRoutines', {
     navbarTitle: 'Current Routines',
-    data
+    currentRoutines
   });
 };
 
 exports.viewAllPreviousRoutines = function(req, res) {
   res.render('previousRoutines', {
-    navbarTitle: 'Previous Routines'
+    navbarTitle: 'Previous Routines',
+    previousRoutines
   });
 };
