@@ -46,10 +46,8 @@ exports.addRoutine = function(req, res) {
       goals,
       goalReward
     });
-    res.render('currentRoutines', {
-      navbarTitle: 'Current Routines',
-      data
-    });
+
+    return res.redirect('/currentRoutines');
   }
 };
 
@@ -62,6 +60,31 @@ exports.viewEditRoutine = function(req, res) {
     navbarTitle: 'Edit Routine',
     currentRoutineData
   });
+};
+
+exports.editRoutine = function(req, res) {
+  const id = req.params.id;
+  const allRoutines = data.routines;
+  console.log('edit routine', req.body);
+  allRoutines.some(function(routine) {
+    if (routine.id === id) {
+      routine.title = req.body.title;
+      routine.daysToComplete = req.body.daysToComplete;
+      routine.alarm = req.body.alarm;
+      routine.repeatMonday = req.body.repeatMonday;
+      routine.repeatTuesday = req.body.repeatTuesday;
+      routine.repeatWednesday = req.body.repeatWednesday;
+      routine.repeatThursday = req.body.repeatThursday;
+      routine.repeatFriday = req.body.repeatFriday;
+      routine.repeatSaturday = req.body.repeatSaturday;
+      routine.repeatSunday = req.body.repeatSunday;
+      routine.everyOtherDay = req.body.everyOtherDay;
+      routine.goals = req.body.goals;
+      routine.goalReward = req.body.goalReward;
+    }
+  });
+
+  return res.redirect('/currentRoutines');
 };
 
 exports.updateCompletionLog = function(req, res) {

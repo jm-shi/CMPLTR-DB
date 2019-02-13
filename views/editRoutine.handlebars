@@ -12,11 +12,12 @@
 </head>
 
 <body>
-  {{> navbar}}
+  {{> navbar back="/currentRoutines"}}
 
   <!-- Form -->
   <div class="container">
-    <form class="needs-validation" method="post" action="/currentRoutines" novalidate>
+    <form id="editForm" class="needs-validation" method="post" action="/routine/edit/{{currentRoutineData.id}}"
+      novalidate>
       <div class="form-group">
         <label for="title">Title<span class="red">*</span></label>
         <button type="button" class="question-btn" data-toggle="modal" data-target="#titleModal">
@@ -99,7 +100,6 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-dark" data-dismiss="modal">Save Changes</button>
               </div>
             </div>
           </div>
