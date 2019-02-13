@@ -48,6 +48,7 @@ app.get('/help', help.view);
 app.get('/login', login.view);
 app.get('/profile', profile.view);
 app.get('/routine/:id', routine.viewCurrentRoutine);
+app.post('/routine/:id', routine.updateCompletionLog);
 app.use(notFound.view); // 404 route
 
 http.createServer(app).listen(app.get('port'), function() {

@@ -36,8 +36,9 @@
     <div class="routine circular-btns" style="flex-wrap: wrap">
     </div>
 
-    <div id="#daysToComplete">{{currentRoutineData.daysToComplete}}</div>
-    <div id="#startDate">{{currentRoutineData.createdAt}}</div>
+    <div id="completionChart">{{currentRoutineData.completionChart}}</div>
+    <div id="daysToComplete">{{currentRoutineData.daysToComplete}}</div>
+    <div id="startDate">{{currentRoutineData.createdAt}}</div>
 
     <div>Alarm: {{currentRoutineData.alarm}}</div>
     <div>Repeat Monday: {{currentRoutineData.repeatMonday}}</div>
@@ -49,6 +50,8 @@
     <div>Repeat Sunday: {{currentRoutineData.repeatSunday}}</div>
     <div>Every other day: {{currentRoutineData.everyOtherDay}}</div>
     <div>Goal Reward: {{currentRoutineData.goalReward}}</div>
+
+    <div id="routineId" class="hidden">{{currentRoutineData.id}}</div>
   </div>
 
   <script src="../js/calendar.js"></script>
@@ -63,17 +66,59 @@
     crossorigin="anonymous"></script>
   <script>
     $(document).ready(function () {
-      const daysToComplete = parseInt(document.getElementById("#daysToComplete").innerHTML);
-      const startDate = JSON.parse(document.getElementById("#startDate").innerHTML);
+      const routineId = document.getElementById("routineId").innerHTML;
+      const daysToComplete = parseInt(document.getElementById("daysToComplete").innerHTML);
+      const startDate = JSON.parse(document.getElementById("startDate").innerHTML);
+      let completionArray = document.getElementById("completionChart").innerHTML;
+      completionArray = completionArray.split(",");
       const month = startDate.month;
       const date = startDate.date;
       const year = startDate.year;
       const workDays = getWorkDays(month, date, year, daysToComplete);
       console.log(workDays);
-      workDays.forEach(function (workDay) {
-        $(".circular-btns").append(`<button type="button" class="btn btn-light circular-btn">${workDay}</button>`)
+
+      workDays.forEach(function (workDay, index) {
+        if (completionArray[index] == 1) {
+          $(".circular-btns").append(`
+          <form action="/routine/${routineId}" method="post" onsubmit="return confirm('Are you sure you want to log this day as complete?')">
+            <input type="hidden" value=${index} name="index" />
+            <input type="hidden" value="off" name="isComplete" />
+            <input type="checkbox" class="check day${index} hidden" name="isComplete" checked="checked" />
+            <input type="submit" class="btn btn-dark circular-btn submit day${index}" value='${workDay}'" />
+          </form>`);
+        } else {
+          $(".circular-btns").append(`
+            <form action="/routine/${routineId}" method="post" onsubmit="return confirm('Are you sure you want to log this day as complete?')">
+              <input type="hidden" value=${index} name="index" />
+              <input type="checkbox" class="check day${index} hidden" name="isComplete" />
+              <input type="submit" class="btn btn-light circular-btn submit day${index}" value='${workDay}'" />
+            </form>`);
+        }
       });
-    })
+
+      /*
+      <button type="button" class="btn btn-light circular-btn day${index}">${workDay}</button>
+      <input type="checkbox" class="day${index}" name="day${index}">*/
+      /*
+            $('.circular-btn').click(function () {
+              $(this).toggleClass('btn-dark');
+              console.log(this);
+            });
+      */
+      function toggleChecked(dayNumber) {
+        return function (event) {
+          if ($(`input.check.day${dayNumber}`).is(':checked')) {
+            $(`input.check.day${dayNumber}`).prop('checked', false);
+          } else {
+            $(`input.check.day${dayNumber}`).prop('checked', true);
+          }
+        }
+      };
+
+      for (var i = 0; i < completionArray.length; i++) {
+        $(`input.submit.day${i}`).click(toggleChecked(i));
+      };
+    });
   </script>
 </body>
 

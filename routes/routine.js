@@ -12,6 +12,7 @@ exports.addRoutine = function(req, res) {
   const createdAt = req.body.createdAt;
   const title = req.body.title;
   const daysToComplete = req.body.daysToComplete;
+  const completionChart = req.body.completionChart;
   const alarm = req.body.alarm;
   const repeatMonday = req.body.repeatMonday;
   const repeatTuesday = req.body.repeatTuesday;
@@ -30,6 +31,7 @@ exports.addRoutine = function(req, res) {
       createdAt,
       title,
       daysToComplete,
+      completionChart,
       alarm,
       repeatMonday,
       repeatTuesday,
@@ -56,6 +58,33 @@ exports.viewEditRoutine = function(req, res) {
   });
   res.render('editRoutine', {
     navbarTitle: 'Edit Routine',
+    currentRoutineData
+  });
+};
+
+exports.updateCompletionLog = function(req, res) {
+  console.log('Update completion log', req.body);
+
+  const index = req.body.index;
+  const isComplete = req.body.isComplete === 'on' ? 1 : 0;
+  const id = req.params.id;
+  const allRoutines = data.routines;
+
+  const currentRoutineData = allRoutines.find(function(routine) {
+    return routine.id === id;
+  });
+
+  for (let i = 0; i < allRoutines.length; i++) {
+    if (allRoutines[i].id === id) {
+      allRoutines[i].completionChart[index] = isComplete;
+      break;
+    }
+  }
+
+  console.log('Current routine data:', currentRoutineData);
+
+  res.render('currentRoutine', {
+    navbarTitle: 'Current Routine',
     currentRoutineData
   });
 };
