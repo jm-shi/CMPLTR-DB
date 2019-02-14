@@ -1,13 +1,6 @@
 let currentRoutines = require('../currentRoutines.json');
 let previousRoutines = require('../previousRoutines.json');
 
-exports.viewCreateRoutine = function(req, res) {
-  res.render('createRoutine', {
-    navbarTitle: 'Create Routine',
-    currentRoutines
-  });
-};
-
 exports.addRoutine = function(req, res) {
   const id = req.body.id;
   const createdAt = req.body.createdAt;
@@ -50,15 +43,42 @@ exports.addRoutine = function(req, res) {
   }
 };
 
-exports.viewEditRoutine = function(req, res) {
+exports.completeRoutine = function(req, res) {
   const id = req.params.id;
-  const currentRoutineData = currentRoutines.routines.find(function(routine) {
+
+  // Add routine to previous routine
+  const routineToMove = currentRoutines.routines.find(function(routine) {
     return routine.id === id;
   });
-  res.render('editRoutine', {
-    navbarTitle: 'Edit Routine',
-    currentRoutineData
+  previousRoutines.routines.push(routineToMove);
+
+  // Delete routine from current routine
+  currentRoutines.routines = currentRoutines.routines.filter(function(routine) {
+    return routine.id !== id;
   });
+
+  res.render('currentRoutines', {
+    navbarTitle: 'Current Routine',
+    currentRoutines
+  });
+};
+
+exports.deletePreviousRoutine = function(req, res) {
+  const id = req.params.id;
+  previousRoutines.routines = previousRoutines.routines.filter(function(
+    routine
+  ) {
+    return routine.id !== id;
+  });
+  return res.redirect('/previousRoutines');
+};
+
+exports.deleteRoutine = function(req, res) {
+  const id = req.params.id;
+  currentRoutines.routines = currentRoutines.routines.filter(function(routine) {
+    return routine.id !== id;
+  });
+  return res.redirect('/currentRoutines');
 };
 
 exports.editRoutine = function(req, res) {
@@ -83,24 +103,6 @@ exports.editRoutine = function(req, res) {
   });
 
   return res.redirect('/currentRoutines');
-};
-
-exports.deleteRoutine = function(req, res) {
-  const id = req.params.id;
-  currentRoutines.routines = currentRoutines.routines.filter(function(routine) {
-    return routine.id !== id;
-  });
-  return res.redirect('/currentRoutines');
-};
-
-exports.deletePreviousRoutine = function(req, res) {
-  const id = req.params.id;
-  previousRoutines.routines = previousRoutines.routines.filter(function(
-    routine
-  ) {
-    return routine.id !== id;
-  });
-  return res.redirect('/previousRoutines');
 };
 
 exports.updateCompletionLog = function(req, res) {
@@ -130,6 +132,13 @@ exports.updateCompletionLog = function(req, res) {
   });
 };
 
+exports.viewCreateRoutine = function(req, res) {
+  res.render('createRoutine', {
+    navbarTitle: 'Create Routine',
+    currentRoutines
+  });
+};
+
 exports.viewCurrentRoutine = function(req, res) {
   const id = req.params.id;
 
@@ -141,6 +150,17 @@ exports.viewCurrentRoutine = function(req, res) {
 
   res.render('currentRoutine', {
     navbarTitle: 'Current Routine',
+    currentRoutineData
+  });
+};
+
+exports.viewEditRoutine = function(req, res) {
+  const id = req.params.id;
+  const currentRoutineData = currentRoutines.routines.find(function(routine) {
+    return routine.id === id;
+  });
+  res.render('editRoutine', {
+    navbarTitle: 'Edit Routine',
     currentRoutineData
   });
 };

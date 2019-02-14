@@ -36,9 +36,41 @@
     <div class="routine circular-btns" style="flex-wrap: wrap">
     </div>
 
+    <button type="button" class="btn btn-primary center-element" style="margin-bottom:1em;" data-toggle="modal"
+      data-target="#completeRoutineModal">
+      Mark Complete
+    </button>
+
+    <div class="modal fade question-modal" id="completeRoutineModal" tabindex="-1" role="dialog"
+      aria-labelledby="completeRoutineModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="completeRoutineLabel">Complete Routine</h5>
+          </div>
+          <div class="modal-body">
+            <h5>Did you complete your goals?</h5>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="completedGoals" id="completedGoals">
+              <label class="form-check-label" for="completedGoals">
+                {{currentRoutineData.goals}}
+              </label>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-dark" data-dismiss="modal">Cancel</button>
+            <button type="button" id={{currentRoutineData.id}} class="btn btn-dark completeRoutine"
+              data-dismiss="modal">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div id="completionChart" class="hidden">{{currentRoutineData.completionChart}}</div>
     <div id="daysToComplete" class="hidden">{{currentRoutineData.daysToComplete}}</div>
     <div id="startDate" class="hidden">{{currentRoutineData.createdAt}}</div>
+    <div id="goalReward" class="hidden">{{currentRoutineData.goalReward}}</div>
 
     <!--
     <div>Repeat Monday: {{currentRoutineData.repeatMonday}}</div>
@@ -49,16 +81,13 @@
     <div>Repeat Saturday: {{currentRoutineData.repeatSaturday}}</div>
     <div>Repeat Sunday: {{currentRoutineData.repeatSunday}}</div>
     <div>Every other day: {{currentRoutineData.everyOtherDay}}</div>
-    <div>Goal Reward: {{currentRoutineData.goalReward}}</div>
     -->
 
     <div id="routineId" class="hidden">{{currentRoutineData.id}}</div>
   </div>
 
   <script src="../js/calendar.js"></script>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
     integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
     crossorigin="anonymous"></script>
@@ -71,13 +100,17 @@
       const routineId = document.getElementById("routineId").innerHTML;
       const daysToComplete = parseInt(document.getElementById("daysToComplete").innerHTML);
       const startDate = JSON.parse(document.getElementById("startDate").innerHTML);
+      // const goalReward = document.getElementById("goalReward").innerHTML;
+      // console.log("The goal reward", goalReward);
+      // console.log("Start date", startDate);
       let completionArray = document.getElementById("completionChart").innerHTML;
       completionArray = completionArray.split(",");
       const month = startDate.month;
       const date = startDate.date;
       const year = startDate.year;
       const workDays = getWorkDays(month, date, year, daysToComplete);
-      console.log(workDays);
+      // console.log(workDays);
+      // console.log(workDays.length);
 
       workDays.forEach(function (workDay, index) {
         if (completionArray[index] == 1) {
@@ -111,6 +144,14 @@
       for (var i = 0; i < completionArray.length; i++) {
         $(`input.submit.day${i}`).click(toggleChecked(i));
       };
+    });
+
+    $("button.completeRoutine").click(function () {
+      $.post(`/routine/complete/${this.id}`).then(
+        function () {
+          alert("Congratulations on completing the routine!");
+          window.location.href = "/currentRoutines";
+        });
     });
   </script>
 </body>
