@@ -11,6 +11,7 @@ const index = require('./routes/index');
 const communityFeed = require('./routes/communityFeed');
 const help = require('./routes/help');
 const login = require('./routes/login');
+const signup = require('./routes/signup');
 const profile = require('./routes/profile');
 const routine = require('./routes/routine');
 const notFound = require('./routes/notFound');
@@ -52,6 +53,7 @@ app.post('/routine/complete/:id', routine.completeRoutine);
 app.get('/previousRoutines', routine.viewAllPreviousRoutines);
 app.get('/help', help.view);
 app.get('/login', login.view);
+app.get('/signup', signup.view);
 app.get('/profile', profile.view);
 app.get('/tutorial', tutorial.view);
 app.get('/routine/:id', routine.viewCurrentRoutine);
@@ -59,6 +61,6 @@ app.get('/routine/previous/:id', routine.viewPreviousRoutine);
 app.post('/routine/:id', routine.updateCompletionLog);
 app.use(notFound.view); // 404 route
 
-http.createServer(app).listen(app.get('port'), function() {
+http.createServer(app).listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
 });

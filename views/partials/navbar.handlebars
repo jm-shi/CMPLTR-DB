@@ -7,12 +7,14 @@
   </a>
 
   <span class="mx-auto navbar-brand">{{{navbarTitle}}}</span>
-
+  {{#if noDropdown}}
+  {{else}}
   <div class="nav-item dropdown">
     <a class="navbar-brand dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false">
       <i class="fas fa-user-circle fa-2x"></i>
     </a>
+
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
       <div class="dropdown-item disabled"><strong>Welcome, John</strong></div>
       <div class="dropdown-divider"></div>
@@ -24,4 +26,5 @@
       <a class="dropdown-item" href="/login">Logout</a>
     </div>
   </div>
+  {{/if}}
 </nav>

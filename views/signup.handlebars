@@ -1,7 +1,7 @@
 <!doctype html>
 
 <head>
-  <title>Login</title>
+  <title>Sign Up</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -13,12 +13,18 @@
 
 <body align="center">
   {{> navbar noBackBtn="true" noDropdown="true"}}
+
   <div class="logo">
     <h1>CMPLTR</h1>
   </div>
   <div class="container">
     <form class="needs-validation" method="get" action="/home" novalidate>
 
+      <div class="form-group">
+        <label for="title">Name<span class="red">*</span></label>
+        <input type="text" class="form-control" id="title" name="title" placeholder="Name" required>
+        <div class="invalid-feedback">Please enter your name.</div>
+      </div>
       <div class="form-group">
         <label for="title">Email<span class="red">*</span></label>
         <input type="text" class="form-control" id="title" name="title" placeholder="Email" required>
@@ -31,12 +37,12 @@
       </div>
       <br />
       <div class="text-center">
-        <input type="submit" class="btn btn-dark large-btn" value="Login">
+        <input type="submit" class="btn btn-dark large-btn" value="Sign Up">
         </input>
       </div>
       <br />
       <div class="form-group" align="center">
-        <p>Don't have an account?<br /><a href="/signup">Sign Up</a></p>
+        <p>Already have an account?<br /><a href="/login">Log In</a></p>
       </div>
     </form>
   </div>
