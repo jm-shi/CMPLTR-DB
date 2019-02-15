@@ -14,7 +14,11 @@
 <body>
   {{> navbar back="/"}}
 
+  {{#if currentRoutines.routines}}
   <div class="center-text" style="margin-bottom:1em;">Click on a routine to view additional details!</div>
+  {{else}}
+  <div class="center-text" style="margin-bottom:1em;">You have no current routines.</div>
+  {{/if}}
 
   {{#each currentRoutines.routines}}
   <!--<div>{{title}}</div>
