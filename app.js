@@ -14,6 +14,7 @@ const login = require('./routes/login');
 const profile = require('./routes/profile');
 const routine = require('./routes/routine');
 const notFound = require('./routes/notFound');
+const tutorial = require('./routes/tutorial');
 
 const app = express();
 
@@ -37,17 +38,25 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', index.view);
+app.get('/', tutorial.view);
+app.get('/home', index.view);
 app.get('/communityFeed', communityFeed.view);
 app.get('/createRoutine', routine.viewCreateRoutine);
 app.get('/currentRoutines', routine.viewAllCurrentRoutines);
-app.post('/currentRoutines', routine.addRoutine);
+app.post('/routine/add', routine.addRoutine);
 app.get('/editRoutine/:id', routine.viewEditRoutine);
+app.post('/routine/edit/:id', routine.editRoutine);
+app.post('/routine/delete/:id', routine.deleteRoutine);
+app.post('/routine/delete/previous/:id', routine.deletePreviousRoutine);
+app.post('/routine/complete/:id', routine.completeRoutine);
 app.get('/previousRoutines', routine.viewAllPreviousRoutines);
 app.get('/help', help.view);
 app.get('/login', login.view);
 app.get('/profile', profile.view);
+app.get('/tutorial', tutorial.view);
 app.get('/routine/:id', routine.viewCurrentRoutine);
+app.get('/routine/previous/:id', routine.viewPreviousRoutine);
+app.post('/routine/:id', routine.updateCompletionLog);
 app.use(notFound.view); // 404 route
 
 http.createServer(app).listen(app.get('port'), function() {

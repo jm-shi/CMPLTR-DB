@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery.timepicker.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
@@ -16,7 +17,7 @@
 
   <!-- Form -->
   <div class="container">
-    <form class="needs-validation" method="post" action="/currentRoutines" novalidate>
+    <form class="needs-validation" method="post" action="/routine/add" novalidate>
       <div class="form-group">
         <label for="title">Title<span class="red">*</span></label>
         <button type="button" class="question-btn" data-toggle="modal" data-target="#titleModal">
@@ -37,7 +38,10 @@
         <button type="button" class="btn btn-dark large-btn" data-toggle="modal" data-target="#alarmModal">
           Set Alarm
         </button>
-        <small id="emailHelp" class="form-text text-muted">Alarm has not been set.</small>
+
+        <div id="alarmStatus">
+          <small id="emailHelp" class="form-text text-muted">Alarm has not been set.</small>
+        </div>
 
         <!-- Set Alarm Modal -->
         <div class="modal fade" id="alarmModal" tabindex="-1" role="dialog" aria-labelledby="alarmModalLabel"
@@ -50,11 +54,11 @@
               <div class="modal-body">
                 <div class="container">
                   <div class="center-text">
-                    <input class="alarm" type="time" id="alarm" name="alarm" />
+                    <input class="alarm" type="time" id="alarm" name="alarm" onchange="updateAlarmText()" />
                   </div>
 
                   <hr />
-                  <div class="divider"><strong>Repeat</strong></div>
+                  <div class=" divider"><strong>Repeat</strong></div>
                   <div class="circular-btns">
                     <button type="button" class="btn btn-light circular-btn monday">Mo</button>
                     <button type="button" class="btn btn-light circular-btn tuesday">Tu</button>
@@ -74,14 +78,13 @@
 
                   <div class="form-check">
                     <input type="checkbox" name="everyOtherDay" class="form-check-input" />
-                    <label class="form-check-label" for="otherDayCheck">Every other day</label>
+                    <label class="form-check-label" for="otherDayCheck" style="color:black;">Every other day</label>
                   </div>
 
                 </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-dark" data-dismiss="modal">Save Changes</button>
               </div>
             </div>
           </div>
@@ -149,8 +152,24 @@
     integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
     crossorigin="anonymous"></script>
   <script src="../js/forms.js"></script>
+  <script src="../js/jquery.timepicker.min.js"></script>
 
   <script>
+    if ($('#alarm')[0].type != 'time') {
+      $('#alarm').timepicker();
+    }
+
+    function updateAlarmText() {
+      const alarmTime = $('#alarm').val();
+      if (alarmTime === '') {
+        console.log('is empty');
+        $('#alarmStatus').html(`<small id="emailHelp" class="form-text text-muted">Alarm has not been set.</small>`);
+      } else {
+        console.log('not empty');
+        $('#alarmStatus').html(`<small id="emailHelp" class="form-text text-success">Alarm has been set to ${alarmTime}.</small>`);
+      }
+    }
+
     const date = new Date();
     const startDate = {
       day: date.getDay(),

@@ -12,12 +12,11 @@
 </head>
 
 <body>
-  {{> navbar}}
+  {{> navbar back="/currentRoutines"}}
 
   <div class="container">
-
     <h2 class="text-center">{{currentRoutineData.title}}</h2>
-    <h4>Goals:</h4>
+    <h4><strong>Goals:</strong></h4>
     <div class="goals-box rounded">
       {{#if currentRoutineData.goals}}
       <ul>
@@ -30,50 +29,161 @@
 
     <br />
 
-    <h4>Alarm: {{currentRoutineData.alarm}}</h4>
+    {{#if currentRoutineData.alarm}}
+    <h4><strong>Alarm:</strong> {{currentRoutineData.alarm}}</h4>
+    {{/if}}
+
+    {{#if currentRoutineData.everyOtherDay}}
+    <h4><strong>Do routine every: </strong>other day</h4>
+    {{else}}
+    {{#if currentRoutineData.everyDay}}
+    <h4><strong>Do routine every: </strong>day</h4>
+    {{else}}
+    <h4><strong>Do routine every: </strong>|
+      {{#if currentRoutineData.repeatSunday}}Sunday |{{/if}}
+      {{#if currentRoutineData.repeatMonday}}Monday |{{/if}}
+      {{#if currentRoutineData.repeatTuesday}}Tuesday |{{/if}}
+      {{#if currentRoutineData.repeatWednesday}}Wednesday |{{/if}}
+      {{#if currentRoutineData.repeatThursday}}Thursday |{{/if}}
+      {{#if currentRoutineData.repeatFriday}}Friday |{{/if}}
+      {{#if currentRoutineData.repeatSaturday}}Saturday |{{/if}}
+      {{/if}}
+      {{/if}}
+    </h4>
 
     <br />
     <div class="routine circular-btns" style="flex-wrap: wrap">
     </div>
 
-    <div id="#daysToComplete">{{currentRoutineData.daysToComplete}}</div>
-    <div id="#startDate">{{currentRoutineData.createdAt}}</div>
+    <button type="button" id="completeRoutineButton" class="btn btn-primary center-element" style="margin-bottom:1em;"
+      data-toggle="modal" data-target="#completeRoutineModal" data-backdrop="static" data-keyboard="false">
+      Mark Complete
+    </button>
 
-    <div>Alarm: {{currentRoutineData.alarm}}</div>
-    <div>Repeat Monday: {{currentRoutineData.repeatMonday}}</div>
-    <div>Repeat Tuesday: {{currentRoutineData.repeatTuesday}}</div>
-    <div>Repeat Wednesday: {{currentRoutineData.repeatWednesday}}</div>
-    <div>Repeat Thursday: {{currentRoutineData.repeatThursday}}</div>
-    <div>Repeat Friday: {{currentRoutineData.repeatFriday}}</div>
-    <div>Repeat Saturday: {{currentRoutineData.repeatSaturday}}</div>
-    <div>Repeat Sunday: {{currentRoutineData.repeatSunday}}</div>
-    <div>Every other day: {{currentRoutineData.everyOtherDay}}</div>
-    <div>Goal Reward: {{currentRoutineData.goalReward}}</div>
+    <div class="modal fade question-modal" id="completeRoutineModal" tabindex="-1" role="dialog"
+      aria-labelledby="completeRoutineModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="completeRoutineLabel">Complete Routine</h5>
+          </div>
+          <div class="modal-body">
+            <h5>Did you complete your goals?</h5>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="completedGoals" id="completedGoals">
+              <label class="form-check-label" for="completedGoals">
+                {{currentRoutineData.goals}}
+              </label>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-dark" data-dismiss="modal">Cancel</button>
+            <button type="button" id={{currentRoutineData.id}} class="btn btn-dark completeRoutine">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="completionChart" class="hidden">{{currentRoutineData.completionChart}}</div>
+    <div id="daysToComplete" class="hidden">{{currentRoutineData.daysToComplete}}</div>
+    <div id="startDate" class="hidden">{{currentRoutineData.createdAt}}</div>
+    <div id="goalReward" class="hidden">{{currentRoutineData.goalReward}}</div>
+
+    <div id="everyOtherDay" class="hidden">{{currentRoutineData.everyOtherDay}}</div>
+    <div id="repeatSunday" class="hidden">{{currentRoutineData.repeatSunday}}</div>
+    <div id="repeatMonday" class="hidden">{{currentRoutineData.repeatMonday}}</div>
+    <div id="repeatTuesday" class="hidden">{{currentRoutineData.repeatTuesday}}</div>
+    <div id="repeatWednesday" class="hidden">{{currentRoutineData.repeatWednesday}}</div>
+    <div id="repeatThursday" class="hidden">{{currentRoutineData.repeatThursday}}</div>
+    <div id="repeatFriday" class="hidden">{{currentRoutineData.repeatFriday}}</div>
+    <div id="repeatSaturday" class="hidden">{{currentRoutineData.repeatSaturday}}</div>
+    <div id="routineId" class="hidden">{{currentRoutineData.id}}</div>
   </div>
 
   <script src="../js/calendar.js"></script>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
     integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
     crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
     integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
     crossorigin="anonymous"></script>
+
   <script>
     $(document).ready(function () {
-      const daysToComplete = parseInt(document.getElementById("#daysToComplete").innerHTML);
-      const startDate = JSON.parse(document.getElementById("#startDate").innerHTML);
+      const routineId = document.getElementById("routineId").innerHTML;
+      const daysToComplete = parseInt(document.getElementById("daysToComplete").innerHTML);
+      const startDate = JSON.parse(document.getElementById("startDate").innerHTML);
+      const goalReward = document.getElementById("goalReward").innerHTML;
+      let everyOtherDay = document.getElementById("everyOtherDay").innerHTML === "on" ? true : false;
+      let repeatSunday = document.getElementById("repeatSunday").innerHTML === "on" ? true : false;
+      let repeatMonday = document.getElementById("repeatMonday").innerHTML === "on" ? true : false;
+      let repeatTuesday = document.getElementById("repeatTuesday").innerHTML === "on" ? true : false;
+      let repeatWednesday = document.getElementById("repeatWednesday").innerHTML === "on" ? true : false;
+      let repeatThursday = document.getElementById("repeatThursday").innerHTML === "on" ? true : false;
+      let repeatFriday = document.getElementById("repeatFriday").innerHTML === "on" ? true : false;
+      let repeatSaturday = document.getElementById("repeatSaturday").innerHTML === "on" ? true : false;
+
+      let completionArray = document.getElementById("completionChart").innerHTML;
+      completionArray = completionArray.split(",");
+      const day = startDate.day;
       const month = startDate.month;
       const date = startDate.date;
       const year = startDate.year;
-      const workDays = getWorkDays(month, date, year, daysToComplete);
-      console.log(workDays);
-      workDays.forEach(function (workDay) {
-        $(".circular-btns").append(`<button type="button" class="btn btn-light circular-btn">${workDay}</button>`)
+      const workDays = getWorkDays(day, repeatSunday, repeatMonday, repeatTuesday, repeatWednesday,
+        repeatThursday, repeatFriday, repeatSaturday, everyOtherDay, month, date, year, daysToComplete);
+
+      workDays.forEach(function (workDay, index) {
+        if (completionArray[index] == 1) {
+          $(".circular-btns").append(`
+          <form action="/routine/${routineId}" method="post" onsubmit="return confirm('Are you sure you want to log this day as incomplete?')">
+            <input type="hidden" value=${index} name="index" />
+            <input type="hidden" value="off" name="isComplete" />
+            <input type="checkbox" class="check day${index} hidden" name="isComplete" checked="checked" />
+            <input type="submit" class="btn btn-dark circular-btn submit day${index}" value='${workDay}'" />
+          </form>`);
+        } else {
+          $(".circular-btns").append(`
+            <form action="/routine/${routineId}" method="post" onsubmit="return confirm('Are you sure you want to log this day as complete?')">
+              <input type="hidden" value=${index} name="index" />
+              <input type="checkbox" class="check day${index} hidden" name="isComplete" />
+              <input type="submit" class="btn btn-light circular-btn submit day${index}" value='${workDay}'" />
+            </form>`);
+        }
       });
-    })
+
+      function toggleChecked(dayNumber) {
+        return function (event) {
+          if ($(`input.check.day${dayNumber}`).is(':checked')) {
+            $(`input.check.day${dayNumber}`).prop('checked', false);
+          } else {
+            $(`input.check.day${dayNumber}`).prop('checked', true);
+          }
+        }
+      };
+
+      for (var i = 0; i < completionArray.length; i++) {
+        $(`input.submit.day${i}`).click(toggleChecked(i));
+      };
+    });
+
+    $("button.completeRoutine").click(function () {
+      const completedGoal = document.getElementById('completedGoals').checked
+      $.post(`/routine/complete/${this.id}`).then(
+        function () {
+          if (completedGoal) {
+            $(".modal-body").eq(0).html(`<div class="text-success">Congratulations on completing the routine and reaching your goals!</div>`);
+            // alert("Congratulations on completing the routine and reaching your goals!");
+          } else {
+            // document.getElementsByClassName("modalBody")[0];
+            $(".modal-body").eq(0).html(`<div class="text-primary">Try harder next time!</div>`);
+            // alert("Work harder next time!");
+          }
+          $(".modal-footer").eq(0).html(`<a class="btn btn-dark" href="/currentRoutines">Back</a>`);
+          // window.location.href = "/currentRoutines";
+        });
+    });
   </script>
 </body>
 

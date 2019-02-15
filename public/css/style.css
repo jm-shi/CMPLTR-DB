@@ -27,6 +27,11 @@ body {
   margin-bottom: 1em;
 }
 
+.center-element {
+  display: block;
+  margin: 0 auto;
+}
+
 .center-text {
   text-align: center;
 }
@@ -49,13 +54,39 @@ body {
   vertical-align: middle;
 }
 
-.container input::placeholder { 
+.container input::placeholder {
   color: rgba(200, 200, 200, 0.9);
- }
+}
 
 /* .container input[type=date]:invalid {
   color: rgba(200, 200, 200, 0.9);
 } */
+
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+  background-color: rgb(52, 58, 64);
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+/* .active, .collapsible:hover {
+  background-color: #ccc;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  padding: 10px 10px 0px 10px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
 
 .divider {
   margin: 0 0 0.5em 0;
@@ -67,7 +98,7 @@ body {
 }
 
 .dropdown-item.disabled {
-  color: rgb(0,0,0);
+  color: rgb(0, 0, 0);
 }
 
 .goals-box {
@@ -82,7 +113,7 @@ body {
 .home-btn {
   font-size: 1.5em;
   margin-bottom: 1.5em;
-  padding: .5em;
+  padding: 0.5em;
 }
 
 .large-btn {
@@ -126,11 +157,11 @@ body {
 
 .routines {
   align-items: center;
-  background: rgb(35,35,35);
+  background: rgb(35, 35, 35);
   border-radius: 0.5em;
-  box-shadow: 0px 5px 20px 0 rgba(0,0,0,0.5); 
+  box-shadow: 0px 5px 20px 0 rgba(0, 0, 0, 0.5);
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   padding: 2em;
 }
 
@@ -142,6 +173,26 @@ body {
   margin-right: 1em;
 }
 
+.video {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.video iframe,
+.video object,
+.video embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 .white {
-  color: rgb(255,255,255);
+  color: rgb(255, 255, 255);
 }
