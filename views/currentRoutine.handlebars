@@ -15,9 +15,8 @@
   {{> navbar back="/currentRoutines"}}
 
   <div class="container">
-
     <h2 class="text-center">{{currentRoutineData.title}}</h2>
-    <h4>Goals:</h4>
+    <h4><strong>Goals:</strong></h4>
     <div class="goals-box rounded">
       {{#if currentRoutineData.goals}}
       <ul>
@@ -30,7 +29,23 @@
 
     <br />
 
-    <h4>Alarm: {{currentRoutineData.alarm}}</h4>
+    {{#if currentRoutineData.alarm}}
+    <h4><strong>Alarm:</strong> {{currentRoutineData.alarm}}</h4>
+    {{/if}}
+
+    {{#if currentRoutineData.everyOtherDay}}
+    <h4>Do routine every other day</h4>
+    {{else}}
+    <h4><strong>Do routine every:</strong> |
+      {{#if currentRoutineData.repeatSunday}}Sunday | {{/if}}
+      {{#if currentRoutineData.repeatMonday}}Monday | {{/if}}
+      {{#if currentRoutineData.repeatTuesday}}Tuesday | {{/if}}
+      {{#if currentRoutineData.repeatWednesday}}Wednesday | {{/if}}
+      {{#if currentRoutineData.repeatThursday}}Thursday | {{/if}}
+      {{#if currentRoutineData.repeatFriday}}Friday | {{/if}}
+      {{#if currentRoutineData.repeatSaturday}}Saturday | {{/if}}
+      {{/if}}
+    </h4>
 
     <br />
     <div class="routine circular-btns" style="flex-wrap: wrap">
@@ -71,17 +86,14 @@
     <div id="startDate" class="hidden">{{currentRoutineData.createdAt}}</div>
     <div id="goalReward" class="hidden">{{currentRoutineData.goalReward}}</div>
 
-    <!--
-    <div>Repeat Monday: {{currentRoutineData.repeatMonday}}</div>
-    <div>Repeat Tuesday: {{currentRoutineData.repeatTuesday}}</div>
-    <div>Repeat Wednesday: {{currentRoutineData.repeatWednesday}}</div>
-    <div>Repeat Thursday: {{currentRoutineData.repeatThursday}}</div>
-    <div>Repeat Friday: {{currentRoutineData.repeatFriday}}</div>
-    <div>Repeat Saturday: {{currentRoutineData.repeatSaturday}}</div>
-    <div>Repeat Sunday: {{currentRoutineData.repeatSunday}}</div>
-    <div>Every other day: {{currentRoutineData.everyOtherDay}}</div>
-    -->
-
+    <div id="everyOtherDay" class="hidden">{{currentRoutineData.everyOtherDay}}</div>
+    <div id="repeatSunday" class="hidden">{{currentRoutineData.repeatSunday}}</div>
+    <div id="repeatMonday" class="hidden">{{currentRoutineData.repeatMonday}}</div>
+    <div id="repeatTuesday" class="hidden">{{currentRoutineData.repeatTuesday}}</div>
+    <div id="repeatWednesday" class="hidden">{{currentRoutineData.repeatWednesday}}</div>
+    <div id="repeatThursday" class="hidden">{{currentRoutineData.repeatThursday}}</div>
+    <div id="repeatFriday" class="hidden">{{currentRoutineData.repeatFriday}}</div>
+    <div id="repeatSaturday" class="hidden">{{currentRoutineData.repeatSaturday}}</div>
     <div id="routineId" class="hidden">{{currentRoutineData.id}}</div>
   </div>
 
@@ -100,16 +112,23 @@
       const daysToComplete = parseInt(document.getElementById("daysToComplete").innerHTML);
       const startDate = JSON.parse(document.getElementById("startDate").innerHTML);
       const goalReward = document.getElementById("goalReward").innerHTML;
-      // console.log("The goal reward", goalReward);
-      // console.log("Start date", startDate);
+      let everyOtherDay = document.getElementById("everyOtherDay").innerHTML === "on" ? true : false;
+      let repeatSunday = document.getElementById("repeatSunday").innerHTML === "on" ? true : false;
+      let repeatMonday = document.getElementById("repeatMonday").innerHTML === "on" ? true : false;
+      let repeatTuesday = document.getElementById("repeatTuesday").innerHTML === "on" ? true : false;
+      let repeatWednesday = document.getElementById("repeatWednesday").innerHTML === "on" ? true : false;
+      let repeatThursday = document.getElementById("repeatThursday").innerHTML === "on" ? true : false;
+      let repeatFriday = document.getElementById("repeatFriday").innerHTML === "on" ? true : false;
+      let repeatSaturday = document.getElementById("repeatSaturday").innerHTML === "on" ? true : false;
+
       let completionArray = document.getElementById("completionChart").innerHTML;
       completionArray = completionArray.split(",");
+      const day = startDate.day;
       const month = startDate.month;
       const date = startDate.date;
       const year = startDate.year;
-      const workDays = getWorkDays(month, date, year, daysToComplete);
-      // console.log(workDays);
-      // console.log(workDays.length);
+      const workDays = getWorkDays(day, repeatSunday, repeatMonday, repeatTuesday, repeatWednesday,
+        repeatThursday, repeatFriday, repeatSaturday, everyOtherDay, month, date, year, daysToComplete);
 
       workDays.forEach(function (workDay, index) {
         if (completionArray[index] == 1) {
