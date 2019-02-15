@@ -38,7 +38,8 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', index.view);
+app.get('/', tutorial.view);
+app.get('/home', index.view);
 app.get('/communityFeed', communityFeed.view);
 app.get('/createRoutine', routine.viewCreateRoutine);
 app.get('/currentRoutines', routine.viewAllCurrentRoutines);
