@@ -34,16 +34,20 @@
     {{/if}}
 
     {{#if currentRoutineData.everyOtherDay}}
-    <h4>Do routine every other day</h4>
+    <h4><strong>Do routine every: </strong>other day</h4>
     {{else}}
-    <h4><strong>Do routine every:</strong> |
-      {{#if currentRoutineData.repeatSunday}}Sunday | {{/if}}
-      {{#if currentRoutineData.repeatMonday}}Monday | {{/if}}
-      {{#if currentRoutineData.repeatTuesday}}Tuesday | {{/if}}
-      {{#if currentRoutineData.repeatWednesday}}Wednesday | {{/if}}
-      {{#if currentRoutineData.repeatThursday}}Thursday | {{/if}}
-      {{#if currentRoutineData.repeatFriday}}Friday | {{/if}}
-      {{#if currentRoutineData.repeatSaturday}}Saturday | {{/if}}
+    {{#if currentRoutineData.everyDay}}
+    <h4><strong>Do routine every: </strong>day</h4>
+    {{else}}
+    <h4><strong>Do routine every: </strong>|
+      {{#if currentRoutineData.repeatSunday}}Sunday |{{/if}}
+      {{#if currentRoutineData.repeatMonday}}Monday |{{/if}}
+      {{#if currentRoutineData.repeatTuesday}}Tuesday |{{/if}}
+      {{#if currentRoutineData.repeatWednesday}}Wednesday |{{/if}}
+      {{#if currentRoutineData.repeatThursday}}Thursday |{{/if}}
+      {{#if currentRoutineData.repeatFriday}}Friday |{{/if}}
+      {{#if currentRoutineData.repeatSaturday}}Saturday |{{/if}}
+      {{/if}}
       {{/if}}
     </h4>
 
