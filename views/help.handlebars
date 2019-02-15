@@ -9,6 +9,7 @@
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
 
 <body>
@@ -17,21 +18,131 @@
   <div class="container">
 
     <div>
-      <b><label for="title">What is CMPLTR?</label></b>
+      <button class="collapsible">Q: What is CMPLTR? <i class="fas fa-caret-down"></i></button>
+      <div class="content">
       <p>CMPLTR, short for Completer, is a progress routine manager that notifies you when to do your task and rewards
         you for each consecutive day completed. After completing your task for the day, you enter it in the app, and it
         rewards you with visual and auditory positive feedback.</p>
+      </div>
+
+     <!--- <b><label for="title">Q: What is CMPLTR?</label></b>
+      <p>CMPLTR, short for Completer, is a progress routine manager that notifies you when to do your task and rewards
+        you for each consecutive day completed. After completing your task for the day, you enter it in the app, and it
+        rewards you with visual and auditory positive feedback.</p> --->
     </div>
 
     <hr class="divider">
     </hr>
 
     <div>
-      <b><label for="title">What do the circles on Current and Previous Routine mean?</label></b>
+      <button class="collapsible">Q: What does the "Create Routine" button do? <i class="fas fa-caret-down"></i></button>
+      <div class="content">
+      <p>It allows you to create and customize a routine that you intend to follow. 
+        You title it, set the total amount of days to complete, set the alarm, and optionally 
+        establish the goals and goal rewards for the routine.</p>
+      </div>
+
+    
+      <!-- <b><label for="title">Q: What does the "Create Routine" button do?</label></b>
+      <p>It allows you to create and customize a routine that you intend to follow. 
+        You title it, set the total amount of days to complete, set the alarm, and optionally 
+        establish the goals and goal rewards for the routine. 
+      </p>-->
+    </div>
+
+    <hr class="divider">
+    </hr>
+
+    <div>
+      <button class="collapsible">Q: What does the "Current Routines" button do? <i class="fas fa-caret-down"></i></button>
+      <div class="content">
+      <p>It shows you all of your active routines that need to be completed. You can click on a specific routine to check your progress,
+        as well as, logging your progress.</p>
+      </div>
+
+     <!-- <b><label for="title">Q: What does the "Current Routines" button do?</label></b>
+      <p> It shows you all of your active routines that need to be completed. You can click on a specific routine to check your progress,
+        as well as, logging your progress. 
+      </p>-->
+    </div>
+
+    <hr class="divider">
+    </hr>
+
+    <div>
+      <button class="collapsible">Q: What does the "Previous Routines" button do? <i class="fas fa-caret-down"></i></button>
+      <div class="content">
+      <p>It is an archive of all previous routines that have been finished. You cannot edit them, but you can view them.</p>
+      </div>
+
+      <!--<b><label for="title">Q: What does the "Previous Routines" button do?</label></b>
+      <p>It is an archive of all previous routines that have been finished. You cannot edit them, but you can view them.
+      </p> -->
+    </div>
+
+    <hr class="divider">
+    </hr>
+
+    <div>
+      <button class="collapsible">Q: What does the "See Community Feed" button do? <i class="fas fa-caret-down"></i></button>
+      <div class="content">
+      <p>It shows you the activity of other users of the app and their progress on their routines.</p>
+      </div>
+
+    <!--  <b><label for="title">Q: What does the "See Community Feed" button do?</label></b>
+      <p> It shows you the activity of other users of the app and their progress on their routines.
+      </p> -->
+    </div>
+
+    <hr class="divider">
+    </hr>
+
+    <div>
+      <button class="collapsible">Q: What do the circles on Current and Previous Routine mean? <i class="fas fa-caret-down"></i></button>
+      <div class="content">
       <p>The circles represent each day that is to be completed for the routine. After doing the task for the specified
         day, you press the circle and it lights up.</p>
+      </div>
+
+     <!-- <b><label for="title">Q: What do the circles on Current and Previous Routine mean?</label></b>
+      <p>The circles represent each day that is to be completed for the routine. After doing the task for the specified
+        day, you press the circle and it lights up.</p> -->
     </div>
+
+    <hr class="divider">
+    </hr>
+
+    <div>
+      <button class="collapsible">Q: What happens when you finish a routine? <i class="fas fa-caret-down"></i></button>
+      <div class="content">
+      <p>After confirming you are logging the last day, it will ask you to confirm what goals you have finished. Afterwards, your routine
+        will be archived in the previous routines page, where you can view it at any time.</p>
+      </div>
+
+    <!--  <b><label for="title">Q: What happens when you finish a routine?</label></b>
+      <p>After confirming you are logging the last day, it will ask you to confirm what goals you have finished. Afterwards, your routine
+        will be archived in the previous routines page, where you can view it at any time.
+      </p> -->
+    </div>
+
   </div>
+
+  <script>
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var content = this.nextElementSibling;
+      if (content.style.display === "block") {
+        content.style.display = "none";
+      } else {
+        content.style.display = "block";
+      }
+    });
+  }
+  </script>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
