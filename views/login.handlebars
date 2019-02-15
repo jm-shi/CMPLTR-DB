@@ -11,13 +11,48 @@
     crossorigin="anonymous">
 </head>
 
-<body>
+<body align="center">
   {{> navbar}}
-  <h1>Login placeholder screen</h1>
-
-  <a href="javascript:history.back()">
-    Back
-  </a>
+  	<div class="logo">
+		  <h1>CMPLTR</h1>
+	  </div>
+  <div class="container">
+      <form class="needs-validation" method="get" action="/" novalidate>
+    {{!-- <div class="container">
+      <input type="email" class="form-control" style="border:solid;"
+        id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
+    </div>
+    <br />
+    <div class="container">
+      <input type="password" class="form-control" style="border:solid;"
+        id="exampleInputPassword1" placeholder="Password" required>
+    </div>
+    <br />
+    <div class="login" align="center">
+      <a class="btn btn-primary btn-lg active" role="button" aria-pressed="true" href="/">Login</a>
+    </div> --}}
+    <div class="form-group">
+        <label for="title">Email<span class="red">*</span></label>
+        <input type="text" class="form-control" id="title" name="title" placeholder="Email" required>
+        <div class="invalid-feedback">Please enter an email.</div>
+      </div>
+    <div class="form-group">
+        <label for="title">Password<span class="red">*</span></label>
+        <input type="text" class="form-control" id="title" name="title" placeholder="Password" required>
+        <div class="invalid-feedback">Please enter a password.</div>
+      </div>
+    <br />
+    <br />
+    <br />
+    <div class="text-center">
+        <input type="submit" class="btn btn-dark large-btn" value="Login">
+        </input>
+    </div>
+    <div class="form-group" align="center">
+      <p>Don't have an account?<br /><a href="index">Sign Up</a></p>
+    </div>  
+</form>
+  </div>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
@@ -25,6 +60,9 @@
     crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
     crossorigin="anonymous"></script>
+   {{!-- <script src="../routes/login.js"></script> --}}
+   <script src="../js/forms.js"></script>
 </body>
 
 </html>
+
