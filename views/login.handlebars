@@ -1,7 +1,7 @@
 <!doctype html>
 
 <head>
-  <title>Login</title>
+  <title>Log In</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -9,29 +9,54 @@
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  {{> facebook}}
+  <script src="../js/facebook.js"></script>
 </head>
 
 <body align="center">
+
+  {{!-- <div id="fb-root"></div>
+  <script async defer
+    src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2&appId=516670882194603&autoLogAppEvents=1"></script> --}}
+
   {{> navbar noBackBtn="true" noDropdown="true"}}
+
   <div class="logo">
     <h1>CMPLTR</h1>
   </div>
+
   <div class="container">
+
+
+
+    <div class="center-text">
+      <div class="fb-login-button" data-size="large" data-button-type="continue_with" data-scope="public_profile, email"
+        data-auto-logout-link="false" data-use-continue-as="false" onlogin="checkLoginState();"></div>
+    </div>
+    {{!-- <p class="facebookLogin">Please login through Facebook
+      <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+      </fb:login-button>
+    </p> --}}
+
+    <hr />
+
     <form class="needs-validation" method="get" action="/home" novalidate>
 
       <div class="form-group">
         <label for="title">Email<span class="red">*</span></label>
-        <input type="text" class="form-control" id="title" name="title" placeholder="Email" required>
+        <input type="text" class="form-control" placeholder="Email" required>
         <div class="invalid-feedback">Please enter an email.</div>
       </div>
       <div class="form-group">
         <label for="title">Password<span class="red">*</span></label>
-        <input type="password" class="form-control" id="title" name="title" placeholder="Password" required>
+        <input type="password" class="form-control" placeholder="Password" required>
         <div class="invalid-feedback">Please enter a password.</div>
       </div>
+
       <br />
+
       <div class="text-center">
-        <input type="submit" class="btn btn-dark large-btn" value="Login">
+        <input type="submit" class="btn btn-dark large-btn" value="Log In">
         </input>
       </div>
       <br />
