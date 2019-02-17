@@ -32,8 +32,18 @@ body {
   margin: 0 auto;
 }
 
+.center-horizontal {
+  display: flex;
+  justify-content: center;
+}
+
 .center-text {
   text-align: center;
+}
+
+.center-vertical {
+  display: flex;
+  align-items: center;
 }
 
 .center-xy {

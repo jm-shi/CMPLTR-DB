@@ -15,21 +15,22 @@
   {{> navbar}}
 
   <div class="container" align="center">
-
-    <div class="community-feed-marquee">
-      <i class="fas fa-user-circle fa-5x marquee-item"></i>
-      <div class="marquee-item" "font-size:50px">
-        <span style="margin-left:.4em">
-          Name: <b>John Robert</b> <br /> <span style="margin-left:2em">Email: <b>john@gmail.com</b></span></b></div>
-      </span><br>
+    <div class="center-horizontal">
+      <div id="picture" class="center-horizontal center-vertical" style="height: 8em">
+        <i class="fas fa-user-circle fa-5x marquee-item"></i>
+      </div>
+      <div class="center-horizontal" style="flex-direction:column; height: 8em; margin-left: 1em;">
+        <div class="center-vertical" style="height: 2em;">
+          <strong id="nameLabel">Name:&nbsp;</strong>
+          <span id="name">John Doe</span>
+        </div>
+        <div class="center-vertical" style="height: 2em;">
+          <strong id="emailLabel">Email:&nbsp;</strong>
+          <span id="email">johndoe@gmail.com</span>
+        </div>
+      </div>
     </div>
-
-    <br />
-
   </div>
-  <br />
-  <br />
-  <br />
 
   <div class="container" align="center">
     <h2 align="center">Stats</h2>
@@ -54,6 +55,21 @@
 <!--<footer align="center">
   <button class="btn btn-dark" role="button">Edit</a>
 </footer>-->
-<br />
+<script>
+  const pictureURL = localStorage.getItem('picture');
+  const name = localStorage.getItem('name');
+  const email = localStorage.getItem('email');
+  if (pictureURL) {
+    $('#picture').html(`<img src=${pictureURL}>`);
+  }
+  if (name) {
+    $('#name').html(name);
+    // document.getElementById('name').innerHTML = name;
+  }
+  if (email) {
+    $('#email').html(email);
+    // document.getElementById('email').innerHTML = email;
+  }
+</script>
 
 </html>
