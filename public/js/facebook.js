@@ -6,8 +6,6 @@ function checkLoginState() {
 
 function statusChangeCallback(response) {
   if (response.status === 'connected') {
-    // const userId = response.authResponse.userID;
-    // const accessToken = response.authResponse.accessToken;
     setUserInfo();
   }
 }
@@ -24,17 +22,6 @@ function setUserInfo() {
     }
   });
 }
-
-// function fetchUserInfo() {
-//   const userObj = new Object();
-//   const localStorage = window.localStorage;
-//   userObj.id = localStorage.getItem('id');
-//   userObj.name = localStorage.getItem('name');
-//   userObj.first_name = localStorage.getItem('first_name');
-//   userObj.email = localStorage.getItem('email');
-//   userObj.picture = localStorage.getItem('picture');
-//   return userObj;
-// }
 
 function logoutFacebook() {
   FB.getLoginStatus(function (response) {

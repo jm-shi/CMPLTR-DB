@@ -32,28 +32,6 @@
       </div>
     </div>
   </div>
-  -->
-
-  <!--
-  <div class="container center-horizontal center-vertical">
-    <div class="card" style="border:none;">
-      <div id="picture" class="center-horizontal center-vertical" style="height: 8em">
-        <i class="fas fa-user-circle fa-5x marquee-item"></i>
-      </div>
-    </div>
-    <div class="card" style="width: 18rem; border:none;">
-      <div class="card-body">
-        <p class="card-text">
-          <strong id="nameLabel">Name:&nbsp;</strong>
-          <span id="name">John Doe</span>
-        </p>
-        <p class="card-text">
-          <strong id="emailLabel">Email:&nbsp;</strong>
-          <span id="email">johndoe@gmail.com</span>
-        </p>
-      </div>
-    </div>
-  </div>
 
   <div class="container" align="center">
     <h2 align="center">Stats</h2>
@@ -67,7 +45,6 @@
 
   <div class="container">
     <div class="card text-white bg-dark mb-3" style="width: 100%">
-      <!--<img class="card-img-top" src="" alt="Card image cap">-->
       <div id="picture" class="center-text" style="padding-top: 1em;">
         <i class="fas fa-user-circle fa-5x marquee-item"></i>
       </div>
@@ -138,9 +115,6 @@
     </div>
   </div>
 
-  <!--<canvas id="myChart" width="400" height="400"></canvas>-->
-
-
 </body>
 <!--<footer align="center">
   <button class="btn btn-dark" role="button">Edit</a>
@@ -154,46 +128,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
   integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
-{{!-- <script src="path/to/chartjs/dist/Chart.js"></script>
-<script>
-  var ctx = document.getElementById("myChart");
-  var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-      datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
-        ],
-        borderColor: [
-          'rgba(255,99,132,1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
-        ],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: true
-          }
-        }]
-      }
-    }
-  });
-</script> --}}
 <script>
   const pictureURL = localStorage.getItem('picture');
   const name = localStorage.getItem('name');
@@ -203,11 +137,9 @@
   }
   if (name) {
     $('#name').html(name);
-    // document.getElementById('name').innerHTML = name;
   }
   if (email) {
     $('#email').html(email);
-    // document.getElementById('email').innerHTML = email;
   }
 </script>
 
