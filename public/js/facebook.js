@@ -13,7 +13,7 @@ function statusChangeCallback(response) {
 }
 
 function setUserInfo() {
-  FB.api('/me?fields=name,first_name,email,picture.width(100)', function (response) {
+  FB.api('/me?fields=name,first_name,email,picture.width(300)', function (response) {
     if (response && !response.error) {
       window.localStorage.setItem('id', response.id);
       window.localStorage.setItem('name', response.name);

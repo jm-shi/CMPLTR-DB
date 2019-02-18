@@ -145,7 +145,7 @@
 
   <!-- Goals Modal -->
   {{> modal modalId="goalsModal" modalTitle="Goals" modalLabel="goalsModalLabel"
-  definition="The objectives you want to achieve by the end of the routine."
+  definition="The objectives you want to achieve by the end of the routine. To create multiple goals, separate them with a comma."
   examples="Ex: lose 10 pounds, get A on exam"}}
 
   <!-- Goal Reward Modal -->
@@ -158,6 +158,8 @@
   {{> modal modalId="daysToCompleteModal" modalTitle="Days to Complete" modalLabel="daysToCompleteModalLabel"
   definition="The number of work days to finish the routine. Does not include rest days."}}
 
+  {{> facebook}}
+  <script src="../js/facebook.js"></script>
   <script src="../js/calendar.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
