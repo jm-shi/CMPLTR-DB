@@ -42,8 +42,6 @@ function nextMonth(currMonth, currYear) {
   return [currMonth, currYear];
 }
 
-
-
 function getWorkDays(startDay, repeatSunday, repeatMonday, repeatTuesday, repeatWednesday, repeatThursday, repeatFriday,
   repeatSaturday, repeatEveryOtherDay, startMonth, startDate, startYear, daysToComplete) {
   let workDays = [];
@@ -116,37 +114,6 @@ function getWorkDays(startDay, repeatSunday, repeatMonday, repeatTuesday, repeat
       currYear = tempYear;
       currDate -= 31;
     }
-    /*
-        if (currDate >= 28 && currMonth == 1 && isLeapYear(currYear)) {
-          const tempMonth = nextMonth(currMonth, currYear)[0];
-          const tempYear = nextMonth(currMonth, currYear)[1];
-          currMonth = tempMonth;
-          currYear = tempYear;
-          currDate = 1;
-        } else if (currDate >= 29 && currMonth == 1) {
-          const tempMonth = nextMonth(currMonth, currYear)[0];
-          const tempYear = nextMonth(currMonth, currYear)[1];
-          currMonth = tempMonth;
-          currYear = tempYear;
-          currDate = 1;
-        } else if (currDate >= 30 && !hasThirtyOneDays(currMonth)) {
-          const tempMonth = nextMonth(currMonth, currYear)[0];
-          const tempYear = nextMonth(currMonth, currYear)[1];
-          currMonth = tempMonth;
-          currYear = tempYear;
-          currDate = 1;
-        } else if (currDate >= 31) {
-          const tempMonth = nextMonth(currMonth, currYear)[0];
-          const tempYear = nextMonth(currMonth, currYear)[1];
-          currMonth = tempMonth;
-          currYear = tempYear;
-          currDate = 1;
-        } else {
-          currDate++;
-        }*/
   }
   return workDays;
 }
-
-// let test = getWorkDays(1, 14, 2019, 16);
-// console.log(test);

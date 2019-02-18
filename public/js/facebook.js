@@ -43,6 +43,8 @@ function logoutFacebook() {
         window.localStorage.clear();
         window.location.href = "/login";
       });
+    } else {
+      window.location.href = "/login";
     }
   });
 }
