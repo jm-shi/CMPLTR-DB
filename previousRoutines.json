@@ -29,7 +29,14 @@
       "goals": [
         "Implement a binary search tree"
       ],
-      "goalReward": "Attend Warriors game"
+      "goalReward": "Attend Warriors game",
+      "completedGoalsCount": 1,
+      "goalsArray": [
+        {
+          "goal": "Implement a binary search tree",
+          "completed": 1
+        }
+      ]
     },
     {
       "id": "b570a105-50af-4b7e-a827-7ac1778c93a4",
@@ -59,7 +66,18 @@
         "Finish Udemy course on Photoshop",
         "Create poster for CMPLTR app"
       ],
-      "goalReward": "Buy a new video game"
+      "goalReward": "Buy a new video game",
+      "completedGoalsCount": 1,
+      "goalsArray": [
+        {
+          "goal": "Finish Udemy course on Photoshop",
+          "completed": 1
+        },
+        {
+          "goal": "Create poster for CMPLTR app",
+          "completed": 0
+        }
+      ]
     },
     {
       "id": "d3cf7fc2-b6b7-4369-bdeb-286edc1a8d99",
@@ -81,7 +99,14 @@
       "goals": [
         "Pass the final exam"
       ],
-      "goalReward": "Go on a cruise"
+      "goalReward": "Go on a cruise",
+      "completedGoalsCount": 1,
+      "goalsArray": [
+        {
+          "goal": "Pass the final exam",
+          "completed": 1
+        }
+      ]
     },
     {
       "id": "fb12f6a0-0353-4979-abb1-9b3726940a21",
@@ -111,7 +136,14 @@
       "goals": [
         "Be able to type at least 80 words per minute"
       ],
-      "goalReward": "Buy a new phone"
+      "goalReward": "Buy a new phone",
+      "completedGoalsCount": 1,
+      "goalsArray": [
+        {
+          "goal": "Be able to type at least 80 words per minute",
+          "completed": 1
+        }
+      ]
     }
   ]
 }

@@ -22,11 +22,17 @@
     <h4><strong>Goals:</strong></h4>
     <div class="goals-box rounded">
       {{#if previousRoutineData.goals}}
-      <ul>
-        {{#each previousRoutineData.goals}}
-        <li>{{this}}</li>
+      <div style="padding-left:1em; padding-bottom:1em;">
+        {{#each previousRoutineData.goalsArray}}
+        <div>
+          {{#if completed}}
+          <i class="fas fa-check text-success"></i> {{goal}}
+          {{else}}
+          <i class="fas fa-times text-danger"></i> &nbsp;{{goal}}
+          {{/if}}
+        </div>
         {{/each}}
-      </ul>
+      </div>
       {{else}}
       <ul>You did not set any goals.</ul>
       {{/if}}

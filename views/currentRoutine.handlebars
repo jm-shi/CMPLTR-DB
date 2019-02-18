@@ -95,7 +95,7 @@
             {{#each currentRoutineData.goals}}
             <div class="form-check">
               <input class="form-check-input" type="checkbox" name="goal{{@index}}" id="goal{{@index}}">
-              <label class="form-check-label" for="goal{{@index}}">
+              <label class="form-check-label" for="goal{{@index}}" id="goalLabel{{@index}}">
                 {{this}}
               </label>
             </div>
@@ -196,20 +196,27 @@
 
     $("button.completeRoutine").click(function () {
       const numberOfGoals = parseInt(document.getElementById('numberOfGoals').innerHTML);
-      console.log('number of goals', numberOfGoals);
       let completedAllGoals = true;
+      let goalsArray = [];
+      let completedGoalsCount = 0;
       for (let i = 0; i < numberOfGoals; i++) {
         const currGoalIsChecked = document.getElementById(`goal${i}`).checked;
+        const currGoal = document.getElementById(`goalLabel${i}`).innerHTML.trim();
+        let goalObject = { "goal": currGoal, "completed": 0 };
         if (!currGoalIsChecked) {
           completedAllGoals = false;
+        } else {
+          goalObject.completed = 1;
+          completedGoalsCount++;
         }
+        goalsArray.push(goalObject);
       }
-      $.post(`/routine/complete/${this.id}`).then(
+      $.post(`/routine/complete/${this.id}`, { goalsArray, completedGoalsCount }).then(
         function () {
           if (completedAllGoals) {
             $(".modal-body").eq(0).html(`<div class="text-success">Congratulations on completing the routine and reaching your goals!</div>`);
           } else {
-            $(".modal-body").eq(0).html(`<div class="text-primary">You completed the routine but did not reach all your goals. Try harder next time!</div>`);
+            $(".modal-body").eq(0).html(`<div class="text-primary">You completed the routine but did not reach all your goals.Try harder next time!</div>`);
           }
           $(".modal-footer").eq(0).html(`<a class="btn btn-dark" href="/currentRoutines">Back</a>`);
         });
