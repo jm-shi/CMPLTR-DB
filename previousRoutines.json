@@ -26,7 +26,9 @@
       "repeatSaturday": "on",
       "repeatSunday": "on",
       "everyDay": true,
-      "goals": "Implement a binary search tree",
+      "goals": [
+        "Implement a binary search tree"
+      ],
       "goalReward": "Attend Warriors game"
     },
     {
@@ -53,7 +55,10 @@
       "alarm": "10:00",
       "repeatMonday": "on",
       "repeatFriday": "on",
-      "goals": "Finish Udemy course on Photoshop",
+      "goals": [
+        "Finish Udemy course on Photoshop",
+        "Create poster for CMPLTR app"
+      ],
       "goalReward": "Buy a new video game"
     },
     {
@@ -73,7 +78,9 @@
         1,
         1
       ],
-      "goals": "Pass the final exam",
+      "goals": [
+        "Pass the final exam"
+      ],
       "goalReward": "Go on a cruise"
     },
     {
@@ -101,7 +108,9 @@
         1,
         1
       ],
-      "goals": "Be able to type at least 80 words per minute",
+      "goals": [
+        "Be able to type at least 80 words per minute"
+      ],
       "goalReward": "Buy a new phone"
     }
   ]

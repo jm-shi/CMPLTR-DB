@@ -20,7 +20,20 @@ exports.addRoutine = function (req, res) {
     && !repeatThursday && !repeatFriday) || (repeatSunday && repeatMonday
       && repeatTuesday && repeatWednesday && repeatThursday && repeatFriday && repeatSaturday);
   const everyOtherDay = req.body.everyOtherDay;
-  const goals = req.body.goals;
+
+  let goals = req.body.goals;
+  goals = goals.split(",");
+  // Remove leading and trailing spaces
+  for (let i = 0; i < goals.length; i++) {
+    goals[i] = goals[i].trim();
+  }
+  // Exclude last goal if it's an empty string
+  if (goals[goals.length - 1].trim() === "") goals.pop();
+  // Capitalize first letter of each item in goals array
+  for (let i = 0; i < goals.length; i++) {
+    goals[i] = goals[i].charAt(0).toUpperCase() + goals[i].substr(1);
+  }
+
   const goalReward = req.body.goalReward;
   if (title && daysToComplete) {
     currentRoutines.routines.push({
@@ -104,11 +117,23 @@ exports.editRoutine = function (req, res) {
         && !routine.repeatThursday && !routine.repeatFriday) || (routine.repeatSunday && routine.repeatMonday
           && routine.repeatTuesday && routine.repeatWednesday && routine.repeatThursday && routine.repeatFriday && routine.repeatSaturday);
       routine.everyOtherDay = req.body.everyOtherDay;
-      routine.goals = req.body.goals;
       routine.goalReward = req.body.goalReward;
+
+      let goals = req.body.goals;
+      goals = goals.split(",");
+      // Remove leading and trailing spaces
+      for (let i = 0; i < goals.length; i++) {
+        goals[i] = goals[i].trim();
+      }
+      // Exclude last goal if it's an empty string
+      if (goals[goals.length - 1].trim() === "") goals.pop();
+      // Capitalize first letter of each item in goals array
+      for (let i = 0; i < goals.length; i++) {
+        goals[i] = goals[i].charAt(0).toUpperCase() + goals[i].substr(1);
+      }
+      routine.goals = goals;
     }
   });
-
   return res.redirect('/currentRoutines');
 };
 
@@ -166,6 +191,15 @@ exports.viewEditRoutine = function (req, res) {
   const currentRoutineData = currentRoutines.routines.find(function (routine) {
     return routine.id === id;
   });
+
+  if (currentRoutineData.goals) {
+    for (let i = 1; i < currentRoutineData.goals.length; i++) {
+      if (currentRoutineData.goals[i].charAt(0) != " ") {
+        currentRoutineData.goals[i] = " " + currentRoutineData.goals[i];
+      }
+    }
+  }
+
   res.render('editRoutine', {
     navbarTitle: 'Edit Routine',
     currentRoutineData

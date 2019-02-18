@@ -23,7 +23,9 @@
     <div class="goals-box rounded">
       {{#if previousRoutineData.goals}}
       <ul>
-        <li>{{previousRoutineData.goals}}</li>
+        {{#each previousRoutineData.goals}}
+        <li>{{this}}</li>
+        {{/each}}
       </ul>
       {{else}}
       <ul>You did not set any goals.</ul>

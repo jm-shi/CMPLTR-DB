@@ -96,7 +96,7 @@
         <button type="button" class="question-btn" data-toggle="modal" data-target="#goalsModal">
           <i class="fas fa-question-circle"></i>
         </button>
-        <input type="text" class="form-control" id="goals" name="goals" placeholder="Lose 10 pounds">
+        <input type="text" class="form-control" id="goals" name="goals" placeholder="Lose 10 pounds, Run a 5K">
         <div class="invalid-feedback">Please enter a goal(s).</div>
       </div>
       <div class="form-group">
@@ -121,7 +121,7 @@
   <!-- Title Modal -->
   {{> modal modalId="titleModal" modalTitle="Title" modalLabel="titleModalLabel" definition="The name for a
   routine."
-  examples="Ex: go to gym, study math"}}
+  examples="Ex: go to gym"}}
 
   <!-- Goals Modal -->
   {{> modal modalId="startDateModal" modalTitle="Start Date" modalLabel="goalsModalLabel"
@@ -129,14 +129,14 @@
 
   <!-- Goals Modal -->
   {{> modal modalId="goalsModal" modalTitle="Goals" modalLabel="goalsModalLabel"
-  definition="The objectives you want to achieve by the end of the routine."
-  examples="Ex: lose 10 pounds, get A on exam"}}
+  definition="The objectives you want to achieve by the end of the routine. To create multiple goals, separate them with a comma."
+  examples="Ex: lose 10 pounds, run a 5K"}}
 
   <!-- Goal Reward Modal -->
   {{> modal modalId="goalRewardModal" modalTitle="Goal Reward" modalLabel="goalRewardModalLabel"
   definition="What you will reward yourself with after finishing the routine. This provides an incentive for you to
   achieve your goals."
-  examples="Ex: watch a movie, eat ice cream"}}
+  examples="Ex: watch a movie"}}
 
   <!-- Days to Complete Modal -->
   {{> modal modalId="daysToCompleteModal" modalTitle="Days to Complete" modalLabel="daysToCompleteModalLabel"

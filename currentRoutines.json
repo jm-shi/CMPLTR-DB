@@ -5,12 +5,35 @@
       "createdAt": "{\"day\":2,\"month\":0,\"date\":8,\"year\":2019}",
       "title": "Learn guitar",
       "daysToComplete": 18,
-      "completionChart": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+      "completionChart": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
       "alarm": "15:00",
       "repeatMonday": "on",
       "repeatWednesday": "on",
       "repeatFriday": "on",
-      "goals": "Play Thunderstruck",
+      "goals": [
+        "Play \"Runaway Train\"",
+        "Play \"Thunderstruck\"",
+        "Play \"I'm Yours\""
+      ],
       "goalReward": "Have apple pie"
     },
     {
@@ -18,10 +41,28 @@
       "createdAt": "{\"day\":3,\"month\":0,\"date\":23,\"year\":2019}",
       "title": "Go to gym",
       "daysToComplete": 14,
-      "completionChart": [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0],
+      "completionChart": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
       "alarm": "10:00",
       "repeatMonday": "on",
-      "goals": "Lose 10 pounds",
+      "goals": [
+        "Lose 10 pounds",
+        "Run a 5K"
+      ],
       "goalReward": "Watch a movie"
     },
     {
@@ -31,8 +72,16 @@
       "alarm": "07:30",
       "repeatSaturday": "on",
       "daysToComplete": 5,
-      "completionChart": [1, 0, 1, 0, 0],
-      "goals": "Get A on exam",
+      "completionChart": [
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "goals": [
+        "Get A on exam"
+      ],
       "goalReward": "Binge Netflix for a weekend"
     }
   ]
