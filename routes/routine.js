@@ -216,7 +216,7 @@ exports.viewPreviousRoutine = function (req, res) {
   console.log('Previous routine data:', previousRoutineData);
 
   res.render('previousRoutine', {
-    navbarTitle: 'Previous Routine',
+    navbarTitle: 'Archived Routine',
     previousRoutineData
   });
 };
@@ -230,7 +230,7 @@ exports.viewAllCurrentRoutines = function (req, res) {
 
 exports.viewAllPreviousRoutines = function (req, res) {
   res.render('previousRoutines', {
-    navbarTitle: 'Previous Routines',
+    navbarTitle: 'Archived Routines',
     previousRoutines
   });
 };
