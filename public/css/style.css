@@ -120,10 +120,30 @@ body {
   display: none;
 }
 
+
+.home-btn {
+  align-items: center;
+  display: flex; 
+  font-size: 1.5em;
+  justify-content: center;
+  height: 5em; 
+  margin-bottom: 1.5em;
+  padding: 0.5em;
+}
+
+/* 
 .home-btn {
   font-size: 1.5em;
   margin-bottom: 1.5em;
   padding: 0.5em;
+}
+*/
+
+.home-header {
+  font-size: 1.5em;
+  font-style: italic;
+  margin-bottom: 0.8em;
+  text-align: center;
 }
 
 .large-btn {
