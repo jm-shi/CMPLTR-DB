@@ -34,17 +34,17 @@
             </div>
           </div>
         </p>
-        <a href="/routine/{{id}}" class="card-link">
+        <a href="/routine/{{id}}" class="routineButton card-link">
           <button type="button" class="btn btn-light btn-rounded btn-sm edit-btn">
             <i class="fas fa-eye"> <span style="font-family:Helvetica"> View More</span></i>
           </button>
         </a>
-        <a href="/editRoutine/{{id}}" class="card-link">
+        <a href="/editRoutine/{{id}}" class="routineButton card-link">
           <button type="button" class="btn btn-info btn-rounded btn-sm edit-btn">
             <i class="fas fa-edit"> <span style="font-family:Helvetica"> Edit</span></i>
           </button>
         </a>
-        <a href="/currentRoutines" class="card-link">
+        <a href="/currentRoutines" class="routineButton card-link">
           <button type="button" id={{id}} class="btn btn-danger btn-rounded btn-sm delete">
             <i class="fas fa-trash"><span style="font-family:Helvetica"> Delete</span></i>
           </button>
@@ -62,46 +62,19 @@
     integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
     crossorigin="anonymous"></script>
   <script src="../js/calendar.js"></script>
+  <script src="../js/routines.js"></script>
   <script>
     $("button.delete").click(function () {
-      if (confirm('Are you sure you want to delete this routine ?')) {
+      if (confirm('Are you sure you want to delete this routine?')) {
         $.post(`/routine/delete/${this.id}`);
         $('.container#' + this.id).addClass('hidden');
       }
     });
-
-    const createdAtTimes = $('.createdAt');
-    for (let i = 0; i < createdAtTimes.length; i++) {
-      const createdAtObject = JSON.parse(createdAtTimes[i].innerHTML);
-      const createdAtMonth = month[createdAtObject.month];
-      const createdAtDate = `${createdAtObject.date} ${createdAtMonth} ${createdAtObject.year}`;
-      $(".createdAt").eq(i).html(createdAtDate);
-      $(".createdAt").eq(i).removeClass("hidden");
-    }
-
-    const completionCharts = $('.completionChart');
-    for (let i = 0; i < completionCharts.length; i++) {
-      const completionData = completionCharts[i].innerHTML;
-      const completionDataArray = completionData.split(",");
-      const totalDays = completionDataArray.length;
-      const completedDays = completionDataArray.filter(function (result) {
-        return result === "1";
-      }).length;
-      const percentComplete = Math.round(completedDays / totalDays * 100);
-
-      $(".completionChart").eq(i).html(`${completedDays}/${totalDays} days`);
-      $(".completionChart").eq(i).removeClass("hidden");
-      if (percentComplete >= 5) {
-        $(".progress-bar").eq(i).html(`${percentComplete}%`);
-      }
-      $('.progress-bar').eq(i).attr("style", `width:${percentComplete}%`);
-    }
-
     $(window).resize(function () {
       if ($(window).width() < 368) {
-        $('a').removeClass('card-link');
+        $('a.routineButton').removeClass('card-link');
       } else {
-        $('a').addClass('card-link');
+        $('a.routineButton').addClass('card-link');
       }
     });
   </script>
