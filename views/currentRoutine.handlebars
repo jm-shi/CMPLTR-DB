@@ -32,31 +32,42 @@
     <br />
 
     {{#if currentRoutineData.alarm}}
-    <h4><strong>Alarm:</strong> {{currentRoutineData.alarm}}</h4>
+    <h4><i class="fas fa-bell"></i> {{currentRoutineData.alarm}}</h4>
     {{/if}}
 
     {{#if currentRoutineData.everyOtherDay}}
-    <h4><strong>Do routine every: </strong>other day</h4>
+    <h4 class="flex">
+      <i class="fas fa-running" style="margin-right: 10px;"></i>
+      <div>every other day</div>
+    </h4>
     {{else}}
     {{#if currentRoutineData.everyDay}}
-    <h4><strong>Do routine every: </strong>day</h4>
+    <h4 class="flex">
+      <i class="fas fa-running" style="margin-right: 10px;"></i>
+      <div>everyday</div>
+    </h4>
     {{else}}
-    <h4><strong>Do routine every: </strong>|
-      {{#if currentRoutineData.repeatSunday}}Sunday |{{/if}}
-      {{#if currentRoutineData.repeatMonday}}Monday |{{/if}}
-      {{#if currentRoutineData.repeatTuesday}}Tuesday |{{/if}}
-      {{#if currentRoutineData.repeatWednesday}}Wednesday |{{/if}}
-      {{#if currentRoutineData.repeatThursday}}Thursday |{{/if}}
-      {{#if currentRoutineData.repeatFriday}}Friday |{{/if}}
-      {{#if currentRoutineData.repeatSaturday}}Saturday |{{/if}}
-      {{/if}}
+    <h4 class="flex">
+      <i class="fas fa-running" style="margin-right: 10px"></i>
+      <div>
+        {{#if currentRoutineData.repeatSunday}} Sun{{/if}}
+        {{#if currentRoutineData.repeatMonday}} Mon{{/if}}
+        {{#if currentRoutineData.repeatTuesday}} Tue{{/if}}
+        {{#if currentRoutineData.repeatWednesday}} Wed{{/if}}
+        {{#if currentRoutineData.repeatThursday}} Thu{{/if}}
+        {{#if currentRoutineData.repeatFriday}} Fri{{/if}}
+        {{#if currentRoutineData.repeatSaturday}} Sat{{/if}}
+      </div>
       {{/if}}
     </h4>
+    {{/if}}
 
+    <!--
     <br />
-    <h6 class="center-text">To record a day as completed, tap the button corresponding to that day.</h6>
+      <h6 class="center-text">To record a day as completed, tap the button corresponding to that day.</h6>
+    -->
+    <br />
 
-    <br />
     <div class="routine circular-btns" style="flex-wrap: wrap">
     </div>
 

@@ -35,26 +35,35 @@
     <br />
 
     {{#if previousRoutineData.alarm}}
-    <h4><strong>Alarm:</strong> {{previousRoutineData.alarm}}</h4>
+    <h4><i class="fas fa-bell"></i> {{previousRoutineData.alarm}}</h4>
     {{/if}}
 
     {{#if previousRoutineData.everyOtherDay}}
-    <h4><strong>Do routine every:</strong> other day</h4>
+    <h4 class="flex">
+      <i class="fas fa-running" style="margin-right: 10px;"></i>
+      <div>every other day</div>
+    </h4>
     {{else}}
     {{#if previousRoutineData.everyDay}}
-    <h4><strong>Do routine every:</strong> day</h4>
+    <h4 class="flex">
+      <i class="fas fa-running" style="margin-right: 10px;"></i>
+      <div>everyday</div>
+    </h4>
     {{else}}
-    <h4><strong>Do routine every: </strong>|
-      {{#if previousRoutineData.repeatSunday}}Sunday |{{/if}}
-      {{#if previousRoutineData.repeatMonday}}Monday |{{/if}}
-      {{#if previousRoutineData.repeatTuesday}}Tuesday |{{/if}}
-      {{#if previousRoutineData.repeatWednesday}}Wednesday |{{/if}}
-      {{#if previousRoutineData.repeatThursday}}Thursday |{{/if}}
-      {{#if previousRoutineData.repeatFriday}}Friday |{{/if}}
-      {{#if previousRoutineData.repeatSaturday}}Saturday |{{/if}}
-      {{/if}}
+    <h4 class="flex">
+      <i class="fas fa-running" style="margin-right: 10px;"></i>
+      <div>
+        {{#if previousRoutineData.repeatSunday}} Sun{{/if}}
+        {{#if previousRoutineData.repeatMonday}} Mon{{/if}}
+        {{#if previousRoutineData.repeatTuesday}} Tue{{/if}}
+        {{#if previousRoutineData.repeatWednesday}} Wed{{/if}}
+        {{#if previousRoutineData.repeatThursday}} Thu{{/if}}
+        {{#if previousRoutineData.repeatFriday}} Fri{{/if}}
+        {{#if previousRoutineData.repeatSaturday}} Sat{{/if}}
+      </div>
       {{/if}}
     </h4>
+    {{/if}}
 
     <br />
     <div class="routine circular-btns" style="flex-wrap: wrap">
