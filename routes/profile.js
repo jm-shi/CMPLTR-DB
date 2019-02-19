@@ -14,7 +14,7 @@ exports.view = function (req, res) {
   for (let i = 0; i < numCurrRoutines; i++) {
     const currRoutine = currRoutines[i];
     currRoutinesDaysCompleted += currRoutine.daysCompleted;
-    currRoutinesDaysTotal += currRoutine.daysToComplete;
+    currRoutinesDaysTotal += parseInt(currRoutine.daysToComplete);
     currGoalsTotal += currRoutine.goals.length;
   }
 
@@ -27,7 +27,7 @@ exports.view = function (req, res) {
   for (let i = 0; i < numPrevRoutines; i++) {
     const prevRoutine = prevRoutines[i];
     prevRoutinesDaysCompleted += prevRoutine.daysCompleted;
-    prevRoutinesDaysTotal += prevRoutine.daysToComplete;
+    prevRoutinesDaysTotal += parseInt(prevRoutine.daysToComplete);
     prevGoalsCompleted += prevRoutine.completedGoalsCount;
     prevGoalsTotal += prevRoutine.goals.length;
   }
