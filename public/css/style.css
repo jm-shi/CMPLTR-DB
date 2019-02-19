@@ -172,6 +172,13 @@ body {
   margin-bottom: 1em;
 }
 
+.profile-input {
+  background: transparent; 
+  border: none; 
+  color: white;
+  width: 100%;
+}
+
 .question-btn {
   background-color: transparent;
   border: none;

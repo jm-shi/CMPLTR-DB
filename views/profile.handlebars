@@ -14,35 +14,6 @@
 <body>
   {{> navbar}}
 
-  <!--
-  <div class="container" align="center">
-    <div class="center-horizontal">
-      <div id="picture" class="center-horizontal center-vertical" style="height: 8em">
-        <i class="fas fa-user-circle fa-5x marquee-item"></i>
-      </div>
-      <div class="center-horizontal" style="flex-direction:column; height: 8em; margin-left: 1em;">
-        <div class="center-vertical" style="height: 2em;">
-          <strong id="nameLabel">Name:&nbsp;</strong>
-          <span id="name">John Doe</span>
-        </div>
-        <div class="center-vertical" style="height: 2em;">
-          <strong id="emailLabel">Email:&nbsp;</strong>
-          <span id="email">johndoe@gmail.com</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="container" align="center">
-    <h2 align="center">Stats</h2>
-    <div style="width:300px;height:200px;background:rgb(255, 255, 255);border:1px solid black;text-align:center">
-      <br />
-      <p align="center"> Total Days: 110/120</h3>
-        <p align="center"> Total Goals: 18/20</h3>
-    </div>
-  </div>
-  -->
-
   <div class="container">
     <div class="card text-white bg-dark mb-3" style="width: 100%">
       <div id="picture" class="center-text" style="padding-top: 1em;">
@@ -50,17 +21,24 @@
       </div>
 
       <div class="card-body">
-        <h1 id="name" class="card-title">John Doe</h1>
-        <h5 id="bio" class="card-text">John Doe is a computer science student at UCSD. He enjoys playing video games and
-          watching
-          basketball.</h5>
+        <h1>
+          <input id="name" type="text" name="name" value="John Doe" class="profile-input">
+        </h1>
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item bg-dark">
-          <h5 id="email">Email: johndoe@gmail.com</h5>
+          <h5 class="flex">
+            <div style="margin-right:5px;">Email: </div>
+            <input id="email" type="text" name="email" value="johndoe@gmail.com" class="profile-input">
+          </h5>
         </li>
         <li class="list-group-item bg-dark">
           <h5 id="joinDate">Joined: February 18, 2019</h5>
+        </li>
+        <li class="list-group-item bg-dark center-text">
+          <form>
+          </form>
+          <button id="editProfile" type="button" class="btn btn-light">Edit Profile</button>
         </li>
       </ul>
     </div>
@@ -117,10 +95,6 @@
 
 </body>
 
-<!--<footer align="center">
-  <button class="btn btn-dark" role="button">Edit</a>
-</footer>-->
-
 {{> facebook}}
 <script src="../js/facebook.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -136,17 +110,16 @@
   const email = localStorage.getItem('email');
   const totalDaysPercentage = $("#totalDaysPercent").attr('aria-valuenow');
   const totalGoalsPercentage = $("#totalGoalsPercent").attr('aria-valuenow');
-  console.log('totalGoalsPercent', totalGoalsPercentage);
 
   $(document).ready(function () {
     if (pictureURL) {
       $('#picture').html(`<img src=${pictureURL}>`);
     }
     if (name) {
-      $('#name').html(name);
+      $('#name').val(name);
     }
     if (email) {
-      $('#email').html(email);
+      $('#email').val(`${email}`);
     }
 
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -161,6 +134,34 @@
     }
     $("#totalDaysPercent").attr("style", `width:${totalDaysPercentage}%`);
     $("#totalGoalsPercent").attr("style", `width:${totalGoalsPercentage}%`);
+  });
+
+  $('#editProfile').click(function () {
+    const innerHTML = $("#editProfile").html();
+    if (innerHTML === "Edit Profile") {
+      $("#editProfile").html("Save Changes");
+      $("#name").prop("disabled", false);
+      $("#email").prop("disabled", false);
+      $("#name").css("background-color", "black");
+      $("#email").css("background-color", "black");
+      $("#name").focus();
+    } else {
+      $("#editProfile").html("Edit Profile");
+      $("#name").prop("disabled", true);
+      $("#email").prop("disabled", true);
+      $("#name").css("background-color", "transparent");
+      $("#email").css("background-color", "transparent");
+      const updatedName = $("#name").val();
+      const updatedEmail = $("#email").val();
+      localStorage.setItem('name', updatedName);
+      localStorage.setItem('first_name', updatedName.trim().split(" ")[0]);
+      localStorage.setItem('email', updatedEmail);
+
+      const first_name = localStorage.getItem('first_name');
+      if (first_name && document.getElementById('welcome')) {
+        document.getElementById('welcome').innerHTML = `<strong>Welcome, ${first_name}</strong>`;
+      }
+    }
   });
 
 </script>
