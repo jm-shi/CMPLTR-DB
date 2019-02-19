@@ -4,6 +4,7 @@
       "id": "e81f2e68-b6b4-447b-9e83-3ae4323f1cc4",
       "createdAt": "{\"day\":2,\"month\":0,\"date\":8,\"year\":2019}",
       "title": "Learn guitar",
+      "daysCompleted": 11,
       "daysToComplete": 18,
       "completionChart": [
         1,
@@ -40,6 +41,7 @@
       "id": "4e53ad54-0a17-4b29-bfcd-c49438b0547c",
       "createdAt": "{\"day\":3,\"month\":0,\"date\":23,\"year\":2019}",
       "title": "Go to gym",
+      "daysCompleted": 8,
       "daysToComplete": 14,
       "completionChart": [
         1,
@@ -71,6 +73,7 @@
       "title": "Study math",
       "alarm": "07:30",
       "repeatSaturday": "on",
+      "daysCompleted": 2,
       "daysToComplete": 5,
       "completionChart": [
         1,

@@ -5,6 +5,7 @@ exports.addRoutine = function (req, res) {
   const id = req.body.id;
   const createdAt = req.body.createdAt;
   const title = req.body.title;
+  const daysCompleted = 0;
   const daysToComplete = req.body.daysToComplete;
   let completionChart = [];
   for (let i = 0; i < daysToComplete; i++) completionChart.push(0);
@@ -40,6 +41,7 @@ exports.addRoutine = function (req, res) {
       id,
       createdAt,
       title,
+      daysCompleted,
       daysToComplete,
       completionChart,
       alarm,
@@ -158,6 +160,8 @@ exports.updateCompletionLog = function (req, res) {
   const currentRoutineData = allRoutines.find(function (routine) {
     return routine.id === id;
   });
+
+  currentRoutineData.daysCompleted = isComplete ? currentRoutineData.daysCompleted + 1 : currentRoutineData.daysCompleted - 1;
 
   for (let i = 0; i < allRoutines.length; i++) {
     if (allRoutines[i].id === id) {
