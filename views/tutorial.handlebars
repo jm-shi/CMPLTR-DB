@@ -10,6 +10,14 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
+<script>
+  const isReturningUser = localStorage.getItem('isReturningUser');
+  if (isReturningUser) {
+    window.location.href = '/login';
+  } else {
+    localStorage.setItem('isReturningUser', true);
+  }
+</script>
 
 <body>
 
@@ -29,13 +37,15 @@
     </div>
     <br />
     <div>
-      Here's what you need to know to get started:
+      Here's a slideshow of what you need to know to get started:
     </div>
   </div>
   <br />
 
   {{> carousel}}
 
+  <br />
+  <div class="center-text">The slideshow can be accessed again in the help page.</div>
   <br />
 
   <div class="container">
@@ -52,11 +62,12 @@
     integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
     crossorigin="anonymous"></script>
   <script>
-    $(".carousel").carousel({
-      interval: false
+    $(document).ready(function () {
+      $(".carousel").carousel({
+        interval: false
+      });
     });
   </script>
-
 
 </body>
 

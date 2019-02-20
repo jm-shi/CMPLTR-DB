@@ -3,5 +3,7 @@
  */
 
 exports.view = function (req, res) {
-    res.render('tutorial', {navbarTitle: 'Tutorial'});
+    res.render('tutorial', {
+        navbarTitle: 'Tutorial'
+    });
 };
