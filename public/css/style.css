@@ -11,6 +11,24 @@ body {
   width: 100%;
 }
 
+.carousel-indicators li {
+  background-color: #fff;
+  border: none;
+  box-shadow: inset 1px 1px 1px 1px rgba(0,0,0,0.5);
+  height: 5px;
+  margin-top: 50px;
+  opacity: 0.8;   
+  text-indent: 0;
+  width: 30px;
+}
+.carousel-indicators .active {
+  background-color: rgb(160, 160, 160);
+  height: 5px;
+  margin-top: 50px;
+  opacity: 0.8;
+  width: 30px;
+}
+
 .circular-btn {
   border-color: #000;
   border-radius: 100%;
@@ -193,26 +211,6 @@ body {
   height: 60px;
   margin-bottom: 1em;
   width: 60px;
-}
-
-.video {
-  position: relative;
-  padding-bottom: 56.25%;
-  height: 0;
-  overflow: hidden;
-  max-width: 100%;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-.video iframe,
-.video object,
-.video embed {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
 }
 
 .white {
