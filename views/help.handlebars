@@ -23,76 +23,75 @@
       <div class="content">
         <p>CMPLTR, short for Completer, is a progress routine manager that notifies you when to do your task and rewards
           you for each consecutive day completed. After completing your task for the day, you record it on the app, and
-          it
-          rewards you with visual and auditory positive feedback.</p>
+          it rewards you with visual and auditory positive feedback.</p>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div>
+      <button class="collapsible">Q: Can I review the tutorial slideshow? <i class="fas fa-caret-down"></i></button>
+      <div class="content">
         {{> carousel}} <br />
       </div>
     </div>
 
-    <hr class="divider">
-    </hr>
+    <hr class="divider" />
 
     <div>
       <button class="collapsible">Q: How do I create a routine? <i class="fas fa-caret-down"></i></button>
       <div class="content">
-        <p>Click on the "Create Routine" button where you can create and customize your routine based on the total
-          amount of days you wish to complete,
-          when you want to be notified, and optionally what goals you wish to achieve, as well as, rewards you wish to
-          recieve upon completing the routine and goals.</p>
+        <p>Click on the "Create" button where you can create and customize your routine based on the total
+          amount of days you wish to complete. Optionally, you can set an alarm for when you want to be notified, set
+          goals you wish to achieve, and set a reward to treat yourself with upon completing the routine and its goals.
+        </p>
       </div>
     </div>
 
-    <hr class="divider">
-    </hr>
+    <hr class="divider" />
 
     <div>
       <button class="collapsible">Q: How do I check my current routine? <i class="fas fa-caret-down"></i></button>
       <div class="content">
-        <p>Click on the "Current Routines" button where you will be able to see all the routines that are currently
-          active. You can then click on one to see more details of that routine,
-          in addition to recording your completed days.</p>
+        <p>Click on the "Current" button where you will be able to see all the routines that are currently
+          active. You can then click on "View More" to segue to that routine's details screen, where you can also record
+          your completed days.</p>
       </div>
     </div>
 
-    <hr class="divider">
-    </hr>
+    <hr class="divider" />
 
     <div>
       <button class="collapsible">Q: Where can I see the old routines that I have completed? <i
           class="fas fa-caret-down"></i></button>
       <div class="content">
-        <p>Click on the "Previous Routines" button where you be able to see all archived routines. You can then click on
-          one to see more details of that routine.
-          You cannot edit them, but you can view them.</p>
+        <p>Click on the "Archives" button where you be able to see all archived routines. You can then click on
+          one to see more details of that routine. You cannot edit them, but you can view them.</p>
       </div>
     </div>
 
-    <hr class="divider">
-    </hr>
+    <hr class="divider" />
 
     <div>
       <button class="collapsible">Q: Can I see other user's activity and progress? <i
           class="fas fa-caret-down"></i></button>
       <div class="content">
-        <p>Click on the "See Community Feed" to see a ongoing list of users and their progression in their routines.</p>
+        <p>Click on the "Community" to see a ongoing list of users and their progression in their routines.</p>
       </div>
     </div>
 
-    <hr class="divider">
-    </hr>
+    <hr class="divider" />
 
     <div>
-      <button class="collapsible">Q: What do the circles on Current and Previous Routine mean? <i
-          class="fas fa-caret-down"></i></button>
+      <button class="collapsible">Q: What do the circles on the "Current Routine" and "Archived Routine" screens mean?
+        <i class="fas fa-caret-down"></i></button>
       <div class="content">
         <p>The circles represent each day that is to be completed for the routine. After doing the task for the
-          specified
-          day, you press the circle, it lights up, gives you a positive message, and plays a tone.</p>
+          specified day, you press the circle, it lights up, gives you a positive message, and plays a tone.</p>
       </div>
     </div>
 
-    <hr class="divider">
-    </hr>
+    <hr class="divider" />
 
     <div>
       <button class="collapsible">Q: How do I record a completed day for a routine? <i
@@ -103,15 +102,15 @@
       </div>
     </div>
 
-    <hr class="divider">
-    </hr>
+    <hr class="divider" />
 
     <div>
-      <button class="collapsible">Q: What happens when you finish a routine? <i class="fas fa-caret-down"></i></button>
+      <button class="collapsible">Q: What happens when I finish a routine? <i class="fas fa-caret-down"></i></button>
       <div class="content">
-        <p>Click on the "Mark Completed" button at the bottom of routine, and it will ask whether you completed the
-          intended goals. Afterwards, your routine
-          will be archived in the previous routines page, where you can view it at any time.</p>
+        <p>Click on the "Mark Routine As Finished" button at the bottom of routine, and it will ask whether you
+          completed the intended goals. Afterwards, your routine will be moved to the archive, where you can view it at
+          any time.
+        </p>
       </div>
     </div>
   </div>
@@ -144,6 +143,13 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
     integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
     crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function () {
+      $(".carousel").carousel({
+        interval: false
+      });
+    });
+  </script>
 
 </body>
 
