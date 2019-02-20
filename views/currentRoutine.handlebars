@@ -32,23 +32,23 @@
     <br />
 
     {{#if currentRoutineData.alarm}}
-    <h4><i class="fas fa-bell"></i> {{currentRoutineData.alarm}}</h4>
+    <h4><i class="fas fa-bell" style="margin-right: 5px;"></i> {{currentRoutineData.alarm}}</h4>
     {{/if}}
 
     {{#if currentRoutineData.everyOtherDay}}
     <h4 class="flex">
-      <i class="fas fa-running" style="margin-right: 10px;"></i>
-      <div>every other day</div>
+      <i class="fas fa-running" style="margin-right: 15px;"></i>
+      <div>Every other day</div>
     </h4>
     {{else}}
     {{#if currentRoutineData.everyDay}}
     <h4 class="flex">
-      <i class="fas fa-running" style="margin-right: 10px;"></i>
-      <div>everyday</div>
+      <i class="fas fa-running" style="margin-right: 15px;"></i>
+      <div>Everyday</div>
     </h4>
     {{else}}
     <h4 class="flex">
-      <i class="fas fa-running" style="margin-right: 10px"></i>
+      <i class="fas fa-running" style="margin-right: 15px"></i>
       <div>
         {{#if currentRoutineData.repeatSunday}} Sun{{/if}}
         {{#if currentRoutineData.repeatMonday}} Mon{{/if}}
@@ -62,10 +62,16 @@
     </h4>
     {{/if}}
 
-    <!--
-    <br />
-      <h6 class="center-text">To record a day as completed, tap the button corresponding to that day.</h6>
-    -->
+
+    {{#if currentRoutineData.goalReward}}
+    <h4 class="flex">
+      <i class="fa fa-gift" style="margin-right: 10px"></i>
+      <div>
+        {{currentRoutineData.goalReward}}
+      </div>
+    </h4>
+    {{/if}}
+
     <br />
 
     <div class="routine circular-btns" style="flex-wrap: wrap">

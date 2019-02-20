@@ -41,23 +41,23 @@
     <br />
 
     {{#if previousRoutineData.alarm}}
-    <h4><i class="fas fa-bell"></i> {{previousRoutineData.alarm}}</h4>
+    <h4><i class="fas fa-bell" style="margin-right: 5px;"></i> {{previousRoutineData.alarm}}</h4>
     {{/if}}
 
     {{#if previousRoutineData.everyOtherDay}}
     <h4 class="flex">
-      <i class="fas fa-running" style="margin-right: 10px;"></i>
-      <div>every other day</div>
+      <i class="fas fa-running" style="margin-right: 15px;"></i>
+      <div>Every other day</div>
     </h4>
     {{else}}
     {{#if previousRoutineData.everyDay}}
     <h4 class="flex">
-      <i class="fas fa-running" style="margin-right: 10px;"></i>
-      <div>everyday</div>
+      <i class="fas fa-running" style="margin-right: 15px;"></i>
+      <div>Everyday</div>
     </h4>
     {{else}}
     <h4 class="flex">
-      <i class="fas fa-running" style="margin-right: 10px;"></i>
+      <i class="fas fa-running" style="margin-right: 15px;"></i>
       <div>
         {{#if previousRoutineData.repeatSunday}} Sun{{/if}}
         {{#if previousRoutineData.repeatMonday}} Mon{{/if}}
@@ -68,6 +68,15 @@
         {{#if previousRoutineData.repeatSaturday}} Sat{{/if}}
       </div>
       {{/if}}
+    </h4>
+    {{/if}}
+
+    {{#if previousRoutineData.goalReward}}
+    <h4 class="flex">
+      <i class="fa fa-gift" style="margin-right: 10px"></i>
+      <div>
+        {{previousRoutineData.goalReward}}
+      </div>
     </h4>
     {{/if}}
 
