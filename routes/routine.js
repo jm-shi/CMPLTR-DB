@@ -66,12 +66,14 @@ exports.completeRoutine = function (req, res) {
   const id = req.params.id;
   const completedGoalsCount = parseInt(req.body.completedGoalsCount);
   let goalsArray = req.body.goalsArray;
-  goalsArray = goalsArray.map(function (item) {
-    return {
-      goal: item.goal,
-      completed: parseInt(item.completed)
-    }
-  });
+  if (goalsArray) {
+    goalsArray = goalsArray.map(function (item) {
+      return {
+        goal: item.goal,
+        completed: parseInt(item.completed)
+      }
+    });
+  }
 
   // Add routine to previous routine
   const routineToMove = currentRoutines.routines.find(function (routine) {

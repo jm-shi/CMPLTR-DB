@@ -97,6 +97,8 @@
               0
               {{/if}}
             </div>
+
+            {{#if currentRoutineData.goals}}
             <h5>Did you complete your goals?</h5>
             {{#each currentRoutineData.goals}}
             <div class="form-check">
@@ -106,6 +108,9 @@
               </label>
             </div>
             {{/each}}
+            {{else}}
+            <h5>You have finished the routine. Save routine to archives?</h5>
+            {{/if}}
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-dark" data-dismiss="modal">Cancel</button>
@@ -201,7 +206,8 @@
     });
 
     $("button.completeRoutine").click(function () {
-      const numberOfGoals = parseInt(document.getElementById('numberOfGoals').innerHTML);
+      const numberOfGoals = parseInt(document.getElementById("numberOfGoals").innerHTML);
+      const goalReward = document.getElementById("goalReward").innerHTML;
       let completedAllGoals = true;
       let goalsArray = [];
       let completedGoalsCount = 0;
@@ -219,10 +225,20 @@
       }
       $.post(`/routine/complete/${this.id}`, { goalsArray, completedGoalsCount }).then(
         function () {
-          if (completedAllGoals) {
-            $(".modal-body").eq(0).html(`<div class="text-success">Congratulations on completing the routine and reaching your goals!</div>`);
+          if (numberOfGoals === 0) {
+            if (goalReward) {
+              $(".modal-body").eq(0).html(`<div class="text-success">Congratulations on completing the routine! Your reward: ${goalReward}</div>`);
+            } else {
+              $(".modal-body").eq(0).html(`<div class="text-success">Congratulations on completing the routine!</div>`);
+            }
+          } else if (completedAllGoals) {
+            if (goalReward) {
+              $(".modal-body").eq(0).html(`<div class="text-success">Congratulations on completing the routine and reaching your goals! Your reward: ${goalReward}</div>`);
+            } else {
+              $(".modal-body").eq(0).html(`<div class="text-success">Congratulations on completing the routine and reaching your goals!</div>`);
+            }
           } else {
-            $(".modal-body").eq(0).html(`<div class="text-primary">You completed the routine but did not reach all your goals.Try harder next time!</div>`);
+            $(".modal-body").eq(0).html(`<div class="text-primary">You completed the routine but did not reach all your goals. Try harder next time!</div>`);
           }
           $(".modal-footer").eq(0).html(`<a class="btn btn-dark" href="/currentRoutines">Back</a>`);
         });
