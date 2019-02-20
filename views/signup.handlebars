@@ -18,16 +18,16 @@
     <h1>CMPLTR</h1>
   </div>
   <div class="container">
-    <form class="needs-validation" method="get" action="/home" novalidate>
+    <form id="signupForm" class="needs-validation" method="get" action="/home" novalidate>
 
       <div class="form-group">
         <label for="title">Name<span class="red">*</span></label>
-        <input type="text" class="form-control" placeholder="Name" required>
+        <input id="name" type="text" class="form-control" placeholder="Name" required>
         <div class="invalid-feedback">Please enter your name.</div>
       </div>
       <div class="form-group">
         <label for="title">Email<span class="red">*</span></label>
-        <input type="text" class="form-control" placeholder="Email" required>
+        <input id="email" type="text" class="form-control" placeholder="Email" required>
         <div class="invalid-feedback">Please enter an email.</div>
       </div>
       <div class="form-group">
@@ -64,6 +64,16 @@
     integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
     crossorigin="anonymous"></script>
   <script src="../js/forms.js"></script>
+  <script>
+    $("#signupForm").submit(function () {
+      const userName = $("#name").val();
+      const userEmail = $("#email").val();
+      localStorage.setItem('name', userName);
+      localStorage.setItem('first_name', userName.trim().split(" ")[0]);
+      localStorage.setItem('email', userEmail);
+      return true;
+    });
+  </script>
 </body>
 
 </html>
