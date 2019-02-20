@@ -23,7 +23,10 @@ function setUserInfo() {
   });
 }
 
-function logoutFacebook() {
+function logout() {
+  window.localStorage.clear();
+  window.location.href = "/login";
+  /*
   FB.getLoginStatus(function (response) {
     if (response.status === 'connected') {
       FB.logout(function (res) {
@@ -34,4 +37,5 @@ function logoutFacebook() {
       window.location.href = "/login";
     }
   });
+  */
 }
