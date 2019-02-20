@@ -1,0 +1,34 @@
+{
+    "communityFeedData": [
+        {
+            "name": "John" ,
+            "completedDayNumber": 5 ,
+            "routineName": "Play the Piano"
+        },
+        {
+            "name": "Patricia" ,
+            "completedDayNumber": 10 ,
+            "routineName": "Do Yoga"
+        },
+        {
+            "name": "Robert" ,
+            "completedDayNumber": 25 ,
+            "routineName": "Learn French"
+        },
+        {
+            "name": "Joe" ,
+            "completedDayNumber": 17 ,
+            "routineName": "Learn Latin"
+        },
+        {
+            "name": "Anna" ,
+            "completedDayNumber": 6 ,
+            "routineName": "Do Homework"
+        },
+        {
+            "name": "Ben" ,
+            "completedDayNumber": 99 ,
+            "routineName": "Code in Java"
+        }
+    ]
+}
