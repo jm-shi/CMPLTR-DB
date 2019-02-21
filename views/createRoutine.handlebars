@@ -165,10 +165,8 @@
     function updateAlarmText() {
       const alarmTime = $('#alarm').val();
       if (alarmTime === '') {
-        console.log('is empty');
         $('#alarmStatus').html(`<small id="emailHelp" class="form-text text-muted">Alarm has not been set.</small>`);
       } else {
-        console.log('not empty');
         $('#alarmStatus').html(`<small id="emailHelp" class="form-text text-success">Alarm has been set to ${alarmTime}.</small>`);
       }
     }

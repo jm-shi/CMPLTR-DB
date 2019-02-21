@@ -20,19 +20,19 @@
         <i class="fas fa-user-circle fa-5x marquee-item"></i>
       </div>
 
-      <div class="card-body">
+      <div class="card-body profile-spacing">
         <h1>
           <input id="name" type="text" name="name" value="John Doe" class="profile-input">
         </h1>
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item bg-dark">
+        <li class="list-group-item bg-dark profile-spacing">
           <h5 class="flex">
             <div style="margin-right:5px;">Email: </div>
             <input id="email" type="text" name="email" value="johndoe@gmail.com" class="profile-input">
           </h5>
         </li>
-        <li class="list-group-item bg-dark">
+        <li class="list-group-item bg-dark profile-spacing">
           <h5 id="joinDate">Joined: February 18, 2019</h5>
         </li>
         <li class="list-group-item bg-dark center-text">
@@ -76,12 +76,11 @@
         <h5 class="card-title">Goals in progress: {{currGoalsTotal}}</h5>
         <h5 class="card-title">Goals achieved: {{prevGoalsCompleted}}</h5>
         <h5 class="card-title">Goals failed to achieve: {{prevGoalsFailed}}</h5>
-        <!-- insert pie chart here -->
       </div>
     </div>
   </div>
 
-  <div class="container">
+  {{!-- <div class="container">
     <div class="card text-white bg-dark mb-3" style="width: 100%">
       <div class="card-header">
         <h1>Connections</h1>
@@ -91,7 +90,7 @@
         <h5 class="card-title">Following: 68</h5>
       </div>
     </div>
-  </div>
+  </div> --}}
 
 </body>
 
