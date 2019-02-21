@@ -76,9 +76,20 @@
         <h5 class="card-title">Goals in progress: {{currGoalsTotal}}</h5>
         <h5 class="card-title">Goals achieved: {{prevGoalsCompleted}}</h5>
         <h5 class="card-title">Goals failed to achieve: {{prevGoalsFailed}}</h5>
+
+        <div class="center-horizontal">
+
+          <canvas id="pieChart" width="400" height="300"></canvas>
+
+        </div>
+
       </div>
     </div>
   </div>
+
+  <div id="goalsInProgress" class="hidden">{{currGoalsTotal}}</div>
+  <div id="goalsAchieved" class="hidden">{{prevGoalsCompleted}}</div>
+  <div id="goalsFailed" class="hidden">{{prevGoalsFailed}}</div>
 
   {{!-- <div class="container">
     <div class="card text-white bg-dark mb-3" style="width: 100%">
@@ -96,6 +107,7 @@
 
 {{> facebook}}
 <script src="../js/facebook.js"></script>
+<script src="../js/chart.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
   integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
@@ -161,6 +173,34 @@
         document.getElementById('welcome').innerHTML = `<strong>Welcome, ${first_name}</strong>`;
       }
     }
+  });
+
+  const goalsInProgress = parseInt($('#goalsInProgress').html());
+  const goalsAchieved = parseInt($('#goalsAchieved').html());
+  const goalsFailed = parseInt($('#goalsFailed').html());
+  new Chart(document.getElementById("pieChart"), {
+    type: 'pie',
+    data: {
+      labels: ["In Progress", "Achieved", "Failed"],
+      datasets: [{
+        label: "Goal Count",
+        backgroundColor: ["#ffeb10", "#00ff43", "#ff000f"],
+        data: [goalsInProgress, goalsAchieved, goalsFailed]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+        fontColor: '#fff',
+        text: 'Goals Data',
+      },
+      legend: {
+        labels: {
+          fontColor: '#fff'
+        }
+      },
+      responsive: false
+    },
   });
 
 </script>
