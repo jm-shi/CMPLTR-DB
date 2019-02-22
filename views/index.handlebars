@@ -40,15 +40,30 @@
 
 				<div class="carousel-inner">
 					<div class="carousel-item active">
-						<i class="fas fa-user-circle fa-2x marquee-item"></i>
-						<div class="marquee-item">Larry completed day 900 of their routine "Be Amazing"
+						<div class="center-vertical" style="padding: 1em; border-radius: 5px;">
+							<div style="margin-right: 10px;">
+								<i class="fas fa-user-circle fa-2x"></i>
+							</div>
+							<div class="center-vertical word-break word-break-ellipsis">
+								Larry completed day 900 of their routine "Be Amazing"
+							</div>
 						</div>
 					</div>
-					
+
 					{{#each communityFeed.communityFeedData}}
-					<div class="carousel-item">
+					{{!-- <div class="carousel-item">
 						<i class="fas fa-user-circle fa-2x marquee-item"></i>
 						<div class="marquee-item">{{name}} completed day {{completedDayNumber}} of their routine "{{routineName}}"
+						</div>
+					</div> --}}
+					<div class="carousel-item">
+						<div class="center-vertical" style="padding: 1em; border-radius: 5px;">
+							<div style="margin-right: 10px;">
+								<i class="fas fa-user-circle fa-2x"></i>
+							</div>
+							<div class="center-vertical word-break word-break-ellipsis">
+								{{name}} completed day {{completedDayNumber}} of their routine "{{routineName}}"
+							</div>
 						</div>
 					</div>
 					{{/each}}
@@ -66,30 +81,9 @@
 
 		</div>
 		<a class="btn btn-dark large-btn home-btn" href="communityFeed">
-				<i class="fas fa-users fa-2x" style="margin-right:0.5em;"></i>
-				<div style="font-size: 1.5em;">Community</div>
-			</a>
-
-		{{!-- <div class="logo">
-		<h1>CMPLTR</h1>
-	</div>
-
-	<div class="container">
-		<a class="btn btn-dark large-btn home-btn" href="createRoutine">Create Routine</a>
-		<a class="btn btn-dark large-btn home-btn" href="currentRoutines">Current Routines</a>
-		<a class="btn btn-dark large-btn home-btn" href="previousRoutines">Previous Routines</a>
-	</div>
-
-	<hr class="divider" />
-
-	<div class="container">
-		<marquee class="community-feed-marquee">
-			<i class="fas fa-user-circle fa-2x marquee-item"></i>
-			<div class="marquee-item">Jim completed day 5 of his "Go swimming" routine!</div>
-		</marquee>
-
-		<a class="btn btn-dark large-btn community-feed-btn" href="communityFeed">View Community Feed</a>
-	</div> --}}
+			<i class="fas fa-users fa-2x" style="margin-right:0.5em;"></i>
+			<div style="font-size: 1.5em;">Community</div>
+		</a>
 
 		{{> facebook}}
 		<script src="../js/facebook.js"></script>

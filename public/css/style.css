@@ -75,6 +75,23 @@ body {
   margin-bottom: 0.5em;
 }
 
+.community-feed-content {
+  align-items: center;
+  display: flex;
+
+  -ms-word-break: break-all;
+  word-break: break-all;
+
+/* Non standard for webkit */
+   word-break: break-word;
+
+  -webkit-hyphens: auto;
+     -moz-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
+
+}
+
 .community-feed-marquee {
   display: inline-block;
   margin-bottom: 0.5em;
@@ -211,4 +228,18 @@ body {
 
 .white {
   color: rgb(255, 255, 255);
+}
+
+.word-break {
+    -ms-word-break: break-word;
+    word-break: break-word;
+}
+
+/* add ellipsis for content that exceeds two lines */
+.word-break-ellipsis {
+  height: 3em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
