@@ -219,3 +219,17 @@ body {
 .white {
   color: rgb(255, 255, 255);
 }
+
+.word-break {
+    -ms-word-break: break-word;
+    word-break: break-word;
+}
+
+/* add ellipsis for content that exceeds two lines */
+.word-break-ellipsis {
+  height: 3em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}

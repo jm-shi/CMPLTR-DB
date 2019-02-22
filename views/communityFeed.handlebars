@@ -16,7 +16,15 @@
 
   <div class="container">
     {{#each communityFeed.communityFeedData}}
-    <div class="container">
+    <div class="text-white bg-dark mb-3 center-vertical" style="padding: 1em; border-radius: 5px;">
+      <div style="margin-right: 10px;">
+        <i class="fas fa-user-circle fa-2x"></i>
+      </div>
+      <div class="word-break">
+        {{name}} completed day {{completedDayNumber}} of their routine "{{routineName}}"
+      </div>
+    </div>
+    {{!-- <div class="container">
       <div class="row">
         <div class="card text-white bg-dark mb-3" style="width:100%">
           <div class="card-body">
@@ -26,55 +34,8 @@
           </div>
         </div>
       </div>
-    </div>
-    {{/each}}
-
-    {{!-- <div class="container">
-      <div class="row">
-        <div class="card text-white bg-dark mb-3" style="width:100%">
-          <div class="card-body">
-            <i class="fas fa-user-circle fa-2x marquee-item"></i>
-            <div class="marquee-item">Rick completed day 35 of his "Do yoga" routine!</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="row">
-        <div class="card text-white bg-dark mb-3" style="width:100%">
-          <div class="card-body">
-            <i class="fas fa-user-circle fa-2x marquee-item"></i>
-            <div class="marquee-item">Larry completed day 2 of his "Learn Vietnamese" routine!</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="row">
-        <div class="card text-white bg-dark mb-3" style="width:100%">
-          <div class="card-body">
-            <i class="fas fa-user-circle fa-2x marquee-item"></i>
-            <div class="marquee-item">Rob completed day 19 of his "Go outside" routine!</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="row">
-        <div class="card text-white bg-dark mb-3" style="width:100%">
-          <div class="card-body">
-            <div>
-              <i class="fas fa-user-circle fa-2x marquee-item"></i>
-              <div class="marquee-item">Tim completed day 107 of his "Meditate" routine!</div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div> --}}
-
+    {{/each}}
   </div>
 
   {{> facebook}}
