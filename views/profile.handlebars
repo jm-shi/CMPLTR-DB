@@ -77,10 +77,7 @@
         <h5 class="card-title">Goals achieved: {{prevGoalsCompleted}}</h5>
         <h5 class="card-title">Goals failed to achieve: {{prevGoalsFailed}}</h5>
 
-        <div class="center-horizontal">
-
-          <canvas id="pieChart" width="400" height="300"></canvas>
-
+        <div id="pieChartContainer" class="center-horizontal">
         </div>
 
       </div>
@@ -178,30 +175,37 @@
   const goalsInProgress = parseInt($('#goalsInProgress').html());
   const goalsAchieved = parseInt($('#goalsAchieved').html());
   const goalsFailed = parseInt($('#goalsFailed').html());
-  new Chart(document.getElementById("pieChart"), {
-    type: 'pie',
-    data: {
-      labels: ["In Progress", "Achieved", "Failed"],
-      datasets: [{
-        label: "Goal Count",
-        backgroundColor: ["#ffeb10", "#00ff43", "#ff000f"],
-        data: [goalsInProgress, goalsAchieved, goalsFailed]
-      }]
-    },
-    options: {
-      title: {
-        display: true,
-        fontColor: '#fff',
-        text: 'Goals Data',
+  const goalsTotal = goalsInProgress + goalsAchieved + goalsFailed;
+
+  if (goalsTotal !== 0) {
+    $("#pieChartContainer").html(`<canvas id="pieChart" width="400" height="300"></canvas>`);
+    new Chart(document.getElementById("pieChart"), {
+      type: 'pie',
+      data: {
+        labels: ["In Progress", "Achieved", "Failed"],
+        datasets: [{
+          label: "Goal Count",
+          backgroundColor: ["#ffeb10", "#00ff43", "#ff000f"],
+          data: [goalsInProgress, goalsAchieved, goalsFailed]
+        }]
       },
-      legend: {
-        labels: {
-          fontColor: '#fff'
-        }
+      options: {
+        title: {
+          display: true,
+          fontColor: '#fff',
+          text: 'Goals Data',
+        },
+        legend: {
+          labels: {
+            fontColor: '#fff'
+          }
+        },
+        responsive: false
       },
-      responsive: false
-    },
-  });
+    });
+  } else {
+    $("#pieChartContainer").html("");
+  }
 
 </script>
 
