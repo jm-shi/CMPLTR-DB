@@ -134,6 +134,8 @@
     <div id="repeatFriday" class="hidden">{{currentRoutineData.repeatFriday}}</div>
     <div id="repeatSaturday" class="hidden">{{currentRoutineData.repeatSaturday}}</div>
     <div id="routineId" class="hidden">{{currentRoutineData.id}}</div>
+    <div id="sound"></div>
+
   </div>
 
   {{> facebook}}
@@ -203,45 +205,56 @@
       for (var i = 0; i < completionArray.length; i++) {
         $(`input.submit.day${i}`).click(toggleChecked(i));
       };
-    });
 
-    $("button.completeRoutine").click(function () {
-      const numberOfGoals = parseInt(document.getElementById("numberOfGoals").innerHTML);
-      const goalReward = document.getElementById("goalReward").innerHTML;
-      let completedAllGoals = true;
-      let goalsArray = [];
-      let completedGoalsCount = 0;
-      for (let i = 0; i < numberOfGoals; i++) {
-        const currGoalIsChecked = document.getElementById(`goal${i}`).checked;
-        const currGoal = document.getElementById(`goalLabel${i}`).innerHTML.trim();
-        let goalObject = { "goal": currGoal, "completed": 0 };
-        if (!currGoalIsChecked) {
-          completedAllGoals = false;
-        } else {
-          goalObject.completed = 1;
-          completedGoalsCount++;
-        }
-        goalsArray.push(goalObject);
+      // Source for playSound: Timo from https://stackoverflow.com/questions/10105063/how-to-play-a-notification-sound-on-websites
+      function playSound(filename) {
+        var mp3Source = '<source src="' + filename + '.mp3" type="audio/mpeg">';
+        var oggSource = '<source src="' + filename + '.ogg" type="audio/ogg">';
+        var embedSource = '<embed hidden="true" autostart="true" loop="false" src="' + filename + '.mp3">';
+        document.getElementById("sound").innerHTML = '<audio autoplay="autoplay">' + mp3Source + oggSource + embedSource + '</audio>';
       }
-      $.post(`/routine/complete/${this.id}`, { goalsArray, completedGoalsCount }).then(
-        function () {
-          if (numberOfGoals === 0) {
-            if (goalReward) {
-              $(".modal-body").eq(0).html(`<div class="text-success">Congratulations on completing the routine! Your reward: ${goalReward}</div>`);
-            } else {
-              $(".modal-body").eq(0).html(`<div class="text-success">Congratulations on completing the routine!</div>`);
-            }
-          } else if (completedAllGoals) {
-            if (goalReward) {
-              $(".modal-body").eq(0).html(`<div class="text-success">Congratulations on completing the routine and reaching your goals! Your reward: ${goalReward}</div>`);
-            } else {
-              $(".modal-body").eq(0).html(`<div class="text-success">Congratulations on completing the routine and reaching your goals!</div>`);
-            }
+
+      $("button.completeRoutine").click(function () {
+        const numberOfGoals = parseInt(document.getElementById("numberOfGoals").innerHTML);
+        const goalReward = document.getElementById("goalReward").innerHTML;
+        let completedAllGoals = true;
+        let goalsArray = [];
+        let completedGoalsCount = 0;
+        for (let i = 0; i < numberOfGoals; i++) {
+          const currGoalIsChecked = document.getElementById(`goal${i}`).checked;
+          const currGoal = document.getElementById(`goalLabel${i}`).innerHTML.trim();
+          let goalObject = { "goal": currGoal, "completed": 0 };
+          if (!currGoalIsChecked) {
+            completedAllGoals = false;
           } else {
-            $(".modal-body").eq(0).html(`<div class="text-primary">You completed the routine but did not reach all your goals. Try harder next time!</div>`);
+            goalObject.completed = 1;
+            completedGoalsCount++;
           }
-          $(".modal-footer").eq(0).html(`<a class="btn btn-dark" href="/currentRoutines">Back</a>`);
-        });
+          goalsArray.push(goalObject);
+        }
+        $.post(`/routine/complete/${this.id}`, { goalsArray, completedGoalsCount }).then(
+          function () {
+            if (numberOfGoals === 0) {
+              if (goalReward) {
+                $(".modal-body").eq(0).html(`<div class="text-success">Congratulations on completing the routine! Your reward: ${goalReward}</div>`);
+              } else {
+                $(".modal-body").eq(0).html(`<div class="text-success">Congratulations on completing the routine!</div>`);
+              }
+              playSound("../audio/fullComplete");
+            } else if (completedAllGoals) {
+              if (goalReward) {
+                $(".modal-body").eq(0).html(`<div class="text-success">Congratulations on completing the routine and reaching your goals! Your reward: ${goalReward}</div>`);
+              } else {
+                $(".modal-body").eq(0).html(`<div class="text-success">Congratulations on completing the routine and reaching your goals!</div>`);
+              }
+              playSound("../audio/fullComplete");
+            } else {
+              $(".modal-body").eq(0).html(`<div class="text-primary">You completed the routine but did not reach all your goals. Try harder next time!</div>`);
+              playSound("../audio/halfComplete");
+            }
+            $(".modal-footer").eq(0).html(`<a class="btn btn-dark" href="/currentRoutines">Back</a>`);
+          });
+      });
     });
   </script>
 </body>
