@@ -14,6 +14,8 @@
 <body>
   {{> navbar back="/currentRoutines"}}
 
+  <div id="notification" class= "hidden"></div>
+
   <div class="container">
     <h2 class="text-center">{{currentRoutineData.title}}</h2>
     <h4><strong>Goals:</strong></h4>
@@ -134,6 +136,8 @@
     <div id="repeatFriday" class="hidden">{{currentRoutineData.repeatFriday}}</div>
     <div id="repeatSaturday" class="hidden">{{currentRoutineData.repeatSaturday}}</div>
     <div id="routineId" class="hidden">{{currentRoutineData.id}}</div>
+
+    <div id="sound"></div>
   </div>
 
   {{> facebook}}
@@ -185,18 +189,49 @@
             <form action="/routine/${routineId}" method="post" onsubmit="return confirm('Are you sure you want to log this day as complete?')">
               <input type="hidden" value=${index} name="index" />
               <input type="checkbox" class="check day${index} hidden" name="isComplete" />
-              <input type="submit" class="btn btn-light circular-btn submit day${index}" value='${workDay}'" />
+              <input type="submit" class="btn btn-light circular-btn submit day${index}" value='${workDay}'" />  
             </form>`);
         }
       });
+
+
+
+      /**
+            * Plays a sound using the HTML5 audio tag. Provide mp3 and ogg files for best browser support.
+            * @param {string} filename The name of the file. Omit the ending!
+            */
+      function playSound(filename) {
+        var mp3Source = '<source src="' + filename + '.mp3" type="audio/mpeg">';
+        var oggSource = '<source src="' + filename + '.ogg" type="audio/ogg">';
+        var embedSource = '<embed hidden="true" autostart="true" loop="false" src="' + filename + '.mp3">';
+        document.getElementById("sound").innerHTML = '<audio autoplay="autoplay">' + mp3Source + oggSource + embedSource + '</audio>';
+      }
+
+      function showNotification() {
+        $('#notification').html(`
+        <div class="alert alert-success alert-dismissible fade show alert-location" role="alert" styl>
+        <center> Nice Job! Keep it up! </center>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        </div>`);
+        $('#notification').removeClass("hidden");
+        setTimeout(function(){ $('#notification').addClass("hidden");}, 3000);
+      }
 
       function toggleChecked(dayNumber) {
         return function (event) {
           if ($(`input.check.day${dayNumber}`).is(':checked')) {
             $(`input.check.day${dayNumber}`).prop('checked', false);
+            $(`input.day${dayNumber}`).removeClass('btn-dark');
+            $(`input.day${dayNumber}`).addClass('btn-light');
           } else {
             $(`input.check.day${dayNumber}`).prop('checked', true);
+            $(`input.day${dayNumber}`).removeClass('btn-light');
+            $(`input.day${dayNumber}`).addClass('btn-dark');
+            showNotification();
           }
+          
         }
       };
 
@@ -231,19 +266,27 @@
             } else {
               $(".modal-body").eq(0).html(`<div class="text-success">Congratulations on completing the routine!</div>`);
             }
+            playSound("../audio/FullComplete");
           } else if (completedAllGoals) {
             if (goalReward) {
               $(".modal-body").eq(0).html(`<div class="text-success">Congratulations on completing the routine and reaching your goals! Your reward: ${goalReward}</div>`);
+
             } else {
               $(".modal-body").eq(0).html(`<div class="text-success">Congratulations on completing the routine and reaching your goals!</div>`);
             }
+            playSound("../audio/FullComplete");
           } else {
             $(".modal-body").eq(0).html(`<div class="text-primary">You completed the routine but did not reach all your goals. Try harder next time!</div>`);
+            playSound("../audio/HalfComplete");
           }
           $(".modal-footer").eq(0).html(`<a class="btn btn-dark" href="/currentRoutines">Back</a>`);
         });
     });
+
+
   </script>
+
+
 </body>
 
 </html>

@@ -174,10 +174,10 @@ exports.updateCompletionLog = function (req, res) {
 
   console.log('Current routine data:', currentRoutineData);
 
-  res.render('currentRoutine', {
-    navbarTitle: 'Current Routine',
-    currentRoutineData
-  });
+  // res.render('currentRoutine', {
+  //   navbarTitle: 'Current Routine',
+  //   currentRoutineData
+  // });
 };
 
 exports.viewCreateRoutine = function (req, res) {

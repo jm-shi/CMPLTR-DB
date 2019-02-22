@@ -10,6 +10,13 @@ body {
   width: 100%;
 }
 
+.alert-location {
+  position: fixed;
+  top: 5px; 
+  left:2%;
+  width: 96%;
+}
+
 .carousel-indicators li {
   background-color: #fff;
   border: none;
