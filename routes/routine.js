@@ -84,6 +84,17 @@ exports.completeRoutine = function (req, res) {
   });
   routineToMove.completedGoalsCount = completedGoalsCount;
   routineToMove.goalsArray = goalsArray;
+
+  const date = new Date();
+  const finishDate = {
+    day: date.getDay(),
+    month: date.getMonth(),
+    date: date.getDate(),
+    year: date.getFullYear()
+  }
+  const finishDateString = JSON.stringify(finishDate);
+  routineToMove.finishDate = finishDateString;
+
   previousRoutines.routines.unshift(routineToMove);
 
   // Delete routine from current routine

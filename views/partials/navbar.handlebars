@@ -6,7 +6,7 @@
     {{/if}}
   </a>
 
-  <span class="mx-auto navbar-brand">{{{navbarTitle}}}</span>
+  <span class="mx-auto navbar-brand">{{navbarTitle}}</span>
   {{#if noDropdown}}
   {{else}}
   <div class="nav-item dropdown">
@@ -22,6 +22,7 @@
       <a class="dropdown-item" href="/home">Home</a>
       <div class="dropdown-divider"></div>
       <a class="dropdown-item" href="/profile">Profile</a>
+      <div class="dropdown-divider"></div>
       <a class="dropdown-item" href="/help">Help</a>
       <div class="dropdown-divider"></div>
       <a class="dropdown-item" onclick="logout()">Logout</a>

@@ -37,7 +37,8 @@
           "goal": "Implement a binary search tree",
           "completed": 1
         }
-      ]
+      ],
+      "finishDate": "{\"day\":2,\"month\":11,\"date\":18,\"year\":2018}"
     },
     {
       "id": "b570a105-50af-4b7e-a827-7ac1778c93a4",
@@ -79,7 +80,8 @@
           "goal": "Create poster for CMPLTR app",
           "completed": 0
         }
-      ]
+      ],
+      "finishDate": "{\"day\":3,\"month\":9,\"date\":10,\"year\":2018}"
     },
     {
       "id": "d3cf7fc2-b6b7-4369-bdeb-286edc1a8d99",
@@ -109,7 +111,8 @@
           "goal": "Pass the final exam",
           "completed": 1
         }
-      ]
+      ],
+      "finishDate": "{\"day\":0,\"month\":3,\"date\":22,\"year\":2018}"
     },
     {
       "id": "fb12f6a0-0353-4979-abb1-9b3726940a21",
@@ -147,7 +150,8 @@
           "goal": "Be able to type at least 80 words per minute",
           "completed": 1
         }
-      ]
+      ],
+      "finishDate": "{\"day\":3,\"month\":11,\"date\":20,\"year\":2017}"
     }
   ]
 }

@@ -1,11 +1,11 @@
 $(document).ready(function () {
-  const createdAtTimes = $('.createdAt');
-  for (let i = 0; i < createdAtTimes.length; i++) {
-    const createdAtObject = JSON.parse(createdAtTimes[i].innerHTML);
-    const createdAtMonth = month[createdAtObject.month];
-    const createdAtDate = `${createdAtObject.date} ${createdAtMonth} ${createdAtObject.year}`;
-    $(".createdAt").eq(i).html(createdAtDate);
-    $(".createdAt").eq(i).removeClass("hidden");
+  const jsonTimeStrings = $('.jsonTimeString');
+  for (let i = 0; i < jsonTimeStrings.length; i++) {
+    const jsonTime = JSON.parse(jsonTimeStrings[i].innerHTML);
+    const stringifiedMonth = month[jsonTime.month];
+    const stringifiedDate = `${jsonTime.date} ${stringifiedMonth} ${jsonTime.year}`;
+    $(".jsonTimeString").eq(i).html(stringifiedDate);
+    $(".jsonTimeString").eq(i).removeClass("hidden");
   }
 
   const completionCharts = $('.completionChart');
