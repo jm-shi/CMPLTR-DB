@@ -36,29 +36,31 @@ exports.addRoutine = function (req, res) {
   }
 
   const goalReward = req.body.goalReward;
-  if (title && daysToComplete) {
-    currentRoutines.routines.push({
-      id,
-      createdAt,
-      title,
-      daysCompleted,
-      daysToComplete,
-      completionChart,
-      alarm,
-      repeatMonday,
-      repeatTuesday,
-      repeatWednesday,
-      repeatThursday,
-      repeatFriday,
-      repeatSaturday,
-      repeatSunday,
-      everyDay,
-      everyOtherDay,
-      goals,
-      goalReward
-    });
 
-    return res.redirect('/currentRoutines');
+  const currentRoutine = {
+    id,
+    createdAt,
+    title,
+    daysCompleted,
+    daysToComplete,
+    completionChart,
+    alarm,
+    repeatMonday,
+    repeatTuesday,
+    repeatWednesday,
+    repeatThursday,
+    repeatFriday,
+    repeatSaturday,
+    repeatSunday,
+    everyDay,
+    everyOtherDay,
+    goals,
+    goalReward
+  };
+
+  if (title && daysToComplete) {
+    currentRoutines.routines.push(currentRoutine);
+    return res.redirect(`/routine/${id}`);
   }
 };
 
