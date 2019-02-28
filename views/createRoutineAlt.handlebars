@@ -34,7 +34,7 @@
         </button>
         <span class="required">required</span>
         <input type="number" class="form-control" id="daysToComplete" name="daysToComplete" placeholder="30" required>
-        <div class="invalid-feedback">Please enter the number of days to complete the routine.</div>
+        <div class="invalid-feedback">Please enter the number of days (between 1 and 500) to complete the routine.</div>
       </div>
 
       <div class="form-group">
@@ -43,7 +43,7 @@
           <i class="fas fa-question-circle"></i>
         </button>
         <span class="optional">optional</span>
-        <input class="form-control" type="time" value="12:30" id="alarm" name="alarm">
+        <input class="form-control" onfocus="(this.type='time')" id="alarm" name="alarm" placeholder="12:30 PM" />
       </div>
 
       <div class="form-group">
@@ -150,9 +150,23 @@
   <script src="../js/jquery.timepicker.min.js"></script>
 
   <script>
-    if ($('#alarm')[0].type != 'time') {
-      $('#alarm').timepicker();
-    }
+    $('form').submit(function (event) {
+      const daysToCompleteValue = $('#daysToComplete').val();
+      if (daysToCompleteValue && (daysToCompleteValue <= 0 || daysToComplete > 500)) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      this.classList.add('was-validated');
+    })
+
+    $('#daysToComplete').keyup(function () {
+      const daysToCompleteValue = $('#daysToComplete').val();
+      if (!daysToCompleteValue || daysToCompleteValue <= 0 || daysToCompleteValue > 500) {
+        this.setCustomValidity('Value must be larger than zero or no more than 500!');
+      } else {
+        this.setCustomValidity('');
+      }
+    })
 
     function updateAlarmText() {
       const alarmTime = $('#alarm').val();
