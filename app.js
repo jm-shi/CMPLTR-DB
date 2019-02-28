@@ -43,6 +43,7 @@ app.get('/', tutorial.view);
 app.get('/home', index.view);
 app.get('/communityFeed', communityFeed.view);
 app.get('/createRoutine', routine.viewCreateRoutine);
+app.get('/createRoutineAlt', routine.viewCreateRoutineAlt);
 app.get('/currentRoutines', routine.viewAllCurrentRoutines);
 app.post('/routine/add', routine.addRoutine);
 app.get('/editRoutine/:id', routine.viewEditRoutine);

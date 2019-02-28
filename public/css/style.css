@@ -198,6 +198,12 @@ body {
   margin-bottom: 1em;
 }
 
+.optional {
+  color: rgb(126, 126, 126);
+  float: right; 
+  margin-top: 5px; 
+}
+
 .profile-input {
   background: transparent; 
   border: none; 
@@ -218,6 +224,12 @@ body {
 
 .red {
   color: rgb(230, 0, 0);
+}
+
+.required{
+  color: rgb(230, 0, 0);
+  float: right; 
+  margin-top: 5px; 
 }
 
 .routine .circular-btn {

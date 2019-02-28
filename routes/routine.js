@@ -187,6 +187,13 @@ exports.viewCreateRoutine = function (req, res) {
   });
 };
 
+exports.viewCreateRoutineAlt = function (req, res) {
+  res.render('createRoutineAlt', {
+    navbarTitle: 'Create Routine',
+    currentRoutines
+  });
+};
+
 exports.viewCurrentRoutine = function (req, res) {
   const id = req.params.id;
 
