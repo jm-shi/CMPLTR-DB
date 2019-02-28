@@ -159,6 +159,15 @@
 {{> modal modalId="daysToCompleteModal" modalTitle="Days to Complete" modalLabel="daysToCompleteModalLabel"
   definition="The number of work days to finish the routine. Does not include rest days."}}
 
+<!-- Alarm Modal -->
+{{> modal modalId="alarmModal" modalTitle="Alarm" modalLabel="alarmModalLabel"
+  definition="When CMPLTR will notify you to complete the routine."}}
+
+<!-- Repeat Modal -->
+{{> modal modalId="repeatModal" modalTitle="Repeat" modalLabel="repeatModalLabel"
+  definition="What days of the week you will do the routine. Defaults to every day. If you select 
+  'every other day,' then you will do the routine every other day, starting from today."}}
+
 <!-- Goals Modal -->
 {{> modal modalId="goalsModal" modalTitle="Goals" modalLabel="goalsModalLabel"
   definition="The objectives you want to achieve by the end of the routine. To create multiple goals, separate them with a comma."
