@@ -59,8 +59,9 @@ exports.addRoutine = function (req, res) {
   };
 
   if (title && daysToComplete) {
-    currentRoutines.routines.push(currentRoutine);
-    return res.redirect(`/routine/${id}`);
+    currentRoutines.routines.unshift(currentRoutine);
+    return res.redirect('/currentRoutines');
+    // return res.redirect(`/routine/${id}`);
   }
 };
 
@@ -83,7 +84,7 @@ exports.completeRoutine = function (req, res) {
   });
   routineToMove.completedGoalsCount = completedGoalsCount;
   routineToMove.goalsArray = goalsArray;
-  previousRoutines.routines.push(routineToMove);
+  previousRoutines.routines.unshift(routineToMove);
 
   // Delete routine from current routine
   currentRoutines.routines = currentRoutines.routines.filter(function (routine) {
