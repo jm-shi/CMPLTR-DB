@@ -41,7 +41,8 @@
     <br />
 
     {{#if previousRoutineData.alarm}}
-    <h4><i class="fas fa-bell" style="margin-right: 5px;"></i> {{previousRoutineData.alarm}}</h4>
+    <h4><i class="fas fa-bell" style="margin-right: 5px;"></i> <span id="alarmTime">{{previousRoutineData.alarm}}</span>
+    </h4>
     {{/if}}
 
     {{#if previousRoutineData.everyOtherDay}}
@@ -137,6 +138,9 @@
       const year = startDate.year;
       const workDays = getWorkDays(day, repeatSunday, repeatMonday, repeatTuesday, repeatWednesday,
         repeatThursday, repeatFriday, repeatSaturday, everyOtherDay, month, date, year, daysToComplete);
+
+      const alarmTime = $("#alarmTime").html();
+      $("#alarmTime").html(militaryToStandard(alarmTime));
 
       workDays.forEach(function (workDay, index) {
         if (completionArray[index] == 1) {

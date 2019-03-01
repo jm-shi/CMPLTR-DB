@@ -117,3 +117,25 @@ function getWorkDays(startDay, repeatSunday, repeatMonday, repeatTuesday, repeat
   }
   return workDays;
 }
+
+// Convert military time to standard time
+// @param time - military time in the form of hh:mm (e.g. 07:30)
+function militaryToStandard(time) {
+  // Return original time in case user sets an invalid alarm time
+  if (time.length !== 5 || isNaN(time.slice(0, 2) + time.slice(3))) return time;
+
+  let standardTime = "";
+  const timeArr = time.split(":");
+  let hours = Number(timeArr[0]);
+  let mins = Number(timeArr[1]);
+  let isAM = true;
+  if (hours > 12) {
+    hours = hours - 12;
+    isAM = false;
+  }
+  mins = mins < 10 ? "0" + mins : mins;
+  standardTime = hours + ":" + mins;
+  standardTime = isAM ? standardTime + " AM" : standardTime + " PM";
+
+  return standardTime;
+}
