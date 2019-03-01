@@ -14,13 +14,14 @@
 <body>
   {{> create}}
 
+  <script src="js/calendar.js"></script>
   <script>
     function updateAlarmText() {
       const alarmTime = $('#alarm').val();
       if (alarmTime === '') {
         $('#alarmStatus').html(`<small id="emailHelp" class="form-text text-muted">Alarm has not been set.</small>`);
       } else {
-        $('#alarmStatus').html(`<small id="emailHelp" class="form-text text-success">Alarm has been set to ${alarmTime}.</small>`);
+        $('#alarmStatus').html(`<small id="emailHelp" class="form-text text-success">Alarm has been set to ${militaryToStandard(alarmTime)}.</small>`);
       }
     }
   </script>

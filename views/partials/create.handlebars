@@ -19,7 +19,7 @@
       </button>
       <span class="required">required</span>
       <input type="number" class="form-control" id="daysToComplete" name="daysToComplete" placeholder="30" required>
-      <div class="invalid-feedback">Please enter the number of days (between 1 and 500) to complete the routine.</div>
+      <div class="invalid-feedback">Please enter the number of days (between 1 and 365) to complete the routine.</div>
     </div>
 
 
@@ -157,7 +157,8 @@
 
 <!-- Days to Complete Modal -->
 {{> modal modalId="daysToCompleteModal" modalTitle="Days to Complete" modalLabel="daysToCompleteModalLabel"
-  definition="The number of work days to finish the routine. Does not include rest days."}}
+  definition="The number of work days to finish the routine. Does not include rest days. 
+  Your routine must be between 1 and 500 work days (inclusive) long."}}
 
 <!-- Alarm Modal -->
 {{> modal modalId="alarmModal" modalTitle="Alarm" modalLabel="alarmModalLabel"
@@ -193,7 +194,7 @@
 <script>
   $('form').submit(function (event) {
     const daysToCompleteValue = $('#daysToComplete').val();
-    if (daysToCompleteValue && (daysToCompleteValue <= 0 || daysToComplete > 500)) {
+    if (daysToCompleteValue && (daysToCompleteValue <= 0 || daysToComplete > 365)) {
       event.preventDefault();
       event.stopPropagation();
     }
@@ -202,8 +203,8 @@
 
   $('#daysToComplete').keyup(function () {
     const daysToCompleteValue = $('#daysToComplete').val();
-    if (!daysToCompleteValue || daysToCompleteValue <= 0 || daysToCompleteValue > 500) {
-      this.setCustomValidity('Value must be greater than zero and no more than 500.');
+    if (!daysToCompleteValue || daysToCompleteValue <= 0 || daysToCompleteValue > 365) {
+      this.setCustomValidity('Value must be greater than zero and no more than 365.');
     } else {
       this.setCustomValidity('');
     }

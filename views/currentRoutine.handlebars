@@ -175,7 +175,9 @@
         repeatThursday, repeatFriday, repeatSaturday, everyOtherDay, month, date, year, daysToComplete);
 
       const alarmTime = $("#alarmTime").html();
-      $("#alarmTime").html(militaryToStandard(alarmTime));
+      if (alarmTime) {
+        $("#alarmTime").html(militaryToStandard(alarmTime));
+      }
 
       workDays.forEach(function (workDay, index) {
         if (completionArray[index] == 1) {
