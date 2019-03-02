@@ -39,7 +39,10 @@
         <button type="button" class="btn btn-dark large-btn" data-toggle="modal" data-target="#alarmModal">
           Set Alarm
         </button>
-        <small id="emailHelp" class="form-text text-muted">Alarm has not been set.</small>
+
+        <div id="alarmStatus">
+          <small id="emailHelp" class="form-text text-muted">Alarm has not been set.</small>
+        </div>
 
         <!-- Set Alarm Modal -->
         <div class="modal fade" id="alarmModal" tabindex="-1" role="dialog" aria-labelledby="alarmModalLabel"
@@ -52,7 +55,8 @@
               <div class="modal-body">
                 <div class="container">
                   <div class="center-text">
-                    <input class="alarm" type="time" id="alarm" name="alarm" value="{{currentRoutineData.alarm}}" />
+                    <input class="alarm" onfocus="(this.type='time')" id="alarm" name="alarm" placeholder="12:30 PM"
+                      value="{{currentRoutineData.alarm}}" onchange="updateAlarmText()" />
                   </div>
 
                   <hr />
@@ -172,6 +176,19 @@
     crossorigin="anonymous"></script>
   <script src="../js/forms.js"></script>
   <script src="../js/repeatButtons.js"></script>
+  <script>
+    $(document).ready(function () {
+      function updateAlarmText() {
+        const alarmTime = $('#alarm').val();
+        if (alarmTime === '') {
+          $('#alarmStatus').html(`<small id="emailHelp" class="form-text text-muted">Alarm has not been set.</small>`);
+        } else {
+          $('#alarmStatus').html(`<small id="emailHelp" class="form-text text-success">Alarm has been set to ${militaryToStandard(alarmTime)}.</small>`);
+        }
+      }
+      updateAlarmText();
+    });
+  </script>
 
 </body>
 

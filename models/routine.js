@@ -1,12 +1,6 @@
 const mongoose = require('mongoose');
-// const validator = require('validator');
 
-mongoose.connect('mongodb://127.0.0.1:27017/cmpltr-api', {
-  useNewUrlParser: true,
-  useCreateIndex: true
-});
-
-const CurrentRoutine = mongoose.model('CurrentRoutine', {
+const Routine = mongoose.model('Routine', {
   title: {
     type: String,
     required: true
@@ -19,6 +13,10 @@ const CurrentRoutine = mongoose.model('CurrentRoutine', {
       }
     },
     required: true
+  },
+  isArchived: {
+    type: Boolean,
+    default: false
   },
   daysCompleted: {
     type: Number,
@@ -67,21 +65,22 @@ const CurrentRoutine = mongoose.model('CurrentRoutine', {
   },
   goalReward: {
     type: String
+  },
+  completedGoalsCount: {
+    type: Number,
+    default: 0
+  },
+  goalsArray: {
+    type: [{
+      goal: String,
+      completed: Number
+    }]
+  },
+  finishDate: {
+    type: String
   }
 });
 
-const PreviousRoutine = mongoose.model('PreviousRoutine', {
-  title: {
-    type: String,
-    required: true
-  },
-  daysToComplete: {
-    type: Number,
-    required: true
-  }
-})
-
 module.exports = {
-  CurrentRoutine,
-  PreviousRoutine
+  Routine
 }

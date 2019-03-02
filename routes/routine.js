@@ -1,8 +1,4 @@
-let currentRoutines = require('../currentRoutines.json');
-let previousRoutines = require('../previousRoutines.json');
-
-const db = require('../mongoose.js');
-const { CurrentRoutine, PreviousRoutine } = require('../models/routine.js');
+const { Routine } = require('../models/routine.js');
 
 exports.addRoutine = function (req, res) {
   const id = req.body.id;
@@ -38,7 +34,6 @@ exports.addRoutine = function (req, res) {
     goals[i] = goals[i].charAt(0).toUpperCase() + goals[i].substr(1);
   }
   goals = goals.length === 0 ? undefined : goals;
-  console.log('The goals are', goals);
 
   const goalReward = req.body.goalReward;
 
@@ -64,9 +59,7 @@ exports.addRoutine = function (req, res) {
   };
 
   if (title && daysToComplete) {
-    currentRoutines.routines.unshift(currentRoutine);
-
-    const newRoutine = new CurrentRoutine(currentRoutine);
+    const newRoutine = new Routine(currentRoutine);
     newRoutine.save().then(function () {
       console.log('Created new routine!');
       res.send(newRoutine);
@@ -90,14 +83,6 @@ exports.completeRoutine = function (req, res) {
       }
     });
   }
-
-  // Add routine to previous routine
-  const routineToMove = currentRoutines.routines.find(function (routine) {
-    return routine.id === id;
-  });
-  routineToMove.completedGoalsCount = completedGoalsCount;
-  routineToMove.goalsArray = goalsArray;
-
   const date = new Date();
   const finishDate = {
     day: date.getDay(),
@@ -106,37 +91,44 @@ exports.completeRoutine = function (req, res) {
     year: date.getFullYear()
   }
   const finishDateString = JSON.stringify(finishDate);
-  routineToMove.finishDate = finishDateString;
 
-  previousRoutines.routines.unshift(routineToMove);
+  update = {
+    $set: {
+      isArchived: true,
+      finishDate: finishDateString,
+      completedGoalsCount,
+      goalsArray
+    }
+  }
 
-  // Delete routine from current routine
-  currentRoutines.routines = currentRoutines.routines.filter(function (routine) {
-    return routine.id !== id;
-  });
-
-  res.render('currentRoutines', {
-    navbarTitle: 'Current Routine',
-    currentRoutines
+  Routine.findByIdAndUpdate(id, update, { new: true }, function (err, updatedRoutine) {
+    if (err) {
+      return console.log('Error with archiving routine', err);
+    }
+    return res.redirect('/currentRoutines');
   });
 };
 
 exports.deletePreviousRoutine = function (req, res) {
   const id = req.params.id;
-  previousRoutines.routines = previousRoutines.routines.filter(function (
-    routine
-  ) {
-    return routine.id !== id;
+  Routine.findByIdAndRemove(id, function (err, routine) {
+    if (err) {
+      return console.log('Could not remove current routine', err);
+    }
+    console.log('Successfully deleted routine!');
+    return res.redirect('/previousRoutines');
   });
-  return res.redirect('/previousRoutines');
 };
 
 exports.deleteRoutine = function (req, res) {
   const id = req.params.id;
-  currentRoutines.routines = currentRoutines.routines.filter(function (routine) {
-    return routine.id !== id;
+  Routine.findByIdAndRemove(id, function (err, routine) {
+    if (err) {
+      return console.log('Could not remove current routine', err);
+    }
+    console.log('Successfully deleted routine!');
+    return res.redirect('/currentRoutines');
   });
-  return res.redirect('/currentRoutines');
 };
 
 exports.editRoutine = function (req, res) {
@@ -176,7 +168,7 @@ exports.editRoutine = function (req, res) {
     goals: goals
   }
 
-  CurrentRoutine.findByIdAndUpdate(id, update, { new: true }, function (err, updatedRoutine) {
+  Routine.findByIdAndUpdate(id, update, { new: true }, function (err, updatedRoutine) {
     if (err) {
       return console.log('Error with updating routine', err);
     }
@@ -202,7 +194,7 @@ exports.updateCompletionLog = function (req, res) {
     $inc: { daysCompleted: incrementBy }
   }
 
-  CurrentRoutine.findByIdAndUpdate(id, update, { new: true }, function (err, updatedRoutine) {
+  Routine.findByIdAndUpdate(id, update, { new: true }, function (err, updatedRoutine) {
     if (err) {
       return console.log('Error with updating completion log', err);
     }
@@ -215,22 +207,20 @@ exports.updateCompletionLog = function (req, res) {
 
 exports.viewCreateRoutine = function (req, res) {
   res.render('createRoutine', {
-    navbarTitle: 'Create Routine',
-    currentRoutines
+    navbarTitle: 'Create Routine'
   });
 };
 
 exports.viewCreateRoutineAlt = function (req, res) {
   res.render('createRoutineAlt', {
-    navbarTitle: 'Create Routine',
-    currentRoutines
+    navbarTitle: 'Create Routine'
   });
 };
 
 exports.viewCurrentRoutine = function (req, res) {
   const id = req.params.id;
 
-  CurrentRoutine.findById(id, function (err, routine) {
+  Routine.findById(id, function (err, routine) {
     if (err) {
       return console.log('Error with finding current routine:', err);
     }
@@ -246,11 +236,11 @@ exports.viewCurrentRoutine = function (req, res) {
 exports.viewEditRoutine = function (req, res) {
   const id = req.params.id;
 
-  CurrentRoutine.findById(id, function (err, currentRoutine) {
+  Routine.findById(id, function (err, currentRoutine) {
     if (err) {
       return console.log('Could not view edit routine screen', err);
     }
-    console.log('Found routine!', currentRoutine);
+    console.log('Found routine to edit:', currentRoutine);
     if (currentRoutine.goals) {
       // Append a space to the start of each subsequent goal
       for (let i = 1; i < currentRoutine.goals.length; i++) {
@@ -270,20 +260,21 @@ exports.viewEditRoutine = function (req, res) {
 exports.viewPreviousRoutine = function (req, res) {
   const id = req.params.id;
 
-  const previousRoutineData = previousRoutines.routines.find(function (routine) {
-    return routine.id === id;
-  });
+  Routine.findById(id, function (err, routine) {
+    if (err) {
+      return console.log('Error with finding current routine:', err);
+    }
 
-  console.log('Previous routine data:', previousRoutineData);
-
-  res.render('previousRoutine', {
-    navbarTitle: 'Archived Routine',
-    previousRoutineData
+    console.log('Previous routine data:', routine);
+    res.render('previousRoutine', {
+      navbarTitle: 'Archived Routine',
+      previousRoutineData: routine
+    });
   });
 };
 
 exports.viewAllCurrentRoutines = function (req, res) {
-  CurrentRoutine.find({}, function (err, currRoutines) {
+  Routine.find({ isArchived: false }, function (err, currRoutines) {
     res.render('currentRoutines', {
       navbarTitle: 'Current Routines',
       currentRoutines: currRoutines
@@ -292,8 +283,10 @@ exports.viewAllCurrentRoutines = function (req, res) {
 };
 
 exports.viewAllPreviousRoutines = function (req, res) {
-  res.render('previousRoutines', {
-    navbarTitle: 'Archived Routines',
-    previousRoutines
+  Routine.find({ isArchived: true }, function (err, prevRoutines) {
+    res.render('previousRoutines', {
+      navbarTitle: 'Archived Routines',
+      previousRoutines: prevRoutines
+    });
   });
 };
