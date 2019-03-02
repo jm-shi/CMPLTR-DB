@@ -62,7 +62,8 @@ const CurrentRoutine = mongoose.model('CurrentRoutine', {
     type: [Number]
   },
   goals: {
-    type: String
+    type: [String],
+    default: []
   },
   goalReward: {
     type: String

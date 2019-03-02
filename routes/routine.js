@@ -6,27 +6,7 @@ const { CurrentRoutine, PreviousRoutine } = require('../models/routine.js');
 
 exports.addRoutine = function (req, res) {
   const id = req.body.id;
-
   const createdAt = req.body.createdAt;
-  // const jsonTime = JSON.parse(createdAt);
-  // const month = [
-  //   'Jan',
-  //   'Feb',
-  //   'Mar',
-  //   'Apr',
-  //   'May',
-  //   'Jun',
-  //   'Jul',
-  //   'Aug',
-  //   'Sep',
-  //   'Oct',
-  //   'Nov',
-  //   'Dec'
-  // ];
-  // const stringifiedMonth = month[jsonTime.month];
-  // const stringifiedDate = `${jsonTime.date} ${stringifiedMonth} ${jsonTime.year}`;
-  // createdAt = stringifiedDate;
-
   const title = req.body.title;
   const daysCompleted = 0;
   const daysToComplete = req.body.daysToComplete;
@@ -57,6 +37,8 @@ exports.addRoutine = function (req, res) {
   for (let i = 0; i < goals.length; i++) {
     goals[i] = goals[i].charAt(0).toUpperCase() + goals[i].substr(1);
   }
+  goals = goals.length === 0 ? undefined : goals;
+  console.log('The goals are', goals);
 
   const goalReward = req.body.goalReward;
 
@@ -80,11 +62,6 @@ exports.addRoutine = function (req, res) {
     goals,
     goalReward
   };
-
-  // db.get().collection('users').find({}).toArray()
-  //   .then(function (users) {
-  //     console.log('users', users);
-  //   });
 
   if (title && daysToComplete) {
     currentRoutines.routines.unshift(currentRoutine);
@@ -164,41 +141,47 @@ exports.deleteRoutine = function (req, res) {
 
 exports.editRoutine = function (req, res) {
   const id = req.params.id;
-  const allRoutines = currentRoutines.routines;
-  allRoutines.some(function (routine) {
-    if (routine.id === id) {
-      routine.title = req.body.title;
-      routine.daysToComplete = req.body.daysToComplete;
-      routine.alarm = req.body.alarm;
-      routine.repeatMonday = req.body.repeatMonday;
-      routine.repeatTuesday = req.body.repeatTuesday;
-      routine.repeatWednesday = req.body.repeatWednesday;
-      routine.repeatThursday = req.body.repeatThursday;
-      routine.repeatFriday = req.body.repeatFriday;
-      routine.repeatSaturday = req.body.repeatSaturday;
-      routine.repeatSunday = req.body.repeatSunday;
-      routine.everyDay = (!routine.repeatSunday && !routine.repeatMonday && !routine.repeatTuesday && !routine.repeatWednesday
-        && !routine.repeatThursday && !routine.repeatFriday) || (routine.repeatSunday && routine.repeatMonday
-          && routine.repeatTuesday && routine.repeatWednesday && routine.repeatThursday && routine.repeatFriday && routine.repeatSaturday);
-      routine.everyOtherDay = req.body.everyOtherDay;
-      routine.goalReward = req.body.goalReward;
 
-      let goals = req.body.goals;
-      goals = goals.split(",");
-      // Remove leading and trailing spaces
-      for (let i = 0; i < goals.length; i++) {
-        goals[i] = goals[i].trim();
-      }
-      // Exclude last goal if it's an empty string
-      if (goals[goals.length - 1].trim() === "") goals.pop();
-      // Capitalize first letter of each item in goals array
-      for (let i = 0; i < goals.length; i++) {
-        goals[i] = goals[i].charAt(0).toUpperCase() + goals[i].substr(1);
-      }
-      routine.goals = goals;
+  let goals = req.body.goals;
+  goals = goals.split(",");
+  // Remove leading and trailing spaces
+  for (let i = 0; i < goals.length; i++) {
+    goals[i] = goals[i].trim();
+  }
+  // Exclude last goal if it's an empty string
+  if (goals[goals.length - 1].trim() === "") goals.pop();
+  // Capitalize first letter of each item in goals array
+  for (let i = 0; i < goals.length; i++) {
+    goals[i] = goals[i].charAt(0).toUpperCase() + goals[i].substr(1);
+  }
+
+  const update = {
+    title: req.body.title,
+    daysToComplete: req.body.daysToComplete,
+    alarm: req.body.alarm,
+    repeatMonday: req.body.repeatMonday,
+    repeatTuesday: req.body.repeatTuesday,
+    repeatWednesday: req.body.repeatWednesday,
+    repeatThursday: req.body.repeatThursday,
+    repeatFriday: req.body.repeatFriday,
+    repeatSaturday: req.body.repeatSaturday,
+    repeatSunday: req.body.repeatSunday,
+    everyDay: (!req.body.repeatSunday && !req.body.repeatMonday && !req.body.repeatTuesday
+      && !req.body.repeatWednesday && !req.body.repeatThursday && !req.body.repeatFriday)
+      || (req.body.repeatSunday && req.body.repeatMonday && req.body.repeatTuesday
+        && req.body.repeatWednesday && req.body.repeatThursday && req.body.repeatFriday
+        && req.body.repeatSaturday),
+    everyOtherDay: req.body.everyOtherDay,
+    goalReward: req.body.goalReward,
+    goals: goals
+  }
+
+  CurrentRoutine.findByIdAndUpdate(id, update, { new: true }, function (err, updatedRoutine) {
+    if (err) {
+      return console.log('Error with updating routine', err);
     }
+    return res.redirect('/currentRoutines');
   });
-  return res.redirect('/currentRoutines');
 };
 
 exports.updateCompletionLog = function (req, res) {
@@ -247,52 +230,41 @@ exports.viewCreateRoutineAlt = function (req, res) {
 exports.viewCurrentRoutine = function (req, res) {
   const id = req.params.id;
 
-  const currentRoutineData = currentRoutines.routines.find(function (routine) {
-    return routine.id === id;
-  });
-
-  console.log('Current routine data:', currentRoutineData);
-
   CurrentRoutine.findById(id, function (err, routine) {
     if (err) {
       return console.log('Error with finding current routine:', err);
     }
-    console.log('The routine is...', routine);
+
+    console.log('Current routine data:', routine);
     res.render('currentRoutine', {
       navbarTitle: 'Current Routine',
       currentRoutineData: routine
     });
   });
-
-  // db.get().collection('currentRoutines').find({ _id: id }).toArray()
-  //   .then(function (users) {
-  //     console.log('Users', users);
-  //   });
-
-  // res.render('currentRoutine', {
-  //   navbarTitle: 'Current Routine',
-  //   currentRoutineData
-  // });
 };
 
 exports.viewEditRoutine = function (req, res) {
   const id = req.params.id;
-  const currentRoutineData = currentRoutines.routines.find(function (routine) {
-    return routine.id === id;
-  });
 
-  if (currentRoutineData.goals) {
-    for (let i = 1; i < currentRoutineData.goals.length; i++) {
-      if (currentRoutineData.goals[i].charAt(0) != " ") {
-        currentRoutineData.goals[i] = " " + currentRoutineData.goals[i];
+  CurrentRoutine.findById(id, function (err, currentRoutine) {
+    if (err) {
+      return console.log('Could not view edit routine screen', err);
+    }
+    console.log('Found routine!', currentRoutine);
+    if (currentRoutine.goals) {
+      // Append a space to the start of each subsequent goal
+      for (let i = 1; i < currentRoutine.goals.length; i++) {
+        if (currentRoutine.goals[i].charAt(0) != " ") {
+          currentRoutine.goals[i] = " " + currentRoutine.goals[i];
+        }
       }
     }
-  }
 
-  res.render('editRoutine', {
-    navbarTitle: 'Edit Routine',
-    currentRoutineData
-  });
+    res.render('editRoutine', {
+      navbarTitle: 'Edit Routine',
+      currentRoutineData: currentRoutine
+    });
+  })
 };
 
 exports.viewPreviousRoutine = function (req, res) {
