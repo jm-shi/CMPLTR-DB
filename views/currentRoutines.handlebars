@@ -14,12 +14,12 @@
 <body>
   {{> navbar back="/home"}}
 
-  {{#if currentRoutines.routines}}
+  {{#if currentRoutines}}
   {{else}}
   <div class="center-text" style="margin-bottom:1em;">You have no current routines.</div>
   {{/if}}
 
-  {{#each currentRoutines.routines}}
+  {{#each currentRoutines}}
   <div class="container">
     <div class="card text-white bg-dark mb-3" style="width:100%">
       <h4 class="card-header">{{title}}</h4>

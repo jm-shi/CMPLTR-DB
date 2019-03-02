@@ -150,12 +150,14 @@
     crossorigin="anonymous"></script>
   <script src="../js/calendar.js"></script>
 
+
   <script>
     $(document).ready(function () {
       const routineId = document.getElementById("routineId").innerHTML;
       const daysToComplete = parseInt(document.getElementById("daysToComplete").innerHTML);
       const startDate = JSON.parse(document.getElementById("startDate").innerHTML);
       const goalReward = document.getElementById("goalReward").innerHTML;
+
       let everyOtherDay = document.getElementById("everyOtherDay").innerHTML === "on" ? true : false;
       let repeatSunday = document.getElementById("repeatSunday").innerHTML === "on" ? true : false;
       let repeatMonday = document.getElementById("repeatMonday").innerHTML === "on" ? true : false;
@@ -182,19 +184,19 @@
       workDays.forEach(function (workDay, index) {
         if (completionArray[index] == 1) {
           $(".circular-btns").append(`
-          <form action="/routine/${routineId}" method="post" onsubmit="return confirm('Are you sure you want to log this day as incomplete?')">
-            <input type="hidden" value=${index} name="index" />
-            <input type="hidden" value="off" name="isComplete" />
-            <input type="checkbox" class="check day${index} hidden" name="isComplete" checked="checked" />
-            <input type="submit" class="btn btn-dark circular-btn submit day${index}" value='${workDay}'" />
-          </form>`);
+                                <form action="/routine/${routineId}" method="post" onsubmit="return confirm('Are you sure you want to log this day as incomplete?')">
+                                  <input type="hidden" value=${index} name="index" />
+                                  <input type="hidden" value="off" name="isComplete" />
+                                  <input type="checkbox" class="check day${index} hidden" name="isComplete" checked="checked" />
+                                  <input type="submit" class="btn btn-dark circular-btn submit day${index}" value='${workDay}'" />
+                                </form>`);
         } else {
           $(".circular-btns").append(`
-            <form action="/routine/${routineId}" method="post" onsubmit="return confirm('Are you sure you want to log this day as complete?')">
-              <input type="hidden" value=${index} name="index" />
-              <input type="checkbox" class="check day${index} hidden" name="isComplete" />
-              <input type="submit" class="btn btn-light circular-btn submit day${index}" value='${workDay}'" />
-            </form>`);
+                                  <form action="/routine/${routineId}" method="post" onsubmit="return confirm('Are you sure you want to log this day as complete?')">
+                                    <input type="hidden" value=${index} name="index" />
+                                    <input type="checkbox" class="check day${index} hidden" name="isComplete" />
+                                    <input type="submit" class="btn btn-light circular-btn submit day${index}" value='${workDay}'" />
+                                  </form>`);
         }
       });
 
@@ -261,8 +263,11 @@
             $(".modal-footer").eq(0).html(`<a class="btn btn-dark" href="/currentRoutines">Back</a>`);
           });
       });
-    });
+
+    }); 
   </script>
+
+
 </body>
 
 </html>

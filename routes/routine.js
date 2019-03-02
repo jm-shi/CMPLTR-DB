@@ -1,9 +1,32 @@
 let currentRoutines = require('../currentRoutines.json');
 let previousRoutines = require('../previousRoutines.json');
 
+const db = require('../mongoose.js');
+const { CurrentRoutine, PreviousRoutine } = require('../models/routine.js');
+
 exports.addRoutine = function (req, res) {
   const id = req.body.id;
+
   const createdAt = req.body.createdAt;
+  // const jsonTime = JSON.parse(createdAt);
+  // const month = [
+  //   'Jan',
+  //   'Feb',
+  //   'Mar',
+  //   'Apr',
+  //   'May',
+  //   'Jun',
+  //   'Jul',
+  //   'Aug',
+  //   'Sep',
+  //   'Oct',
+  //   'Nov',
+  //   'Dec'
+  // ];
+  // const stringifiedMonth = month[jsonTime.month];
+  // const stringifiedDate = `${jsonTime.date} ${stringifiedMonth} ${jsonTime.year}`;
+  // createdAt = stringifiedDate;
+
   const title = req.body.title;
   const daysCompleted = 0;
   const daysToComplete = req.body.daysToComplete;
@@ -58,9 +81,22 @@ exports.addRoutine = function (req, res) {
     goalReward
   };
 
+  // db.get().collection('users').find({}).toArray()
+  //   .then(function (users) {
+  //     console.log('users', users);
+  //   });
+
   if (title && daysToComplete) {
     currentRoutines.routines.unshift(currentRoutine);
-    return res.redirect('/currentRoutines');
+
+    const newRoutine = new CurrentRoutine(currentRoutine);
+    newRoutine.save().then(function () {
+      console.log('Created new routine!');
+      res.send(newRoutine);
+      return res.redirect('/currentRoutines');
+    }).catch(function (err) {
+      res.status(400).send(err);
+    });
     // return res.redirect(`/routine/${id}`);
   }
 };
@@ -171,26 +207,26 @@ exports.updateCompletionLog = function (req, res) {
   const index = req.body.index;
   const isComplete = req.body.isComplete === 'on' ? 1 : 0;
   const id = req.params.id;
-  const allRoutines = currentRoutines.routines;
 
-  const currentRoutineData = allRoutines.find(function (routine) {
-    return routine.id === id;
-  });
+  let update = {};
+  update['completionChart.' + index] = isComplete;
 
-  currentRoutineData.daysCompleted = isComplete ? currentRoutineData.daysCompleted + 1 : currentRoutineData.daysCompleted - 1;
+  const indexToUpdate = 'completionChart.' + index;
+  const incrementBy = isComplete ? 1 : -1;
 
-  for (let i = 0; i < allRoutines.length; i++) {
-    if (allRoutines[i].id === id) {
-      allRoutines[i].completionChart[index] = isComplete;
-      break;
-    }
+  update = {
+    $set: { [indexToUpdate]: isComplete },
+    $inc: { daysCompleted: incrementBy }
   }
 
-  console.log('Current routine data:', currentRoutineData);
-
-  res.render('currentRoutine', {
-    navbarTitle: 'Current Routine',
-    currentRoutineData
+  CurrentRoutine.findByIdAndUpdate(id, update, { new: true }, function (err, updatedRoutine) {
+    if (err) {
+      return console.log('Error with updating completion log', err);
+    }
+    res.render('currentRoutine', {
+      navbarTitle: 'Current Routine',
+      currentRoutineData: updatedRoutine
+    });
   });
 };
 
@@ -217,10 +253,26 @@ exports.viewCurrentRoutine = function (req, res) {
 
   console.log('Current routine data:', currentRoutineData);
 
-  res.render('currentRoutine', {
-    navbarTitle: 'Current Routine',
-    currentRoutineData
+  CurrentRoutine.findById(id, function (err, routine) {
+    if (err) {
+      return console.log('Error with finding current routine:', err);
+    }
+    console.log('The routine is...', routine);
+    res.render('currentRoutine', {
+      navbarTitle: 'Current Routine',
+      currentRoutineData: routine
+    });
   });
+
+  // db.get().collection('currentRoutines').find({ _id: id }).toArray()
+  //   .then(function (users) {
+  //     console.log('Users', users);
+  //   });
+
+  // res.render('currentRoutine', {
+  //   navbarTitle: 'Current Routine',
+  //   currentRoutineData
+  // });
 };
 
 exports.viewEditRoutine = function (req, res) {
@@ -259,9 +311,11 @@ exports.viewPreviousRoutine = function (req, res) {
 };
 
 exports.viewAllCurrentRoutines = function (req, res) {
-  res.render('currentRoutines', {
-    navbarTitle: 'Current Routines',
-    currentRoutines
+  CurrentRoutine.find({}, function (err, currRoutines) {
+    res.render('currentRoutines', {
+      navbarTitle: 'Current Routines',
+      currentRoutines: currRoutines
+    });
   });
 };
 

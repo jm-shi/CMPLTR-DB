@@ -16,8 +16,21 @@ const profile = require('./routes/profile');
 const routine = require('./routes/routine');
 const notFound = require('./routes/notFound');
 const tutorial = require('./routes/tutorial');
+const db = require('./mongoose');
 
 const app = express();
+
+// const uri = "mongodb+srv://user123:Wkc7cYxyeCFkUF9p@cmpltr-vyeq1.mongodb.net/test?retryWrites=true";
+// var db;
+// MongoClient.connect(uri, { useNewUrlParser: true }, function (err, client) {
+//   if (err) {
+//     console.log('Error, could not connect to MongoDB Atlas:', err);
+//   }
+//   db = client.db('test');
+//   console.log('Connected to MongoDB Atlas');
+//   const collection = client.db("test").collection("devices");
+//   client.close();
+// });
 
 // All environments
 app.set('port', process.env.PORT || 3000);
@@ -62,6 +75,9 @@ app.get('/routine/previous/:id', routine.viewPreviousRoutine);
 app.post('/routine/:id', routine.updateCompletionLog);
 app.use(notFound.view); // 404 route
 
-http.createServer(app).listen(app.get('port'), function () {
-  console.log('Express server listening on port ' + app.get('port'));
-});
+db.connect(function () {
+  http.createServer(app).listen(app.get('port'), function () {
+    console.log('Express server listening on port ' + app.get('port'));
+  });
+})
+
