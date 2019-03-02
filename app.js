@@ -20,18 +20,6 @@ const db = require('./mongoose');
 
 const app = express();
 
-// const uri = "mongodb+srv://user123:Wkc7cYxyeCFkUF9p@cmpltr-vyeq1.mongodb.net/test?retryWrites=true";
-// var db;
-// MongoClient.connect(uri, { useNewUrlParser: true }, function (err, client) {
-//   if (err) {
-//     console.log('Error, could not connect to MongoDB Atlas:', err);
-//   }
-//   db = client.db('test');
-//   console.log('Connected to MongoDB Atlas');
-//   const collection = client.db("test").collection("devices");
-//   client.close();
-// });
-
 // All environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
