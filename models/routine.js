@@ -80,7 +80,7 @@ const Routine = mongoose.model('Routine', {
     type: String
   },
   owner: {
-    type: String // mongoose.Schema.Types.ObjectId
+    type: String
   }
 });
 

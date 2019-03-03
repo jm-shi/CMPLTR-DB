@@ -15,6 +15,7 @@ const profile = require('./routes/profile');
 const routine = require('./routes/routine');
 const notFound = require('./routes/notFound');
 const tutorial = require('./routes/tutorial');
+const user = require('./routes/user');
 const mongoose = require('./mongoose');
 const session = require('client-sessions');
 
@@ -70,6 +71,7 @@ app.post('/routine/:id', routine.updateCompletionLog);
 app.post('/createUser', signup.createUser);
 app.get('/verifyEmailUnique/:email', signup.verifyEmailUnique);
 app.post('/login', login.loginUser);
+app.get('/getUserInfo/:email', user.getUserInfo);
 app.use(notFound.view); // 404 route
 
 mongoose.connect(function () {

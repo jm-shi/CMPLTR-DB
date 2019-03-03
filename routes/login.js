@@ -12,9 +12,7 @@ exports.view = function (req, res) {
 
 exports.loginUser = async function (req, res) {
   try {
-    console.log('email is', req.body.email);
     const user = await User.authenticateLogin(req.body.email, req.body.password);
-    console.log('The user is', user);
     req.session._id = user._id;
     req.session.name = user.name;
     req.session.email = user.email;
