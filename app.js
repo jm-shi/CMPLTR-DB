@@ -61,6 +61,8 @@ app.get('/tutorial', tutorial.view);
 app.get('/routine/:id', routine.viewCurrentRoutine);
 app.get('/routine/previous/:id', routine.viewPreviousRoutine);
 app.post('/routine/:id', routine.updateCompletionLog);
+app.post('/createUser', signup.createUser);
+app.get('/verifyEmailUnique/:email', signup.verifyEmailUnique);
 app.use(notFound.view); // 404 route
 
 db.connect(function () {
@@ -68,4 +70,3 @@ db.connect(function () {
     console.log('Express server listening on port ' + app.get('port'));
   });
 })
-

@@ -5,5 +5,7 @@ let communityFeed = require('../communityFeed.json');
  */
 
 exports.view = function (req, res) {
-  res.render('index',{communityFeed});
+  res.render('index', {
+    communityFeed
+  });
 };

@@ -18,21 +18,32 @@
     <h1>CMPLTR</h1>
   </div>
   <div class="container">
-    <form id="signupForm" class="needs-validation" method="get" action="/home" novalidate>
+    <form id="signupForm" class="needs-validation" method="post" action="/createUser" novalidate>
 
       <div class="form-group">
         <label for="title">Name<span class="red">*</span></label>
-        <input id="name" type="text" class="form-control" placeholder="Name" required>
+        <input id="name" type="text" name="name" class="form-control" placeholder="Name" required>
         <div class="invalid-feedback">Please enter your name.</div>
       </div>
+
       <div class="form-group">
         <label for="title">Email<span class="red">*</span></label>
-        <input id="email" type="email" class="form-control" placeholder="Email" required>
-        <div class="invalid-feedback">Please enter a valid email.</div>
+        {{#if signedUpWithDuplicateEmail}}
+        <input id="email" type="email" name="email" class="form-control is-invalid" placeholder="Email" required>
+        <div id="isDuplicateEmail" class="invalid-feedback">This email is already being used. Try another one.</div>
+        <div id="isInvalidEmail" class="invalid-feedback">Please enter a valid email.</div>
+        {{else}}
+        <input id="email" type="email" name="email" class="form-control" placeholder="Email" required>
+        <div id="isDuplicateEmail" style="font-size: 80%; margin-top: .25rem" class="text-danger hidden">This email is
+          already being used. Try another one.</div>
+        <div id="isInvalidEmail" class="invalid-feedback">Please enter a valid email.</div>
+        {{/if}}
       </div>
+
+
       <div class="form-group">
         <label for="title">Password<span class="red">*</span></label>
-        <input type="password" id="password" class="form-control" placeholder="Password" required>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
         <div class="invalid-feedback">Please enter a password.</div>
       </div>
       <div class="form-group">
@@ -54,9 +65,7 @@
     </form>
   </div>
 
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
     integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
     crossorigin="anonymous"></script>
@@ -65,12 +74,38 @@
     crossorigin="anonymous"></script>
   <script src="../js/forms.js"></script>
   <script>
+
+    $("#email").change(function () {
+      const email = $("#email").val();
+      if (email) {
+        verifyEmailUnique(email);
+      }
+    });
+
+    function verifyEmailUnique(email) {
+      $.get(`/verifyEmailUnique/${email}`, function (req, res) {
+        if (req === 'email already exists') {
+          $("#email").addClass("is-invalid invalid");
+          $("#isDuplicateEmail").removeClass("hidden");
+          $("#isInvalidEmail").removeClass("invalid-feedback");
+          $("#isInvalidEmail").addClass("hidden");
+        } else {
+          $("#email").removeClass("is-invalid invalid");
+          $("#isDuplicateEmail").addClass("hidden");
+          $("#isInvalidEmail").addClass("invalid-feedback");
+          $("#isInvalidEmail").removeClass("hidden");
+        }
+      });
+    }
+
     $("#signupForm").submit(function (event) {
-      const userName = $("#name").val();
-      const userEmail = $("#email").val();
-      localStorage.setItem('name', userName);
-      localStorage.setItem('first_name', userName.trim().split(" ")[0]);
-      localStorage.setItem('email', userEmail);
+      const name = $("#name").val();
+      const email = $("#email").val();
+      const password = $("#email").val();
+      localStorage.setItem('name', name);
+      localStorage.setItem('first_name', name.trim().split(" ")[0]);
+      localStorage.setItem('email', email);
+      verifyEmailUnique(email);
       return true;
     });
 
