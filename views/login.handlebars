@@ -38,17 +38,20 @@
 
     <hr />
 
-    <form id="loginForm" class="needs-validation" method="post" action="/login" novalidate>
+    <form id="loginForm" class="needs-validation" novalidate>
 
       <div class="form-group">
         <label for="title">Email<span class="red">*</span></label>
         <input id="email" type="email" name="email" class="form-control" placeholder="Email" required>
-        <div class="invalid-feedback">Please enter a valid email.</div>
+        <div id="isUnregistered" class="invalid-feedback hidden-priority">This email has
+          not been registered.</div>
+        <div id="isInvalidEmail" class="invalid-feedback">Please enter a valid email.</div>
       </div>
       <div class="form-group">
         <label for="title">Password<span class="red">*</span></label>
-        <input type="password" name="password" class="form-control" placeholder="Password" required>
-        <div class="invalid-feedback">Please enter a password.</div>
+        <input id="password" type="password" name="password" class="form-control" placeholder="Password" required>
+        <div id="isIncorrectPassword" class="invalid-feedback hidden-priority">Password is incorrect.</div>
+        <div id="isBlankPassword" class="invalid-feedback">Please enter a password.</div>
       </div>
 
       <br />
@@ -64,9 +67,7 @@
     </form>
   </div>
 
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
     integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
     crossorigin="anonymous"></script>
@@ -75,9 +76,42 @@
     crossorigin="anonymous"></script>
   <script src="../js/forms.js"></script>
   <script>
-    $("#loginForm").submit(function () {
-      const userEmail = $("#email").val();
-      localStorage.setItem('email', userEmail);
+    $("#loginForm").submit(function (e) {
+      e.preventDefault();
+
+      const email = $("#email").val();
+      const password = $("#password").val();
+      if (email === "" && password === "") return false;
+
+      $.post("/login", { email, password }, function (req, res) {
+        if (req === "user not found") {
+          const emailInput = document.getElementById("email");
+          emailInput.setCustomValidity("Email does not exist");
+          $("#isUnregistered").removeClass("hidden-priority");
+          $("#isInvalidEmail").addClass("hidden-priority");
+
+          $("#isIncorrectPassword").addClass("hidden-priority");
+          $("#isBlankPassword").removeClass("hidden-priority");
+
+          return console.log("User not found");
+        } else if (req === "incorrect password") {
+          const emailInput = document.getElementById("email");
+          const passwordInput = document.getElementById("password");
+
+          emailInput.setCustomValidity("");
+          $("#isUnregistered").addClass("hidden-priority");
+          $("#isInvalidEmail").removeClass("hidden-priority");
+
+          passwordInput.setCustomValidity("Incorrect password");
+          $("#isIncorrectPassword").removeClass("hidden-priority");
+          $("#isBlankPassword").addClass("hidden-priority");
+          return console.log("Incorrect password");
+        } else {
+          window.location.href = "/home";
+        }
+      });
+
+      localStorage.setItem('email', email);
       return true;
     });
   </script>

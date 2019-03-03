@@ -27,9 +27,9 @@ const UserSchema = new mongoose.Schema({
 
 UserSchema.statics.authenticateLogin = async function (email, password) {
   const user = await User.findOne({ email });
-  if (!user) throw new Error('Could not find user.');
+  if (!user) throw new Error('User not found', 30);
   const passwordsMatch = await bcrypt.compare(password, user.password);
-  if (!passwordsMatch) throw new Error('Password is incorrect.')
+  if (!passwordsMatch) throw new Error('Incorrect password')
   return user;
 }
 

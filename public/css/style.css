@@ -158,6 +158,10 @@ body {
   display: none;
 }
 
+.hidden-priority {
+  display: none !important;
+}
+
 .home-btn {
   align-items: center;
   display: flex; 
