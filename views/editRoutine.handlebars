@@ -19,18 +19,20 @@
     <form id="editForm" class="needs-validation" method="post" action="/routine/edit/{{currentRoutineData.id}}"
       novalidate>
       <div class="form-group">
-        <label for="title">Title<span class="red">*</span></label>
+        <label for="title">Title</label>
         <button type="button" class="question-btn" data-toggle="modal" data-target="#titleModal">
           <i class="fas fa-question-circle"></i>
         </button>
+        <span class="required">required</span>
         <input type="text" class="form-control" id="title" name="title" value="{{currentRoutineData.title}}" required>
         <div class="invalid-feedback">Please enter a title.</div>
       </div>
       <div class="form-group">
-        <label for="daysToComplete">Days to Complete<span class="red">*</span></label>
-        <button type="button" class="question-btn" data-toggle="modal" data-target="#daysToCompleteModal">
+        <label for="daysToComplete">Days to Complete</label> <button type="button" class="question-btn"
+          data-toggle="modal" data-target="#daysToCompleteModal">
           <i class="fas fa-question-circle"></i>
         </button>
+        <span class="required">required</span>
         <input type="number" class="form-control" id="daysToComplete" name="daysToComplete"
           value="{{currentRoutineData.daysToComplete}}" required>
         <div class="invalid-feedback">Please enter the number of days to complete the routine.</div>
@@ -115,17 +117,17 @@
         <button type="button" class="question-btn" data-toggle="modal" data-target="#goalsModal">
           <i class="fas fa-question-circle"></i>
         </button>
+        <span class="optional">optional</span>
         <input type="text" class="form-control" id="goals" name="goals" value="{{currentRoutineData.goals}}">
-        <div class="invalid-feedback">Please enter a goal(s).</div>
       </div>
       <div class="form-group">
         <label for="goalReward">Goal Reward</label>
         <button type="button" class="question-btn" data-toggle="modal" data-target="#goalRewardModal">
           <i class="fas fa-question-circle"></i>
         </button>
+        <span class="optional">optional</span>
         <input type="text" class="form-control" id="goalReward" name="goalReward"
           value="{{currentRoutineData.goalReward}}">
-        <div class="invalid-feedback">Please enter a goal reward.</div>
       </div>
 
       <input class="hidden" type="text" name="id" value={{currentRoutineData.id}} readonly>
