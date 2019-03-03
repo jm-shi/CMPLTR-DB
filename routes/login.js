@@ -15,6 +15,7 @@ exports.loginUser = async function (req, res) {
     const user = await User.authenticateLogin(req.body.email, req.body.password);
     req.session._id = user._id;
     req.session.name = user.name;
+    req.session.first_name = user.name.trim().split(" ")[0];
     req.session.email = user.email;
     res.redirect('/home');
   } catch (err) {
@@ -27,4 +28,9 @@ exports.loginUser = async function (req, res) {
       res.send('login failed for other reasons');
     }
   }
+}
+
+exports.logoutUser = function (req, res) {
+  req.session.destroy();
+  res.redirect('/login');
 }

@@ -200,10 +200,11 @@ exports.updateCompletionLog = function (req, res) {
     if (err) {
       return console.log('Error with updating completion log', err);
     }
-    if (req.session && req.session._id) {
+    if (req.session && req.session.first_name) {
       res.render('currentRoutine', {
         navbarTitle: 'Current Routine',
         currentRoutineData: updatedRoutine,
+        firstName: req.session.first_name,
         userSignedIn: true
       });
     } else {
@@ -216,9 +217,10 @@ exports.updateCompletionLog = function (req, res) {
 };
 
 exports.viewCreateRoutine = function (req, res) {
-  if (req.session && req.session._id) {
+  if (req.session && req.session.first_name) {
     res.render('createRoutine', {
       navbarTitle: 'Create Routine',
+      firstName: req.session.first_name,
       userSignedIn: true
     });
   } else {
@@ -230,9 +232,10 @@ exports.viewCreateRoutine = function (req, res) {
 
 exports.viewCreateRoutineAlt = function (req, res) {
   ;
-  if (req.session && req.session._id) {
+  if (req.session && req.session.first_name) {
     res.render('createRoutineAlt', {
       navbarTitle: 'Create Routine',
+      firstName: req.session.first_name,
       userSignedIn: true
     });
   } else {
@@ -251,10 +254,11 @@ exports.viewCurrentRoutine = function (req, res) {
     }
 
     console.log('Current routine data:', routine);
-    if (req.session && req.session._id) {
+    if (req.session && req.session.first_name) {
       res.render('currentRoutine', {
         navbarTitle: 'Current Routine',
         currentRoutineData: routine,
+        firstName: req.session.first_name,
         userSignedIn: true
       });
     } else {
@@ -283,10 +287,11 @@ exports.viewEditRoutine = function (req, res) {
       }
     }
 
-    if (req.session && req.session._id) {
+    if (req.session && req.session.first_name) {
       res.render('editRoutine', {
         navbarTitle: 'Edit Routine',
         currentRoutineData: currentRoutine,
+        firstName: req.session.first_name,
         userSignedIn: true
       });
     } else {
@@ -308,10 +313,11 @@ exports.viewPreviousRoutine = function (req, res) {
     }
 
     console.log('Previous routine data:', routine);
-    if (req.session && req.session._id) {
+    if (req.session && req.session.first_name) {
       res.render('previousRoutine', {
         navbarTitle: 'Archived Routine',
         previousRoutineData: routine,
+        firstName: req.session.first_name,
         userSignedIn: true
       });
     } else {
@@ -330,10 +336,11 @@ exports.viewAllCurrentRoutines = function (req, res) {
     signedInUser = req.session._id;
   }
   Routine.find({ isArchived: false, owner: signedInUser }, function (err, currRoutines) {
-    if (req.session && req.session._id) {
+    if (req.session && req.session.first_name) {
       res.render('currentRoutines', {
         navbarTitle: 'Current Routines',
         currentRoutines: currRoutines,
+        firstName: req.session.first_name,
         userSignedIn: true
       });
     } else {
@@ -351,10 +358,11 @@ exports.viewAllPreviousRoutines = function (req, res) {
     signedInUser = req.session._id;
   }
   Routine.find({ isArchived: true, owner: signedInUser }, function (err, prevRoutines) {
-    if (req.session && req.session._id) {
+    if (req.session && req.session.first_name) {
       res.render('previousRoutines', {
         navbarTitle: 'Archived Routines',
         previousRoutines: prevRoutines,
+        firstName: req.session.first_name,
         userSignedIn: true
       });
 

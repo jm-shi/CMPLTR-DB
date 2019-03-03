@@ -18,6 +18,7 @@ exports.createUser = async function (req, res) {
 
     req.session._id = user._id;
     req.session.name = user.name;
+    req.session.first_name = user.name.trim().split(" ")[0];
     req.session.email = user.email;
 
     return res.redirect('/home');

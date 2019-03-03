@@ -8,9 +8,10 @@ exports.view = function (req, res) {
   if (req.session) {
     console.log(req.session);
   }
-  if (req.session && req.session._id) {
+  if (req.session && req.session.first_name) {
     res.render('index', {
       communityFeed,
+      firstName: req.session.first_name,
       userSignedIn: true
     });
   } else {

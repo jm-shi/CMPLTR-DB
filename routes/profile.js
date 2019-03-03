@@ -3,6 +3,7 @@
  */
 
 const { Routine } = require('../models/routine.js');
+const { User } = require('../models/user.js');
 
 exports.view = function (req, res) {
   let signedInUser = 'anonymous';
@@ -50,7 +51,7 @@ exports.view = function (req, res) {
       const totalGoals = currGoalsTotal + prevGoalsTotal;
       const totalGoalsCompletedPercentage = totalGoals === 0 ? 0 : Math.round((prevGoalsCompleted / totalGoals) * 100);
 
-      if (req.session && req.session._id) {
+      if (req.session && req.session.first_name) {
         res.render('profile', {
           navbarTitle: 'Profile',
           currentRoutines,
@@ -65,6 +66,9 @@ exports.view = function (req, res) {
           prevGoalsFailed,
           totalGoals,
           totalGoalsCompletedPercentage,
+          firstName: req.session.first_name,
+          fullName: req.session.name,
+          email: req.session.email,
           userSignedIn: true
         });
       } else {
@@ -88,3 +92,29 @@ exports.view = function (req, res) {
 
   });
 };
+
+exports.editUserInfo = async function (req, res) {
+  console.log("Called edit user info", req.body);
+  if (req.session && req.session._id) {
+    const id = req.session._id;
+    update = {
+      $set: {
+        first_name: req.body.name.trim().split(" ")[0],
+        name: req.body.name,
+        email: req.body.email
+      }
+    }
+    User.findByIdAndUpdate(id, update, { new: true }, function (err, updatedUser) {
+      if (err) {
+        return console.log('Error with updating user information', err);
+      }
+      console.log('Updated user', updatedUser);
+      req.session.name = updatedUser.name;
+      req.session.first_name = updatedUser.name.trim().split(" ")[0];
+      req.session.email = updatedUser.email;
+      res.redirect('/profile');
+    })
+  } else {
+    console.log("User not logged in");
+  }
+}

@@ -14,6 +14,15 @@
 <body>
   {{> navbar}}
 
+  {{#if userSignedIn}}
+  {{else}}
+  <div class="container">
+    <div class="alert alert-primary center-text" role="alert">These are routine stats computed among
+      anonymous users. To view your own private stats, click the topright icon to log in.
+    </div>
+  </div>
+  {{/if}}
+
   <div class="container">
     <div class="card text-white bg-dark mb-3" style="width: 100%">
       <div id="picture" class="center-text" style="padding-top: 1em;">
@@ -22,23 +31,43 @@
 
       <div class="card-body profile-spacing">
         <h1>
+          {{#if fullName}}
+          <input id="name" type="text" name="name" value="{{fullName}}" class="profile-input">
+          {{else}}
           <input id="name" type="text" name="name" value="Anonymous" class="profile-input">
+          {{/if}}
         </h1>
+        <div id="isInvalidName" style="margin-top: .25rem" class="text-danger hidden">Enter at least one
+          character for your name.
+        </div>
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item bg-dark profile-spacing">
           <h5 class="flex">
             <div style="margin-right:5px;">Email: </div>
-            <input id="email" type="text" name="email" value="johndoe@gmail.com" class="profile-input">
+            {{#if email}}
+            <input id="email" type="text" name="email" value="{{email}}" class="profile-input">
+            {{else}}
+            <input id="email" type="text" name="email" value="anonymous@anon.com" class="profile-input">
+            {{/if}}
           </h5>
+          <div id="warningEmail" style="margin-top: .25rem" class="text-warning hidden">Changing your email
+            will change the email you use to login.
+          </div>
+          <div id="isInvalidEmail" style="margin-top: .25rem" class="text-danger hidden">Email format is invalid.
+            Try another one.
+          </div>
         </li>
         <li class="list-group-item bg-dark profile-spacing">
-          <h5 id="joinDate">Joined: February 18, 2019</h5>
+          <h5 id="joinDate">Joined: </h5>
         </li>
+
         <li class="list-group-item bg-dark center-text">
+          {{#if userSignedIn}}
           <form>
           </form>
           <button id="editProfile" type="button" class="btn btn-light">Edit Profile</button>
+          {{/if}}
         </li>
       </ul>
     </div>
@@ -88,18 +117,6 @@
   <div id="goalsAchieved" class="hidden">{{prevGoalsCompleted}}</div>
   <div id="goalsFailed" class="hidden">{{prevGoalsFailed}}</div>
 
-  {{!-- <div class="container">
-    <div class="card text-white bg-dark mb-3" style="width: 100%">
-      <div class="card-header">
-        <h1>Connections</h1>
-      </div>
-      <div class="card-body">
-        <h5 class="card-title">Followers: 42</h5>
-        <h5 class="card-title">Following: 68</h5>
-      </div>
-    </div>
-  </div> --}}
-
 </body>
 
 {{> facebook}}
@@ -118,21 +135,14 @@
   const totalDaysPercentage = $("#totalDaysPercent").attr('aria-valuenow');
   const totalGoalsPercentage = $("#totalGoalsPercent").attr('aria-valuenow');
 
-  $(document).ready(function () {
-    $.get(`/getUserInfo/${email}`).then(function (req, res) {
-      if (req.name) {
-        name = localStorage.setItem('name', req.name);
-      }
-    })
+  function isValidEmail(email) {
+    const re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  }
 
+  $(document).ready(function () {
     if (pictureURL) {
       $('#picture').html(`<img src=${pictureURL}>`);
-    }
-    if (name) {
-      $('#name').val(name);
-    }
-    if (email) {
-      $('#email').val(`${email}`);
     }
 
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -153,27 +163,41 @@
     const innerHTML = $("#editProfile").html();
     if (innerHTML === "Edit Profile") {
       $("#editProfile").html("Save Changes");
+      $('#warningEmail').removeClass('hidden');
       $("#name").prop("disabled", false);
       $("#email").prop("disabled", false);
       $("#name").css("background-color", "black");
       $("#email").css("background-color", "black");
       $("#name").focus();
     } else {
+      const updatedName = $("#name").val();
+      const updatedEmail = $("#email").val();
+
+      const validName = updatedName.length > 0;
+      const validEmail = isValidEmail(updatedEmail);
+
+      if (!validName) {
+        $('#isInvalidName').removeClass('hidden');
+      }
+      if (!validEmail) {
+        $('#isInvalidEmail').removeClass('hidden');
+      }
+      if (!validName || !validEmail) {
+        return;
+      }
+
+      $('#warningEmail').addClass('hidden');
+      $('#isInvalidEmail').addClass('hidden');
       $("#editProfile").html("Edit Profile");
       $("#name").prop("disabled", true);
       $("#email").prop("disabled", true);
       $("#name").css("background-color", "transparent");
       $("#email").css("background-color", "transparent");
-      const updatedName = $("#name").val();
-      const updatedEmail = $("#email").val();
-      localStorage.setItem('name', updatedName);
-      localStorage.setItem('first_name', updatedName.trim().split(" ")[0]);
-      localStorage.setItem('email', updatedEmail);
+      $.post(`/editUserInfo`, { name: updatedName, email: updatedEmail }).then(function (req, res) {
+        const firstName = $("#name").val().trim().split(" ")[0];
+        document.getElementById('welcome').innerHTML = `<strong>Welcome, ${firstName}</strong>`;
+      });
 
-      const first_name = localStorage.getItem('first_name');
-      if (first_name && document.getElementById('welcome')) {
-        document.getElementById('welcome').innerHTML = `<strong>Welcome, ${first_name}</strong>`;
-      }
     }
   });
 
