@@ -4,10 +4,18 @@ let communityFeed = require('../communityFeed.json');
  * GET community feed page.
  */
 exports.view = function (req, res) {
-  res.render('communityFeed', {
-    navbarTitle: 'Community Feed',
-    communityFeed
-  }); 
+  if (req.session && req.session._id) {
+    res.render('communityFeed', {
+      navbarTitle: 'Community Feed',
+      userSignedIn: true,
+      communityFeed
+    });
+  } else {
+    res.render('communityFeed', {
+      navbarTitle: 'Community Feed',
+      communityFeed
+    });
+  }
 };
 
 exports.add = function (req, res) {
@@ -15,5 +23,5 @@ exports.add = function (req, res) {
   const name = req.params.name;
   const completedDayNumber = req.params.completedDayNumber;
   const routineName = req.params.routineName;
-  
+
 };

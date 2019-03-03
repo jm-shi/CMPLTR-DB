@@ -14,6 +14,15 @@
 <body>
 	{{> navbar noBackBtn="true"}}
 
+	{{#if userSignedIn}}
+
+	{{else}}
+	<div class="container">
+		<div class="alert alert-primary center-text" role="alert">You are not logged in. To log in, click the topright icon.
+		</div>
+	</div>
+	{{/if}}
+
 	<div class="center-text">
 		<h1>CMPLTR</h1>
 	</div>

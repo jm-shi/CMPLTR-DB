@@ -200,24 +200,46 @@ exports.updateCompletionLog = function (req, res) {
     if (err) {
       return console.log('Error with updating completion log', err);
     }
-    res.render('currentRoutine', {
-      navbarTitle: 'Current Routine',
-      currentRoutineData: updatedRoutine
-    });
+    if (req.session && req.session._id) {
+      res.render('currentRoutine', {
+        navbarTitle: 'Current Routine',
+        currentRoutineData: updatedRoutine,
+        userSignedIn: true
+      });
+    } else {
+      res.render('currentRoutine', {
+        navbarTitle: 'Current Routine',
+        currentRoutineData: updatedRoutine
+      });
+    }
   });
 };
 
 exports.viewCreateRoutine = function (req, res) {
-  console.log('req.session is', req.session);
-  res.render('createRoutine', {
-    navbarTitle: 'Create Routine'
-  });
+  if (req.session && req.session._id) {
+    res.render('createRoutine', {
+      navbarTitle: 'Create Routine',
+      userSignedIn: true
+    });
+  } else {
+    res.render('createRoutine', {
+      navbarTitle: 'Create Routine'
+    });
+  }
 };
 
 exports.viewCreateRoutineAlt = function (req, res) {
-  res.render('createRoutineAlt', {
-    navbarTitle: 'Create Routine'
-  });
+  ;
+  if (req.session && req.session._id) {
+    res.render('createRoutineAlt', {
+      navbarTitle: 'Create Routine',
+      userSignedIn: true
+    });
+  } else {
+    res.render('createRoutineAlt', {
+      navbarTitle: 'Create Routine'
+    });
+  }
 };
 
 exports.viewCurrentRoutine = function (req, res) {
@@ -229,10 +251,18 @@ exports.viewCurrentRoutine = function (req, res) {
     }
 
     console.log('Current routine data:', routine);
-    res.render('currentRoutine', {
-      navbarTitle: 'Current Routine',
-      currentRoutineData: routine
-    });
+    if (req.session && req.session._id) {
+      res.render('currentRoutine', {
+        navbarTitle: 'Current Routine',
+        currentRoutineData: routine,
+        userSignedIn: true
+      });
+    } else {
+      res.render('currentRoutine', {
+        navbarTitle: 'Current Routine',
+        currentRoutineData: routine
+      });
+    }
   });
 };
 
@@ -253,10 +283,19 @@ exports.viewEditRoutine = function (req, res) {
       }
     }
 
-    res.render('editRoutine', {
-      navbarTitle: 'Edit Routine',
-      currentRoutineData: currentRoutine
-    });
+    if (req.session && req.session._id) {
+      res.render('editRoutine', {
+        navbarTitle: 'Edit Routine',
+        currentRoutineData: currentRoutine,
+        userSignedIn: true
+      });
+    } else {
+      res.render('editRoutine', {
+        navbarTitle: 'Edit Routine',
+        currentRoutineData: currentRoutine
+      });
+    }
+
   })
 };
 
@@ -269,10 +308,19 @@ exports.viewPreviousRoutine = function (req, res) {
     }
 
     console.log('Previous routine data:', routine);
-    res.render('previousRoutine', {
-      navbarTitle: 'Archived Routine',
-      previousRoutineData: routine
-    });
+    if (req.session && req.session._id) {
+      res.render('previousRoutine', {
+        navbarTitle: 'Archived Routine',
+        previousRoutineData: routine,
+        userSignedIn: true
+      });
+    } else {
+      res.render('previousRoutine', {
+        navbarTitle: 'Archived Routine',
+        previousRoutineData: routine
+      });
+    }
+
   });
 };
 
@@ -282,10 +330,18 @@ exports.viewAllCurrentRoutines = function (req, res) {
     signedInUser = req.session._id;
   }
   Routine.find({ isArchived: false, owner: signedInUser }, function (err, currRoutines) {
-    res.render('currentRoutines', {
-      navbarTitle: 'Current Routines',
-      currentRoutines: currRoutines
-    });
+    if (req.session && req.session._id) {
+      res.render('currentRoutines', {
+        navbarTitle: 'Current Routines',
+        currentRoutines: currRoutines,
+        userSignedIn: true
+      });
+    } else {
+      res.render('currentRoutines', {
+        navbarTitle: 'Current Routines',
+        currentRoutines: currRoutines
+      });
+    }
   });
 };
 
@@ -295,9 +351,18 @@ exports.viewAllPreviousRoutines = function (req, res) {
     signedInUser = req.session._id;
   }
   Routine.find({ isArchived: true, owner: signedInUser }, function (err, prevRoutines) {
-    res.render('previousRoutines', {
-      navbarTitle: 'Archived Routines',
-      previousRoutines: prevRoutines
-    });
+    if (req.session && req.session._id) {
+      res.render('previousRoutines', {
+        navbarTitle: 'Archived Routines',
+        previousRoutines: prevRoutines,
+        userSignedIn: true
+      });
+
+    } else {
+      res.render('previousRoutines', {
+        navbarTitle: 'Archived Routines',
+        previousRoutines: prevRoutines
+      });
+    }
   });
 };

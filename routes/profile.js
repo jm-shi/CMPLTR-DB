@@ -50,21 +50,40 @@ exports.view = function (req, res) {
       const totalGoals = currGoalsTotal + prevGoalsTotal;
       const totalGoalsCompletedPercentage = totalGoals === 0 ? 0 : Math.round((prevGoalsCompleted / totalGoals) * 100);
 
-      res.render('profile', {
-        navbarTitle: 'Profile',
-        currentRoutines,
-        previousRoutines,
-        numCurrRoutines,
-        numPrevRoutines,
-        totalDaysCompleted,
-        totalDays,
-        totalDaysCompletedPercentage,
-        currGoalsTotal,
-        prevGoalsCompleted,
-        prevGoalsFailed,
-        totalGoals,
-        totalGoalsCompletedPercentage
-      });
+      if (req.session && req.session._id) {
+        res.render('profile', {
+          navbarTitle: 'Profile',
+          currentRoutines,
+          previousRoutines,
+          numCurrRoutines,
+          numPrevRoutines,
+          totalDaysCompleted,
+          totalDays,
+          totalDaysCompletedPercentage,
+          currGoalsTotal,
+          prevGoalsCompleted,
+          prevGoalsFailed,
+          totalGoals,
+          totalGoalsCompletedPercentage,
+          userSignedIn: true
+        });
+      } else {
+        res.render('profile', {
+          navbarTitle: 'Profile',
+          currentRoutines,
+          previousRoutines,
+          numCurrRoutines,
+          numPrevRoutines,
+          totalDaysCompleted,
+          totalDays,
+          totalDaysCompletedPercentage,
+          currGoalsTotal,
+          prevGoalsCompleted,
+          prevGoalsFailed,
+          totalGoals,
+          totalGoalsCompletedPercentage
+        });
+      }
     })
 
   });

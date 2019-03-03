@@ -3,5 +3,11 @@
  */
 
 exports.view = function (req, res) {
-  res.render('notFound');
+  if (req.session && req.session._id) {
+    res.render('notFound', {
+      userSignedIn: true
+    });
+  } else {
+    res.render('notFound');
+  }
 };

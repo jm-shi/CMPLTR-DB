@@ -14,9 +14,28 @@
 <body>
   {{> navbar back="/home"}}
 
+  {{#if userSignedIn}}
+  {{else}}
+  <div class="container">
+    <div class="alert alert-primary center-text" role="alert">This a list of current
+      routines created by anonymous users. To create a private list, click the topright icon to log in.
+    </div>
+  </div>
+  {{/if}}
+
   {{#if currentRoutines}}
   {{else}}
-  <div class="center-text" style="margin-bottom:1em;">You have no current routines.</div>
+  {{#if userSignedIn}}
+  <div class="container">
+    <div class="alert alert-secondary center-text" role="alert">You have no current routines.
+    </div>
+  </div>
+  {{else}}
+  <div class="container">
+    <div class="alert alert-secondary center-text" role="alert">There are no current routines.
+    </div>
+  </div>
+  {{/if}}
   {{/if}}
 
   {{#each currentRoutines}}
