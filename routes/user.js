@@ -8,3 +8,8 @@ exports.getUserInfo = async function (req, res) {
     res.send(user);
   })
 }
+
+exports.logout = function (req, res) {
+  req.session.destroy();
+  res.redirect('/login');
+}

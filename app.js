@@ -71,6 +71,7 @@ app.post('/routine/:id', routine.updateCompletionLog);
 app.post('/createUser', signup.createUser);
 app.get('/verifyEmailUnique/:email', signup.verifyEmailUnique);
 app.post('/login', login.loginUser);
+app.get('/logout', user.logout);
 app.get('/getUserInfo/:email', user.getUserInfo);
 app.use(notFound.view); // 404 route
 

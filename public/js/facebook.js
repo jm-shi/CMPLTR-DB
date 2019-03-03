@@ -22,20 +22,3 @@ function setUserInfo() {
     }
   });
 }
-
-function logout() {
-  window.localStorage.clear();
-  window.location.href = "/login";
-  /*
-  FB.getLoginStatus(function (response) {
-    if (response.status === 'connected') {
-      FB.logout(function (res) {
-        window.localStorage.clear();
-        window.location.href = "/login";
-      });
-    } else {
-      window.location.href = "/login";
-    }
-  });
-  */
-}

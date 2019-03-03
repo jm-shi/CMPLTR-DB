@@ -31,6 +31,8 @@
   {{/if}}
 </nav>
 
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
 <script>
   const localStorage = window.localStorage;
   // const id = localStorage.getItem('id');
@@ -40,5 +42,10 @@
   // const email = localStorage.getItem('email');
   if (first_name && document.getElementById('welcome')) {
     document.getElementById('welcome').innerHTML = `<strong>Welcome, ${first_name}</strong>`;
+  }
+
+  function logout() {
+    window.localStorage.clear();
+    window.location.href = "/logout";
   }
 </script>
