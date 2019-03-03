@@ -1,7 +1,7 @@
 const { Routine } = require('../models/routine.js');
 
 exports.addRoutine = function (req, res) {
-  const createdAt = req.body.createdAt;
+  const createdAtString = req.body.createdAtString;
   const title = req.body.title;
   const daysCompleted = 0;
   const daysToComplete = req.body.daysToComplete;
@@ -41,7 +41,7 @@ exports.addRoutine = function (req, res) {
   const goalReward = req.body.goalReward;
 
   let currentRoutine = {
-    createdAt,
+    createdAtString,
     title,
     daysCompleted,
     daysToComplete,
@@ -335,7 +335,9 @@ exports.viewAllCurrentRoutines = function (req, res) {
   if (req.session && req.session._id) {
     signedInUser = req.session._id;
   }
+
   Routine.find({ isArchived: false, owner: signedInUser }, function (err, currRoutines) {
+    console.log('currroutines', currRoutines);
     if (req.session && req.session.first_name) {
       res.render('currentRoutines', {
         navbarTitle: 'Current Routines',
@@ -349,7 +351,7 @@ exports.viewAllCurrentRoutines = function (req, res) {
         currentRoutines: currRoutines
       });
     }
-  });
+  }).sort('-createdAt');
 };
 
 exports.viewAllPreviousRoutines = function (req, res) {
@@ -372,5 +374,5 @@ exports.viewAllPreviousRoutines = function (req, res) {
         previousRoutines: prevRoutines
       });
     }
-  });
+  }).sort('-updatedAt');
 };

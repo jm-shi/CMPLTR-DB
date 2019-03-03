@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const Routine = mongoose.model('Routine', {
+const RoutineSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true
@@ -22,7 +22,7 @@ const Routine = mongoose.model('Routine', {
     type: Number,
     default: 0
   },
-  createdAt: {
+  createdAtString: {
     type: String
   },
   alarm: {
@@ -82,7 +82,11 @@ const Routine = mongoose.model('Routine', {
   owner: {
     type: String
   }
-});
+}, {
+    timestamps: true
+  });
+
+const Routine = mongoose.model('Routine', RoutineSchema);
 
 module.exports = {
   Routine
