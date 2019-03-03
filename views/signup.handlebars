@@ -28,16 +28,10 @@
 
       <div class="form-group">
         <label for="title">Email<span class="red">*</span></label>
-        {{#if signedUpWithDuplicateEmail}}
-        <input id="email" type="email" name="email" class="form-control is-invalid" placeholder="Email" required>
-        <div id="isDuplicateEmail" class="invalid-feedback">This email is already being used. Try another one.</div>
-        <div id="isInvalidEmail" class="invalid-feedback">Please enter a valid email.</div>
-        {{else}}
         <input id="email" type="email" name="email" class="form-control" placeholder="Email" required>
         <div id="isDuplicateEmail" style="font-size: 80%; margin-top: .25rem" class="text-danger hidden">This email is
           already being used. Try another one.</div>
         <div id="isInvalidEmail" class="invalid-feedback">Please enter a valid email.</div>
-        {{/if}}
       </div>
 
 

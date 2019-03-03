@@ -6,7 +6,6 @@ const express = require('express');
 const http = require('http');
 const path = require('path');
 const handlebars = require('express-handlebars');
-
 const index = require('./routes/index');
 const communityFeed = require('./routes/communityFeed');
 const help = require('./routes/help');
@@ -16,7 +15,8 @@ const profile = require('./routes/profile');
 const routine = require('./routes/routine');
 const notFound = require('./routes/notFound');
 const tutorial = require('./routes/tutorial');
-const db = require('./mongoose');
+const mongoose = require('./mongoose');
+const session = require('client-sessions');
 
 const app = express();
 
@@ -34,6 +34,12 @@ app.use(express.cookieParser('IxD secret key'));
 app.use(express.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  cookieName: 'session',
+  secret: 'some-secret',
+  saveUninitialized: false,
+  resave: false
+}));
 
 // Development only
 if ('development' == app.get('env')) {
@@ -63,9 +69,10 @@ app.get('/routine/previous/:id', routine.viewPreviousRoutine);
 app.post('/routine/:id', routine.updateCompletionLog);
 app.post('/createUser', signup.createUser);
 app.get('/verifyEmailUnique/:email', signup.verifyEmailUnique);
+app.post('/login', login.loginUser);
 app.use(notFound.view); // 404 route
 
-db.connect(function () {
+mongoose.connect(function () {
   http.createServer(app).listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
   });

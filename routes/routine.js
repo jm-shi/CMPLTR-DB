@@ -1,7 +1,6 @@
 const { Routine } = require('../models/routine.js');
 
 exports.addRoutine = function (req, res) {
-  const id = req.body.id;
   const createdAt = req.body.createdAt;
   const title = req.body.title;
   const daysCompleted = 0;
@@ -20,6 +19,10 @@ exports.addRoutine = function (req, res) {
     && !repeatThursday && !repeatFriday) || (repeatSunday && repeatMonday
       && repeatTuesday && repeatWednesday && repeatThursday && repeatFriday && repeatSaturday);
   const everyOtherDay = req.body.everyOtherDay;
+  let owner = 'anonymous';
+  if (req.session && req.session._id) {
+    owner = req.session._id;
+  }
 
   let goals = req.body.goals;
   goals = goals.split(",");
@@ -37,8 +40,7 @@ exports.addRoutine = function (req, res) {
 
   const goalReward = req.body.goalReward;
 
-  const currentRoutine = {
-    id,
+  let currentRoutine = {
     createdAt,
     title,
     daysCompleted,
@@ -55,7 +57,8 @@ exports.addRoutine = function (req, res) {
     everyDay,
     everyOtherDay,
     goals,
-    goalReward
+    goalReward,
+    owner
   };
 
   if (title && daysToComplete) {
@@ -67,7 +70,6 @@ exports.addRoutine = function (req, res) {
     }).catch(function (err) {
       res.status(400).send(err);
     });
-    // return res.redirect(`/routine/${id}`);
   }
 };
 
@@ -206,6 +208,7 @@ exports.updateCompletionLog = function (req, res) {
 };
 
 exports.viewCreateRoutine = function (req, res) {
+  console.log('req.session is', req.session);
   res.render('createRoutine', {
     navbarTitle: 'Create Routine'
   });
@@ -274,7 +277,11 @@ exports.viewPreviousRoutine = function (req, res) {
 };
 
 exports.viewAllCurrentRoutines = function (req, res) {
-  Routine.find({ isArchived: false }, function (err, currRoutines) {
+  let signedInUser = 'anonymous';
+  if (req.session && req.session._id) {
+    signedInUser = req.session._id;
+  }
+  Routine.find({ isArchived: false, owner: signedInUser }, function (err, currRoutines) {
     res.render('currentRoutines', {
       navbarTitle: 'Current Routines',
       currentRoutines: currRoutines
@@ -283,7 +290,11 @@ exports.viewAllCurrentRoutines = function (req, res) {
 };
 
 exports.viewAllPreviousRoutines = function (req, res) {
-  Routine.find({ isArchived: true }, function (err, prevRoutines) {
+  let signedInUser = 'anonymous';
+  if (req.session && req.session._id) {
+    signedInUser = req.session._id;
+  }
+  Routine.find({ isArchived: true, owner: signedInUser }, function (err, prevRoutines) {
     res.render('previousRoutines', {
       navbarTitle: 'Archived Routines',
       previousRoutines: prevRoutines

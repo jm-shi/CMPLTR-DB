@@ -13,6 +13,9 @@
     "dev": "env-cmd ./config/dev.env nodemon app.js"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "client-sessions": "^0.8.0",
+    "connect-mongo": "^2.0.3",
     "express": "3.x",
     "express-handlebars": "^3.0.0",
     "mongodb": "^3.1.13",

@@ -22,7 +22,6 @@
       <div class="invalid-feedback">Please enter the number of days (between 1 and 365) to complete the routine.</div>
     </div>
 
-
     {{#if alt}}
     <div class="form-group">
       <label for="alarm">Alarm</label>
@@ -140,7 +139,6 @@
       <div class="invalid-feedback">Please enter a goal reward.</div>
     </div>
 
-    <input class="hidden" type="text" name="id" id="uuid" readonly>
     <input class="hidden" type="text" name="createdAt" id="createdAt">
 
     <div class="text-center">
@@ -221,16 +219,4 @@
 
   // Set createdAt to current date
   $("#createdAt").val(startDateString);
-
-  // Generate unique ID
-  $("#uuid").val(uuidv4());
-
-  // Differentiate routines by associating each of them with a unique ID
-  // The function below, written by broofa, generates a unique ID
-  // Source: https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
-  function uuidv4() {
-    return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
-      (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-    )
-  }
 </script>

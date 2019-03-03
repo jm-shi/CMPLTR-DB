@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 function connect(callback) {
-  mongoose.connect(process.env.MONGODB_URL, {
+  mongoose.connect(process.env.MONGODB_URL || 'mongodb://127.0.0.1:27017/cmpltr-api', {
     useNewUrlParser: true,
     useFindAndModify: false,
     useCreateIndex: true,

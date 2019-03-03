@@ -78,6 +78,9 @@ const Routine = mongoose.model('Routine', {
   },
   finishDate: {
     type: String
+  },
+  owner: {
+    type: String // mongoose.Schema.Types.ObjectId
   }
 });
 

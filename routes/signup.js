@@ -15,16 +15,15 @@ exports.createUser = async function (req, res) {
   try {
     await user.save()
     res.status(201).send(user);
+
+    req.session._id = user._id;
+    req.session.name = user.name;
+    req.session.email = user.email;
+
     return res.redirect('/home');
   } catch (err) {
-    if (err.code === 11000) {
-      res.render('signup', {
-        navbarTitle: 'Sign Up',
-        signedUpWithDuplicateEmail: true
-      });
-    } else {
-      res.status(400).send(err)
-    }
+    res.status(400).send(err)
+    return res.redirect('/home');
   }
 }
 

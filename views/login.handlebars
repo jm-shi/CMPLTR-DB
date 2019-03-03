@@ -38,16 +38,16 @@
 
     <hr />
 
-    <form id="loginForm" class="needs-validation" method="get" action="/home" novalidate>
+    <form id="loginForm" class="needs-validation" method="post" action="/login" novalidate>
 
       <div class="form-group">
         <label for="title">Email<span class="red">*</span></label>
-        <input id="email" type="email" class="form-control" placeholder="Email" required>
+        <input id="email" type="email" name="email" class="form-control" placeholder="Email" required>
         <div class="invalid-feedback">Please enter a valid email.</div>
       </div>
       <div class="form-group">
         <label for="title">Password<span class="red">*</span></label>
-        <input type="password" class="form-control" placeholder="Password" required>
+        <input type="password" name="password" class="form-control" placeholder="Password" required>
         <div class="invalid-feedback">Please enter a password.</div>
       </div>
 
