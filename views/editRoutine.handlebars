@@ -44,7 +44,7 @@
         </button>
 
         <div id="alarmStatus">
-          <small id="emailHelp" class="form-text text-muted">Alarm has not been set.</small>
+          <small id="alarmHelp" class="form-text text-muted">Alarm has not been set.</small>
         </div>
 
         <!-- Set Alarm Modal -->
@@ -184,9 +184,9 @@
     function updateAlarmText() {
       const alarmTime = $('#alarm').val();
       if (alarmTime === '') {
-        $('#alarmStatus').html(`<small id="emailHelp" class="form-text text-muted">Alarm has not been set.</small>`);
+        $('#alarmStatus').html(`<small id="alarmHelp" class="form-text text-muted">Alarm has not been set.</small>`);
       } else {
-        $('#alarmStatus').html(`<small id="emailHelp" class="form-text text-success">Alarm has been set to ${militaryToStandard(alarmTime)}.</small>`);
+        $('#alarmStatus').html(`<small id="alarmHelp" class="form-text text-success">Alarm has been set to ${militaryToStandard(alarmTime)}.</small>`);
       }
     }
     $(document).ready(function () {
