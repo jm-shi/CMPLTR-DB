@@ -282,8 +282,12 @@
   } else {
     const name = window.localStorage.getItem("name");
     const email = window.localStorage.getItem("email");
-    $("#name").val(name);
-    $("#email").val(email);
+    if (name !== null) {
+      $("#name").val(name);
+    }
+    if (email !== null) {
+      $("#email").val(email);
+    }
   }
 </script>
 
