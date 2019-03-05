@@ -36,7 +36,7 @@
       {{#if userSignedIn}}
       <a class="dropdown-item" onclick="logout()">Logout</a>
       {{else}}
-      <a class="dropdown-item" onclick="logout()">Login</a>
+      <a id="login" class="dropdown-item" onclick="logout()">Login</a>
       {{/if}}
     </div>
   </div>
@@ -46,6 +46,11 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
 <script>
+  const loggedIn = localStorage.getItem("email");
+  if (loggedIn === null) {
+    $("#id").val("logout");
+  }
+
   // const localStorage = window.localStorage;
   // const id = localStorage.getItem('id');
   // const picture = localStorage.getItem('picture');

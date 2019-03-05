@@ -276,14 +276,14 @@
     $("#pieChartContainer").html("");
   }
 
-  const loggedInWithFacebook = window.localStorage.getItem("loggedInWithFacebook");
-  if (!loggedInWithFacebook) {
+  const isLoggedIn = window.localStorage.getItem("email");
+  if (isLoggedIn === null) {
     $("#notLoggedIn").removeClass("hidden");
   } else {
     const name = window.localStorage.getItem("name");
     const email = window.localStorage.getItem("email");
-    $("name").val(name);
-    $("email").val(email);
+    $("#name").val(name);
+    $("#email").val(email);
   }
 </script>
 

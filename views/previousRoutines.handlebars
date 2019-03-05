@@ -129,8 +129,8 @@
       }
     });
 
-    const loggedInWithFacebook = window.localStorage.getItem("loggedInWithFacebook");
-    if (!loggedInWithFacebook) {
+    const isLoggedIn = window.localStorage.getItem("email");
+    if (isLoggedIn === null) {
       $("#notLoggedIn").removeClass("hidden");
     }
   </script>
