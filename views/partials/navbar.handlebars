@@ -17,7 +17,7 @@
 
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
       <div id="welcome" class="dropdown-item disabled">
-        <strong>
+        <strong id="welcomeName">
           Welcome,
           {{#if firstName}}
           {{firstName}}
@@ -49,6 +49,11 @@
   const loggedIn = localStorage.getItem("email");
   if (loggedIn === null) {
     $("#id").val("logout");
+  } else {
+    const userFirstName = localStorage.getItem("first_name");
+    if (userFirstName !== null) {
+      $("#welcomeName").val(`Welcome, ${userFirstName}`);
+    }
   }
 
   // const localStorage = window.localStorage;
