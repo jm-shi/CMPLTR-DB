@@ -16,17 +16,14 @@
     </a>
 
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+      {{#if firstName}}
       <div id="welcome" class="dropdown-item disabled">
-        <strong id="welcomeName">
-          Welcome,
-          {{#if firstName}}
-          {{firstName}}
-          {{else}}
-          Anonymous
-          {{/if}}
+        <strong>
+          Welcome, {{firstName}}
         </strong>
       </div>
       <div class="dropdown-divider"></div>
+      {{/if}}
       <a class="dropdown-item" href="/home">Home</a>
       <div class="dropdown-divider"></div>
       <a class="dropdown-item" href="/profile">Profile</a>
@@ -46,15 +43,15 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
 <script>
-  const loggedIn = localStorage.getItem("email");
-  if (loggedIn === null) {
-    $("#id").val("logout");
-  } else {
-    const userFirstName = localStorage.getItem("first_name");
-    if (userFirstName !== null) {
-      $("#welcomeName").val(`Welcome, ${userFirstName}`);
+
+  $(document).ready(function () {
+    const loggedIn = localStorage.getItem("email");
+    if (loggedIn === null) {
+      $("#id").val("logout");
+    } else {
+      $("#login").html("Logout");
     }
-  }
+  });
 
   // const localStorage = window.localStorage;
   // const id = localStorage.getItem('id');
