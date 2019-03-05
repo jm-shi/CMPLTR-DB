@@ -56,7 +56,7 @@
   {{#if userSignedIn}}
   {{else}}
   <div class="container">
-    <div class="alert alert-primary center-text" role="alert">This a list of archived
+    <div id="notLoggedIn" class="alert alert-primary center-text hidden" role="alert">This a list of archived
       routines created by anonymous users. To create a private list, click the topright icon to log in.
     </div>
   </div>
@@ -128,6 +128,11 @@
         $('.container#' + this.id).addClass('hidden');
       }
     });
+
+    const loggedInWithFacebook = window.localStorage.getItem("loggedInWithFacebook");
+    if (!loggedInWithFacebook) {
+      $("#notLoggedIn").removeClass("hidden");
+    }
   </script>
 
 </body>

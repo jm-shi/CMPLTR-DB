@@ -15,7 +15,6 @@ const profile = require('./routes/profile');
 const routine = require('./routes/routine');
 const notFound = require('./routes/notFound');
 const tutorial = require('./routes/tutorial');
-const user = require('./routes/user');
 const mongoose = require('./mongoose');
 const session = require('client-sessions');
 

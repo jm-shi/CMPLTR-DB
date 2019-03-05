@@ -56,8 +56,8 @@
   {{#if userSignedIn}}
   {{else}}
   <div class="container">
-    <div class="alert alert-primary center-text" role="alert">These are routine stats computed among
-      anonymous users. To view your own private stats, click the topright icon to log in.
+    <div id="notLoggedIn" class="alert alert-primary center-text hidden" role="alert">These are routine stats computed
+      among anonymous users. To view your own private stats, click the topright icon to log in.
     </div>
   </div>
   {{/if}}
@@ -276,6 +276,15 @@
     $("#pieChartContainer").html("");
   }
 
+  const loggedInWithFacebook = window.localStorage.getItem("loggedInWithFacebook");
+  if (!loggedInWithFacebook) {
+    $("#notLoggedIn").removeClass("hidden");
+  } else {
+    const name = window.localStorage.getItem("name");
+    const email = window.localStorage.getItem("email");
+    $("name").val(name);
+    $("email").val(email);
+  }
 </script>
 
 </html>

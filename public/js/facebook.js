@@ -18,6 +18,7 @@ function setUserInfo() {
       window.localStorage.setItem('first_name', response.first_name);
       window.localStorage.setItem('email', response.email);
       window.localStorage.setItem('picture', response.picture.data.url);
+      window.localStorage.setItem('loggedInWithFacebook', true);
       window.location.href = "/home";
     }
   });
