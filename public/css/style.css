@@ -13,10 +13,10 @@ body {
 .carousel-indicators li {
   background-color: #fff;
   border: none;
-  box-shadow: inset 1px 1px 1px 1px rgba(0,0,0,0.5);
+  box-shadow: inset 1px 1px 1px 1px rgba(0, 0, 0, 0.5);
   height: 5px;
   margin-top: 50px;
-  opacity: 0.8;   
+  opacity: 0.8;
   text-indent: 0;
   width: 30px;
 }
@@ -82,14 +82,13 @@ body {
   -ms-word-break: break-all;
   word-break: break-all;
 
-/* Non standard for webkit */
-   word-break: break-word;
+  /* Non standard for webkit */
+  word-break: break-word;
 
   -webkit-hyphens: auto;
-     -moz-hyphens: auto;
-      -ms-hyphens: auto;
-          hyphens: auto;
-
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
 }
 
 .community-feed-marquee {
@@ -164,10 +163,10 @@ body {
 
 .home-btn {
   align-items: center;
-  display: flex; 
+  display: flex;
   font-size: 1.5em;
   justify-content: center;
-  height: 5em; 
+  height: 5em;
   margin-bottom: 1.5em;
   padding: 0.5em;
 }
@@ -192,13 +191,9 @@ body {
   width: 100%;
 }
 
-.logo {
-  padding: 1.5em;
-  text-align: center;
-}
-
-.logo h1 {
-  font-size: 4.5em;
+.logo-img {
+  height: auto;
+  max-width: 100%;
 }
 
 .marquee-item {
@@ -212,19 +207,19 @@ body {
 
 .optional {
   color: rgb(126, 126, 126);
-  float: right; 
-  margin-top: 5px; 
+  float: right;
+  margin-top: 5px;
 }
 
 .profile-input {
-  background: transparent; 
-  border: none; 
+  background: transparent;
+  border: none;
   color: white;
   width: 100%;
 }
 
 .profile-spacing {
-  padding-bottom: 0; 
+  padding-bottom: 0;
   padding-top: 0.5em;
 }
 
@@ -238,10 +233,10 @@ body {
   color: rgb(230, 0, 0);
 }
 
-.required{
+.required {
   color: rgb(230, 0, 0);
-  float: right; 
-  margin-top: 5px; 
+  float: right;
+  margin-top: 5px;
 }
 
 .routine .circular-btn {
@@ -255,8 +250,8 @@ body {
 }
 
 .word-break {
-    -ms-word-break: break-word;
-    word-break: break-word;
+  -ms-word-break: break-word;
+  word-break: break-word;
 }
 
 /* add ellipsis for content that exceeds two lines */
