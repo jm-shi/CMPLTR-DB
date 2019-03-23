@@ -16,19 +16,19 @@ exports.addRoutine = function(req, res) {
   const repeatSaturday = req.body.repeatSaturday;
   const repeatSunday = req.body.repeatSunday;
   const everyDay =
-    (!repeatSunday &&
-      !repeatMonday &&
-      !repeatTuesday &&
-      !repeatWednesday &&
-      !repeatThursday &&
-      !repeatFriday) ||
-    (repeatSunday &&
-      repeatMonday &&
-      repeatTuesday &&
-      repeatWednesday &&
-      repeatThursday &&
-      repeatFriday &&
-      repeatSaturday);
+    (repeatSunday !== 'on' &&
+      repeatMonday !== 'on' &&
+      repeatTuesday !== 'on' &&
+      repeatWednesday !== 'on' &&
+      repeatThursday !== 'on' &&
+      repeatFriday !== 'on') ||
+    (repeatSunday === 'on' &&
+      repeatMonday === 'on' &&
+      repeatTuesday === 'on' &&
+      repeatWednesday === 'on' &&
+      repeatThursday === 'on' &&
+      repeatFriday === 'on' &&
+      repeatSaturday === 'on');
   const everyOtherDay = req.body.everyOtherDay;
   let owner = 'anonymous';
   if (req.session && req.session._id) {
@@ -213,19 +213,19 @@ exports.editRoutine = async function(req, res) {
     repeatSaturday: req.body.repeatSaturday,
     repeatSunday: req.body.repeatSunday,
     everyDay:
-      (!req.body.repeatSunday &&
-        !req.body.repeatMonday &&
-        !req.body.repeatTuesday &&
-        !req.body.repeatWednesday &&
-        !req.body.repeatThursday &&
-        !req.body.repeatFriday) ||
-      (req.body.repeatSunday &&
-        req.body.repeatMonday &&
-        req.body.repeatTuesday &&
-        req.body.repeatWednesday &&
-        req.body.repeatThursday &&
-        req.body.repeatFriday &&
-        req.body.repeatSaturday),
+      (req.body.repeatSunday !== 'on' &&
+        req.body.repeatMonday !== 'on' &&
+        req.body.repeatTuesday !== 'on' &&
+        req.body.repeatWednesday !== 'on' &&
+        req.body.repeatThursday !== 'on' &&
+        req.body.repeatFriday !== 'on') ||
+      (req.body.repeatSunday === 'on' &&
+        req.body.repeatMonday === 'on' &&
+        req.body.repeatTuesday === 'on' &&
+        req.body.repeatWednesday === 'on' &&
+        req.body.repeatThursday === 'on' &&
+        req.body.repeatFriday === 'on' &&
+        req.body.repeatSaturday === 'on'),
     everyOtherDay: req.body.everyOtherDay,
     goalReward: req.body.goalReward,
     goals: goals
