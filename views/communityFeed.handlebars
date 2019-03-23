@@ -17,67 +17,143 @@
   <link rel="shortcut icon" sizes="150x150" href="/images/icons/icon-150x150.png">
   <link rel="apple-touch-icon" sizes="192x192" href="/images/icons/icon-192x192.png">
   <link rel="apple-touch-icon" sizes="150x150" href="/images/icons/icon-150x150.png">
-  <link href="/images/icons/splash/iphone5_splash.png"
+  <link href="/images/splash/iphone5_splash.png"
     media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
     rel="apple-touch-startup-image" />
-  <link href="/images/icons/splash/iphone6_splash.png"
+  <link href="/images/splash/iphone6_splash.png"
     media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
     rel="apple-touch-startup-image" />
-  <link href="/images/icons/splash/iphoneplus_splash.png"
+  <link href="/images/splash/iphoneplus_splash.png"
     media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)"
     rel="apple-touch-startup-image" />
-  <link href="/images/icons/splash/iphonex_splash.png"
+  <link href="/images/splash/iphonex_splash.png"
     media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)"
     rel="apple-touch-startup-image" />
-  <link href="/images/icons/splash/iphonexr_splash.png"
+  <link href="/images/splash/iphonexr_splash.png"
     media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)"
     rel="apple-touch-startup-image" />
-  <link href="/images/icons/splash/iphonexsmax_splash.png"
+  <link href="/images/splash/iphonexsmax_splash.png"
     media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)"
     rel="apple-touch-startup-image" />
-  <link href="/images/icons/splash/ipad_splash.png"
+  <link href="/images/splash/ipad_splash.png"
     media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)"
     rel="apple-touch-startup-image" />
-  <link href="/images/icons/splash/ipadpro1_splash.png"
+  <link href="/images/splash/ipadpro1_splash.png"
     media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)"
     rel="apple-touch-startup-image" />
-  <link href="/images/icons/splash/ipadpro3_splash.png"
+  <link href="/images/splash/ipadpro3_splash.png"
     media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)"
     rel="apple-touch-startup-image" />
-  <link href="/images/icons/splash/ipadpro2_splash.png"
+  <link href="/images/splash/ipadpro2_splash.png"
     media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)"
     rel="apple-touch-startup-image" />
   {{> analytics}}
 </head>
 
 <body>
-  {{> navbar}}
+  {{> navbar back="/home"}}
 
   <div class="container">
     {{#each communityFeed.communityFeedData}}
-    <div class="text-white bg-dark mb-3 center-vertical" style="padding: 1em; border-radius: 5px;">
-      <div style="margin-right: 10px;">
-        <i class="fas fa-user-circle fa-2x"></i>
+    <div class="text-white bg-dark mb-3 " style="padding: 1em; border-radius: 5px;">
+      <div style="display:flex;">
+        <i class="fas fa-user-circle fa-2x " style="margin-right: 10px; margin-top: 7px;"></i>
+        {{name}} completed Day {{completedDayNumber}} of their routine "{{routineName}}"
       </div>
-      <div class="word-break">
-        {{name}} completed day {{completedDayNumber}} of their routine "{{routineName}}"
+      <span style="color:grey; margin-left: 40px;">
+        {{date}} at {{time}}
+      </span>
+      <div data-id={{id}} class="viewMore card-link" style="float:right;">
+        <button type="button" class="btn btn-light btn-rounded btn-sm edit-btn">
+          <i class="fas fa-eye">
+            <span class="view" data-view={{id}} style="font-family:Helvetica"> View More</span>
+          </i>
+        </button>
+      </div>
+
+      <div id={{id}} class="extraDetails mt-3 hidden">
+        {{#if goals}}
+        <div class="center-vertical">
+          <i class="fas fa-bullseye" style="margin-right: 10px;"></i>
+          <div style="margin-top:0.8px;">{{goals}}</div>
+        </div>
+        {{/if}}
+
+        {{#if alarm}}
+        <div class="center-vertical">
+          <i class="fas fa-bell" style="margin-right: 12px;"></i>
+          <span id="alarmTime">{{alarm}}</span>
+        </div>
+        {{/if}}
+
+        {{#if everyOtherDay}}
+        <div class="flex">
+          <i class="fas fa-running" style="margin-right: 13px;"></i>
+          <div>Every other day</div>
+        </div>
+        {{else}}
+        {{#if everyDay}}
+        <div class="center-vertical">
+          <i class="fas fa-running" style="margin-right: 13px;"></i>
+          <div>Everyday</div>
+        </div>
+        {{else}}
+        <div class="center-vertical">
+          <i class="fas fa-running" style="margin-right: 13px"></i>
+          <div>
+            {{#if repeatSunday}} Sun{{/if}}
+            {{#if repeatMonday}} Mon{{/if}}
+            {{#if repeatTuesday}} Tue{{/if}}
+            {{#if repeatWednesday}} Wed{{/if}}
+            {{#if repeatThursday}} Thu{{/if}}
+            {{#if repeatFriday}} Fri{{/if}}
+            {{#if repeatSaturday}} Sat{{/if}}
+          </div>
+
+        </div>
+        {{/if}}
+        {{/if}}
+
+        {{#if goalReward}}
+        <div class="center-vertical">
+          <i class="fa fa-gift" style="margin-right: 10px;"></i>
+
+          <div style="margin-top:0.8px;">{{goalReward}}</div>
+
+        </div>
+        {{/if}}
       </div>
     </div>
     {{/each}}
+
   </div>
 
   {{> facebook}}
   {{> sw}}
   <script src="../js/facebook.js"></script>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
     integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
     crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
     integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
     crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function () {
+      $(".viewMore").click(function () {
+        const routineID = $(this).attr("data-id");
+        const currentToggleState = $(this).find(`[data-view=${routineID}]`)[0];
+
+        if (currentToggleState.textContent.trim() === "View More") {
+          currentToggleState.textContent = "View Less";
+        } else {
+          currentToggleState.textContent = "View More";
+        }
+
+        $(`#${routineID}`).toggleClass("hidden");
+      });
+    });
+  </script>
 
 </body>
 
