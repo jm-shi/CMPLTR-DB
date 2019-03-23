@@ -29,7 +29,7 @@ self.__precacheManifest = [
   },
   {
     "url": "css/style.css",
-    "revision": "f17022f8ba8ff9502653660287488020"
+    "revision": "2da30c090bbb7f18b8b949adbb134692"
   },
   {
     "url": "images/createRoutine.png",
@@ -124,6 +124,10 @@ self.__precacheManifest = [
     "revision": "d0512b2da766da2934c9e10e2356f0cd"
   },
   {
+    "url": "images/logo.png",
+    "revision": "54469408e6e03f7f6ca153ea573944b7"
+  },
+  {
     "url": "js/calendar.js",
     "revision": "2f057b4044f6ea873ae4585bea088468"
   },
@@ -133,7 +137,7 @@ self.__precacheManifest = [
   },
   {
     "url": "js/facebook.js",
-    "revision": "db22328d417ba17d4bbbb02c8e633eb1"
+    "revision": "a5d0a2147629b4ecb8cfe478269e221f"
   },
   {
     "url": "js/forms.js",
@@ -145,7 +149,7 @@ self.__precacheManifest = [
   },
   {
     "url": "js/routines.js",
-    "revision": "5df2e56a5c10615e29e3fed6d236a853"
+    "revision": "b72d4c8fd2e994d5f5c122986f0494c1"
   },
   {
     "url": "manifest.json",
