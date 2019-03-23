@@ -17,34 +17,34 @@
   <link rel="shortcut icon" sizes="150x150" href="/images/icons/icon-150x150.png">
   <link rel="apple-touch-icon" sizes="192x192" href="/images/icons/icon-192x192.png">
   <link rel="apple-touch-icon" sizes="150x150" href="/images/icons/icon-150x150.png">
-  <link href="/images/icons/splash/iphone5_splash.png"
+  <link href="/images/splash/iphone5_splash.png"
     media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
     rel="apple-touch-startup-image" />
-  <link href="/images/icons/splash/iphone6_splash.png"
+  <link href="/images/splash/iphone6_splash.png"
     media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
     rel="apple-touch-startup-image" />
-  <link href="/images/icons/splash/iphoneplus_splash.png"
+  <link href="/images/splash/iphoneplus_splash.png"
     media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)"
     rel="apple-touch-startup-image" />
-  <link href="/images/icons/splash/iphonex_splash.png"
+  <link href="/images/splash/iphonex_splash.png"
     media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)"
     rel="apple-touch-startup-image" />
-  <link href="/images/icons/splash/iphonexr_splash.png"
+  <link href="/images/splash/iphonexr_splash.png"
     media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)"
     rel="apple-touch-startup-image" />
-  <link href="/images/icons/splash/iphonexsmax_splash.png"
+  <link href="/images/splash/iphonexsmax_splash.png"
     media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)"
     rel="apple-touch-startup-image" />
-  <link href="/images/icons/splash/ipad_splash.png"
+  <link href="/images/splash/ipad_splash.png"
     media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)"
     rel="apple-touch-startup-image" />
-  <link href="/images/icons/splash/ipadpro1_splash.png"
+  <link href="/images/splash/ipadpro1_splash.png"
     media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)"
     rel="apple-touch-startup-image" />
-  <link href="/images/icons/splash/ipadpro3_splash.png"
+  <link href="/images/splash/ipadpro3_splash.png"
     media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)"
     rel="apple-touch-startup-image" />
-  <link href="/images/icons/splash/ipadpro2_splash.png"
+  <link href="/images/splash/ipadpro2_splash.png"
     media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)"
     rel="apple-touch-startup-image" />
   {{> analytics}}
@@ -67,142 +67,131 @@
         <div class="invalid-feedback">Please enter a title.</div>
       </div>
       <div class="form-group">
-        <label for="daysToComplete">Days to Complete</label> <button type="button" class="question-btn"
-          data-toggle="modal" data-target="#daysToCompleteModal">
+        <label for="daysToComplete">Days to Complete</label>
+        <button type="button" class="question-btn" data-toggle="modal" data-target="#daysToCompleteModal">
           <i class="fas fa-question-circle"></i>
         </button>
         <span class="required">required</span>
         <input type="number" class="form-control" id="daysToComplete" name="daysToComplete"
           value="{{currentRoutineData.daysToComplete}}" required>
-        <div class="invalid-feedback">Please enter the number of days to complete the routine.</div>
+        <div class="invalid-feedback">Please enter the number of days (between 0 and 366) to complete the routine.</div>
       </div>
+
       <div class="form-group">
-        <button type="button" class="btn btn-dark large-btn" data-toggle="modal" data-target="#alarmModal">
-          Set Alarm
+        <label for="alarm">Alarm</label>
+        <button type="button" class="question-btn" data-toggle="modal" data-target="#alarmModal">
+          <i class="fas fa-question-circle"></i>
         </button>
+        <span class="optional">optional</span>
+        <input class="alarm form-control" onfocus="(this.type='time')" id="alarm" name="alarm" placeholder="12:30 PM"
+          value="{{currentRoutineData.alarm}}" />
+      </div>
 
-        <div id="alarmStatus">
-          <small id="alarmHelp" class="form-text text-muted">Alarm has not been set.</small>
-        </div>
-
-        <!-- Set Alarm Modal -->
-        <div class="modal fade" id="alarmModal" tabindex="-1" role="dialog" aria-labelledby="alarmModalLabel"
-          aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="alarmModalLabel">Set Alarm</h5>
-              </div>
-              <div class="modal-body">
-                <div class="container">
-                  <div class="center-text">
-                    <input class="alarm" onfocus="(this.type='time')" id="alarm" name="alarm" placeholder="12:30 PM"
-                      value="{{currentRoutineData.alarm}}" onchange="updateAlarmText()" />
-                  </div>
-
-                  <hr />
-                  <div class="divider"><strong>Repeat</strong></div>
-                  <div class="circular-btns">
-
-                    <button type="button" class="btn circular-btn monday 
+      <div class="form-group">
+        <label for="repeat">Repeat</label>
+        <button type="button" class="question-btn" data-toggle="modal" data-target="#repeatModal">
+          <i class="fas fa-question-circle"></i>
+        </button>
+        <span class="optional">optional</span>
+        <div class="circular-btns">
+          <button type="button" class="btn circular-btn monday 
                        {{#if currentRoutineData.repeatMonday}}btn-dark{{else}}btn-light{{/if}}">Mo</button>
-                    <button type="button" class="btn circular-btn tuesday 
+          <button type="button" class="btn circular-btn tuesday 
                       {{#if currentRoutineData.repeatTuesday}}btn-dark{{else}}btn-light{{/if}}">Tu</button>
-                    <button type="button" class="btn circular-btn wednesday
+          <button type="button" class="btn circular-btn wednesday
                       {{#if currentRoutineData.repeatWednesday}}btn-dark{{else}}btn-light{{/if}}">We</button>
-                    <button type="button" class="btn circular-btn thursday
+          <button type="button" class="btn circular-btn thursday
                      {{#if currentRoutineData.repeatThursday}}btn-dark{{else}}btn-light{{/if}}">Th</button>
-                    <button type="button" class="btn circular-btn friday
+          <button type="button" class="btn circular-btn friday
                       {{#if currentRoutineData.repeatFriday}}btn-dark{{else}}btn-light{{/if}}">Fr</button>
-                    <button type="button" class="btn circular-btn saturday
+          <button type="button" class="btn circular-btn saturday
                        {{#if currentRoutineData.repeatSaturday}}btn-dark{{else}}btn-light{{/if}}">Sa</button>
-                    <button type="button" class="btn circular-btn sunday
+          <button type="button" class="btn circular-btn sunday
                        {{#if currentRoutineData.repeatSunday}}btn-dark{{else}}btn-light{{/if}}">Su</button>
 
-                    <input type="checkbox" name="repeatMonday" class="monday hidden"
-                      {{#if currentRoutineData.repeatMonday}}checked{{/if}}>
-                    <input type="checkbox" name="repeatTuesday" class="tuesday hidden"
-                      {{#if currentRoutineData.repeatTuesday}}checked{{/if}}>
-                    <input type="checkbox" name="repeatWednesday" class="wednesday hidden"
-                      {{#if currentRoutineData.repeatWednesday}}checked{{/if}}>
-                    <input type="checkbox" name="repeatThursday" class="thursday hidden"
-                      {{#if currentRoutineData.repeatThursday}}checked{{/if}}>
-                    <input type="checkbox" name="repeatFriday" class="friday hidden"
-                      {{#if currentRoutineData.repeatFriday}}checked{{/if}}>
-                    <input type="checkbox" name="repeatSaturday" class="saturday hidden"
-                      {{#if currentRoutineData.repeatSaturday}}checked{{/if}}>
-                    <input type="checkbox" name="repeatSunday" class="sunday hidden"
-                      {{#if currentRoutineData.repeatSunday}}checked{{/if}}>
-                  </div>
-
-                  <div class="form-check">
-                    <input type="checkbox" name="everyOtherDay" class="form-check-input"
-                      {{#if currentRoutineData.everyOtherDay}}checked{{/if}} />
-                    <label class="form-check-label" for="otherDayCheck">Every other day</label>
-                  </div>
-
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
-              </div>
-            </div>
-          </div>
+          <input type="checkbox" name="repeatMonday" class="monday hidden"
+            {{#if currentRoutineData.repeatMonday}}checked{{/if}}>
+          <input type="checkbox" name="repeatTuesday" class="tuesday hidden"
+            {{#if currentRoutineData.repeatTuesday}}checked{{/if}}>
+          <input type="checkbox" name="repeatWednesday" class="wednesday hidden"
+            {{#if currentRoutineData.repeatWednesday}}checked{{/if}}>
+          <input type="checkbox" name="repeatThursday" class="thursday hidden"
+            {{#if currentRoutineData.repeatThursday}}checked{{/if}}>
+          <input type="checkbox" name="repeatFriday" class="friday hidden"
+            {{#if currentRoutineData.repeatFriday}}checked{{/if}}>
+          <input type="checkbox" name="repeatSaturday" class="saturday hidden"
+            {{#if currentRoutineData.repeatSaturday}}checked{{/if}}>
+          <input type="checkbox" name="repeatSunday" class="sunday hidden"
+            {{#if currentRoutineData.repeatSunday}}checked{{/if}}>
         </div>
 
-      </div>
-      <div class="form-group">
-        <label for="goals">Goals</label>
-        <button type="button" class="question-btn" data-toggle="modal" data-target="#goalsModal">
-          <i class="fas fa-question-circle"></i>
-        </button>
-        <span class="optional">optional</span>
-        <input type="text" class="form-control" id="goals" name="goals" value="{{currentRoutineData.goals}}">
-      </div>
-      <div class="form-group">
-        <label for="goalReward">Goal Reward</label>
-        <button type="button" class="question-btn" data-toggle="modal" data-target="#goalRewardModal">
-          <i class="fas fa-question-circle"></i>
-        </button>
-        <span class="optional">optional</span>
-        <input type="text" class="form-control" id="goalReward" name="goalReward"
-          value="{{currentRoutineData.goalReward}}">
+        <div class="form-check center-text">
+          <input type="checkbox" name="everyOtherDay" class="form-check-input"
+            {{#if currentRoutineData.everyOtherDay}}checked{{/if}} />
+          <label class="form-check-label" for="otherDayCheck">Every other day</label>
+        </div>
       </div>
 
-      <input class="hidden" type="text" name="id" value={{currentRoutineData.id}} readonly>
-      <input class="hidden" type="text" name="createdAtString" id="createdAtString"
-        value={{currentRoutineData.createdAtString}}>
+      <div class="form-group">
+        <div class="form-group">
+          <label for="goals">Goals</label>
+          <button type="button" class="question-btn" data-toggle="modal" data-target="#goalsModal">
+            <i class="fas fa-question-circle"></i>
+          </button>
+          <span class="optional">optional</span>
+          <input type="text" class="form-control" id="goals" name="goals" value="{{currentRoutineData.goals}}">
+          <div class="invalid-feedback">Please enter a goal(s).</div>
+        </div>
+        <div class="form-group">
+          <label for="goalReward">Goal Reward</label>
+          <button type="button" class="question-btn" data-toggle="modal" data-target="#goalRewardModal">
+            <i class="fas fa-question-circle"></i>
+          </button>
+          <span class="optional">optional</span>
+          <input type="text" class="form-control" id="goalReward" name="goalReward"
+            value="{{currentRoutineData.goalReward}}">
+          <div class="invalid-feedback">Please enter a goal reward.</div>
+        </div>
 
-      <div class="text-center">
-        <input type="submit" class="btn btn-dark large-btn" value="Save">
-        </input>
-      </div>
+        <input class="hidden" type="text" name="id" id="uuid" value={{currentRoutineData.id}} readonly>
+        <input class="hidden" type="text" name="createdAt" id="createdAt" value={{currentRoutineData.createdAt}}>
+
+        <div class="text-center">
+          <input type="submit" class="btn btn-dark large-btn" value="Save">
+          </input>
+        </div>
     </form>
   </div>
 
   <!-- Title Modal -->
   {{> modal modalId="titleModal" modalTitle="Title" modalLabel="titleModalLabel" definition="The name for a
   routine."
-  examples="Ex: go to gym, study math"}}
+  examples="Ex: go to gym"}}
 
-  <!-- Goals Modal -->
-  {{> modal modalId="startDateModal" modalTitle="Start Date" modalLabel="goalsModalLabel"
-  definition="The day you will begin your routine."}}
+  <!-- Days to Complete Modal -->
+  {{> modal modalId="daysToCompleteModal" modalTitle="Days to Complete" modalLabel="daysToCompleteModalLabel"
+  definition="The number of work days to finish the routine. Does not include rest days. 
+  Your routine must be at least 1 and no more than 365 work days long."}}
+
+  <!-- Alarm Modal -->
+  {{> modal modalId="alarmModal" modalTitle="Alarm" modalLabel="alarmModalLabel"
+  definition="When CMPLTR will notify you to complete the routine."}}
+
+  <!-- Repeat Modal -->
+  {{> modal modalId="repeatModal" modalTitle="Repeat" modalLabel="repeatModalLabel"
+  definition="What days of the week you will do the routine. Defaults to every day. If you select 
+  'every other day,' then you will do the routine every other day, starting from today."}}
 
   <!-- Goals Modal -->
   {{> modal modalId="goalsModal" modalTitle="Goals" modalLabel="goalsModalLabel"
   definition="The objectives you want to achieve by the end of the routine. To create multiple goals, separate them with a comma."
-  examples="Ex: lose 10 pounds, get A on exam"}}
+  examples="Ex: lose 10 pounds, run a 5K"}}
 
   <!-- Goal Reward Modal -->
   {{> modal modalId="goalRewardModal" modalTitle="Goal Reward" modalLabel="goalRewardModalLabel"
   definition="What you will reward yourself with after finishing the routine. This provides an incentive for you to
   achieve your goals."
-  examples="Ex: watch a movie, eat ice cream"}}
-
-  <!-- Days to Complete Modal -->
-  {{> modal modalId="daysToCompleteModal" modalTitle="Days to Complete" modalLabel="daysToCompleteModalLabel"
-  definition="The number of work days to finish the routine. Does not include rest days."}}
+  examples="Ex: watch a movie"}}
 
   {{> facebook}}
   {{> sw}}
@@ -219,20 +208,26 @@
     crossorigin="anonymous"></script>
   <script src="../js/forms.js"></script>
   <script src="../js/repeatButtons.js"></script>
+
   <script>
-    function updateAlarmText() {
-      const alarmTime = $('#alarm').val();
-      if (alarmTime === '') {
-        $('#alarmStatus').html(`<small id="alarmHelp" class="form-text text-muted">Alarm has not been set.</small>`);
-      } else {
-        $('#alarmStatus').html(`<small id="alarmHelp" class="form-text text-success">Alarm has been set to ${militaryToStandard(alarmTime)}.</small>`);
+    $("form").submit(function (event) {
+      const daysToCompleteValue = $("#daysToComplete").val();
+      if (daysToCompleteValue && (daysToCompleteValue <= 0 || daysToComplete > 365)) {
+        event.preventDefault();
+        event.stopPropagation();
       }
-    }
-    $(document).ready(function () {
-      updateAlarmText();
+      this.classList.add("was-validated");
+    });
+
+    $("#daysToComplete").keyup(function () {
+      const daysToCompleteValue = $("#daysToComplete").val();
+      if (!daysToCompleteValue || daysToCompleteValue <= 0 || daysToCompleteValue > 365) {
+        this.setCustomValidity("Value must be greater than zero and no more than 365.");
+      } else {
+        this.setCustomValidity("");
+      }
     });
   </script>
-
 </body>
 
 </html>

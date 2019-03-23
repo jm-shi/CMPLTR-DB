@@ -74,8 +74,20 @@
 </head>
 
 <body>
-  {{> create alt="true"}}
+  {{> create}}
+
   {{> sw}}
+  <script src="js/calendar.js"></script>
+  <script>
+    function updateAlarmText() {
+      const alarmTime = $('#alarm').val();
+      if (alarmTime === '') {
+        $('#alarmStatus').html(`<small id="alarmHelp" class="form-text text-muted">Alarm has not been set.</small>`);
+      } else {
+        $('#alarmStatus').html(`<small id="alarmHelp" class="form-text text-success">Alarm has been set to ${militaryToStandard(alarmTime)}.</small>`);
+      }
+    }
+  </script>
 </body>
 
 </html>
