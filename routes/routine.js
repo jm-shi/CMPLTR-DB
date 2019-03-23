@@ -1,6 +1,6 @@
 const { Routine } = require('../models/routine.js');
 
-exports.addRoutine = function (req, res) {
+exports.addRoutine = function(req, res) {
   const createdAtString = req.body.createdAtString;
   const title = req.body.title;
   const daysCompleted = 0;
@@ -15,9 +15,20 @@ exports.addRoutine = function (req, res) {
   const repeatFriday = req.body.repeatFriday;
   const repeatSaturday = req.body.repeatSaturday;
   const repeatSunday = req.body.repeatSunday;
-  const everyDay = (!repeatSunday && !repeatMonday && !repeatTuesday && !repeatWednesday
-    && !repeatThursday && !repeatFriday) || (repeatSunday && repeatMonday
-      && repeatTuesday && repeatWednesday && repeatThursday && repeatFriday && repeatSaturday);
+  const everyDay =
+    (!repeatSunday &&
+      !repeatMonday &&
+      !repeatTuesday &&
+      !repeatWednesday &&
+      !repeatThursday &&
+      !repeatFriday) ||
+    (repeatSunday &&
+      repeatMonday &&
+      repeatTuesday &&
+      repeatWednesday &&
+      repeatThursday &&
+      repeatFriday &&
+      repeatSaturday);
   const everyOtherDay = req.body.everyOtherDay;
   let owner = 'anonymous';
   if (req.session && req.session._id) {
@@ -25,13 +36,13 @@ exports.addRoutine = function (req, res) {
   }
 
   let goals = req.body.goals;
-  goals = goals.split(",");
+  goals = goals.split(',');
   // Remove leading and trailing spaces
   for (let i = 0; i < goals.length; i++) {
     goals[i] = goals[i].trim();
   }
   // Exclude last goal if it's an empty string
-  if (goals[goals.length - 1].trim() === "") goals.pop();
+  if (goals[goals.length - 1].trim() === '') goals.pop();
   // Capitalize first letter of each item in goals array
   for (let i = 0; i < goals.length; i++) {
     goals[i] = goals[i].charAt(0).toUpperCase() + goals[i].substr(1);
@@ -63,26 +74,29 @@ exports.addRoutine = function (req, res) {
 
   if (title && daysToComplete) {
     const newRoutine = new Routine(currentRoutine);
-    newRoutine.save().then(function () {
-      console.log('Created new routine!');
-      res.send(newRoutine);
-      return res.redirect('/currentRoutines');
-    }).catch(function (err) {
-      res.status(400).send(err);
-    });
+    newRoutine
+      .save()
+      .then(function() {
+        console.log('Created new routine!');
+        res.send(newRoutine);
+        return res.redirect('/currentRoutines');
+      })
+      .catch(function(err) {
+        res.status(400).send(err);
+      });
   }
 };
 
-exports.completeRoutine = function (req, res) {
+exports.completeRoutine = function(req, res) {
   const id = req.params.id;
   const completedGoalsCount = parseInt(req.body.completedGoalsCount);
   let goalsArray = req.body.goalsArray;
   if (goalsArray) {
-    goalsArray = goalsArray.map(function (item) {
+    goalsArray = goalsArray.map(function(item) {
       return {
         goal: item.goal,
         completed: parseInt(item.completed)
-      }
+      };
     });
   }
   const date = new Date();
@@ -91,7 +105,7 @@ exports.completeRoutine = function (req, res) {
     month: date.getMonth(),
     date: date.getDate(),
     year: date.getFullYear()
-  }
+  };
   const finishDateString = JSON.stringify(finishDate);
 
   update = {
@@ -101,9 +115,12 @@ exports.completeRoutine = function (req, res) {
       completedGoalsCount,
       goalsArray
     }
-  }
+  };
 
-  Routine.findByIdAndUpdate(id, update, { new: true }, function (err, updatedRoutine) {
+  Routine.findByIdAndUpdate(id, update, { new: true }, function(
+    err,
+    updatedRoutine
+  ) {
     if (err) {
       return console.log('Error with archiving routine', err);
     }
@@ -111,9 +128,9 @@ exports.completeRoutine = function (req, res) {
   });
 };
 
-exports.deletePreviousRoutine = function (req, res) {
+exports.deletePreviousRoutine = function(req, res) {
   const id = req.params.id;
-  Routine.findByIdAndRemove(id, function (err, routine) {
+  Routine.findByIdAndRemove(id, function(err, routine) {
     if (err) {
       return console.log('Could not remove current routine', err);
     }
@@ -122,9 +139,9 @@ exports.deletePreviousRoutine = function (req, res) {
   });
 };
 
-exports.deleteRoutine = function (req, res) {
+exports.deleteRoutine = function(req, res) {
   const id = req.params.id;
-  Routine.findByIdAndRemove(id, function (err, routine) {
+  Routine.findByIdAndRemove(id, function(err, routine) {
     if (err) {
       return console.log('Could not remove current routine', err);
     }
@@ -133,25 +150,60 @@ exports.deleteRoutine = function (req, res) {
   });
 };
 
-exports.editRoutine = function (req, res) {
+exports.editRoutine = async function(req, res) {
   const id = req.params.id;
 
   let goals = req.body.goals;
-  goals = goals.split(",");
+  goals = goals.split(',');
   // Remove leading and trailing spaces
   for (let i = 0; i < goals.length; i++) {
     goals[i] = goals[i].trim();
   }
   // Exclude last goal if it's an empty string
-  if (goals[goals.length - 1].trim() === "") goals.pop();
+  if (goals[goals.length - 1].trim() === '') goals.pop();
   // Capitalize first letter of each item in goals array
   for (let i = 0; i < goals.length; i++) {
     goals[i] = goals[i].charAt(0).toUpperCase() + goals[i].substr(1);
   }
 
+  let updatedCompletionChart = [];
+  let updatedDaysToComplete = req.body.daysToComplete;
+  let updatedDaysCompleted = 0;
+
+  await Routine.findById(id, function(err, currRoutine) {
+    const originalDaysToComplete = currRoutine.daysToComplete;
+    const newDaysToComplete = parseInt(req.body.daysToComplete);
+    if (originalDaysToComplete <= newDaysToComplete) {
+      const daysToAdd = newDaysToComplete - originalDaysToComplete;
+      currRoutine.completionChart = currRoutine.completionChart.concat(
+        Array(daysToAdd).fill(0)
+      );
+    } else {
+      let completedDaysToRemove = 0;
+      for (
+        let i = newDaysToComplete;
+        i < currRoutine.completionChart.length;
+        i++
+      ) {
+        if (currRoutine.completionChart[i] === 1) {
+          completedDaysToRemove++;
+        }
+      }
+      updatedDaysCompleted = currRoutine.daysCompleted - completedDaysToRemove;
+      currRoutine.completionChart = currRoutine.completionChart.slice(
+        0,
+        newDaysToComplete
+      );
+    }
+    updatedCompletionChart = currRoutine.completionChart;
+    updatedDaysToComplete = newDaysToComplete;
+  });
+
   const update = {
     title: req.body.title,
-    daysToComplete: req.body.daysToComplete,
+    completionChart: updatedCompletionChart,
+    daysCompleted: updatedDaysCompleted,
+    daysToComplete: updatedDaysToComplete,
     alarm: req.body.alarm,
     repeatMonday: req.body.repeatMonday,
     repeatTuesday: req.body.repeatTuesday,
@@ -160,25 +212,38 @@ exports.editRoutine = function (req, res) {
     repeatFriday: req.body.repeatFriday,
     repeatSaturday: req.body.repeatSaturday,
     repeatSunday: req.body.repeatSunday,
-    everyDay: (!req.body.repeatSunday && !req.body.repeatMonday && !req.body.repeatTuesday
-      && !req.body.repeatWednesday && !req.body.repeatThursday && !req.body.repeatFriday)
-      || (req.body.repeatSunday && req.body.repeatMonday && req.body.repeatTuesday
-        && req.body.repeatWednesday && req.body.repeatThursday && req.body.repeatFriday
-        && req.body.repeatSaturday),
+    everyDay:
+      (!req.body.repeatSunday &&
+        !req.body.repeatMonday &&
+        !req.body.repeatTuesday &&
+        !req.body.repeatWednesday &&
+        !req.body.repeatThursday &&
+        !req.body.repeatFriday) ||
+      (req.body.repeatSunday &&
+        req.body.repeatMonday &&
+        req.body.repeatTuesday &&
+        req.body.repeatWednesday &&
+        req.body.repeatThursday &&
+        req.body.repeatFriday &&
+        req.body.repeatSaturday),
     everyOtherDay: req.body.everyOtherDay,
     goalReward: req.body.goalReward,
     goals: goals
-  }
+  };
 
-  Routine.findByIdAndUpdate(id, update, { new: true }, function (err, updatedRoutine) {
+  Routine.findByIdAndUpdate(id, update, { new: true }, function(
+    err,
+    updatedRoutine
+  ) {
     if (err) {
       return console.log('Error with updating routine', err);
     }
+    console.log('The updated routine is...', updatedRoutine);
     return res.redirect('/currentRoutines');
   });
 };
 
-exports.updateCompletionLog = function (req, res) {
+exports.updateCompletionLog = function(req, res) {
   console.log('Update completion log', req.body);
 
   const index = req.body.index;
@@ -194,9 +259,12 @@ exports.updateCompletionLog = function (req, res) {
   update = {
     $set: { [indexToUpdate]: isComplete },
     $inc: { daysCompleted: incrementBy }
-  }
+  };
 
-  Routine.findByIdAndUpdate(id, update, { new: true }, function (err, updatedRoutine) {
+  Routine.findByIdAndUpdate(id, update, { new: true }, function(
+    err,
+    updatedRoutine
+  ) {
     if (err) {
       return console.log('Error with updating completion log', err);
     }
@@ -216,7 +284,7 @@ exports.updateCompletionLog = function (req, res) {
   });
 };
 
-exports.viewCreateRoutine = function (req, res) {
+exports.viewCreateRoutine = function(req, res) {
   if (req.session && req.session.first_name) {
     res.render('createRoutine', {
       navbarTitle: 'Create Routine',
@@ -230,8 +298,7 @@ exports.viewCreateRoutine = function (req, res) {
   }
 };
 
-exports.viewCreateRoutineAlt = function (req, res) {
-  ;
+exports.viewCreateRoutineAlt = function(req, res) {
   if (req.session && req.session.first_name) {
     res.render('createRoutineAlt', {
       navbarTitle: 'Create Routine',
@@ -245,10 +312,10 @@ exports.viewCreateRoutineAlt = function (req, res) {
   }
 };
 
-exports.viewCurrentRoutine = function (req, res) {
+exports.viewCurrentRoutine = function(req, res) {
   const id = req.params.id;
 
-  Routine.findById(id, function (err, routine) {
+  Routine.findById(id, function(err, routine) {
     if (err) {
       return console.log('Error with finding current routine:', err);
     }
@@ -270,10 +337,10 @@ exports.viewCurrentRoutine = function (req, res) {
   });
 };
 
-exports.viewEditRoutine = function (req, res) {
+exports.viewEditRoutine = function(req, res) {
   const id = req.params.id;
 
-  Routine.findById(id, function (err, currentRoutine) {
+  Routine.findById(id, function(err, currentRoutine) {
     if (err) {
       return console.log('Could not view edit routine screen', err);
     }
@@ -281,8 +348,8 @@ exports.viewEditRoutine = function (req, res) {
     if (currentRoutine.goals) {
       // Append a space to the start of each subsequent goal
       for (let i = 1; i < currentRoutine.goals.length; i++) {
-        if (currentRoutine.goals[i].charAt(0) != " ") {
-          currentRoutine.goals[i] = " " + currentRoutine.goals[i];
+        if (currentRoutine.goals[i].charAt(0) != ' ') {
+          currentRoutine.goals[i] = ' ' + currentRoutine.goals[i];
         }
       }
     }
@@ -300,14 +367,13 @@ exports.viewEditRoutine = function (req, res) {
         currentRoutineData: currentRoutine
       });
     }
-
-  })
+  });
 };
 
-exports.viewPreviousRoutine = function (req, res) {
+exports.viewPreviousRoutine = function(req, res) {
   const id = req.params.id;
 
-  Routine.findById(id, function (err, routine) {
+  Routine.findById(id, function(err, routine) {
     if (err) {
       return console.log('Error with finding current routine:', err);
     }
@@ -326,17 +392,19 @@ exports.viewPreviousRoutine = function (req, res) {
         previousRoutineData: routine
       });
     }
-
   });
 };
 
-exports.viewAllCurrentRoutines = function (req, res) {
+exports.viewAllCurrentRoutines = function(req, res) {
   let signedInUser = 'anonymous';
   if (req.session && req.session._id) {
     signedInUser = req.session._id;
   }
 
-  Routine.find({ isArchived: false, owner: signedInUser }, function (err, currRoutines) {
+  Routine.find({ isArchived: false, owner: signedInUser }, function(
+    err,
+    currRoutines
+  ) {
     console.log('currroutines', currRoutines);
     if (req.session && req.session.first_name) {
       res.render('currentRoutines', {
@@ -354,12 +422,15 @@ exports.viewAllCurrentRoutines = function (req, res) {
   }).sort('-createdAt');
 };
 
-exports.viewAllPreviousRoutines = function (req, res) {
+exports.viewAllPreviousRoutines = function(req, res) {
   let signedInUser = 'anonymous';
   if (req.session && req.session._id) {
     signedInUser = req.session._id;
   }
-  Routine.find({ isArchived: true, owner: signedInUser }, function (err, prevRoutines) {
+  Routine.find({ isArchived: true, owner: signedInUser }, function(
+    err,
+    prevRoutines
+  ) {
     if (req.session && req.session.first_name) {
       res.render('previousRoutines', {
         navbarTitle: 'Archived Routines',
@@ -367,7 +438,6 @@ exports.viewAllPreviousRoutines = function (req, res) {
         firstName: req.session.first_name,
         userSignedIn: true
       });
-
     } else {
       res.render('previousRoutines', {
         navbarTitle: 'Archived Routines',
