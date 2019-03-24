@@ -10,6 +10,12 @@ body {
   width: 100%;
 }
 
+@media only screen and (max-width: 350px) {
+  .carousel-font-size {
+    font-size: 0.9em;
+  }
+}
+
 .carousel-indicators li {
   background-color: #fff;
   border: none;
@@ -95,6 +101,46 @@ body {
   display: inline-block;
   margin-bottom: 0.5em;
   vertical-align: middle;
+}
+
+.community-item {
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.community-item-left {
+  color: white;
+  margin-top: 0.5em;
+}
+
+.community-item-right {
+  color: white;
+  margin-left: 1em;
+  width: 100%;
+}
+
+.community-item-bottom-right {
+  display: flex;
+  justify-content: space-between;
+  color: rgb(126, 126, 126);
+  margin-top: 5px;
+}
+
+.community-item-button {
+  display: block;
+}
+
+.community-item-button-sm {
+  display: none;
+}
+
+@media only screen and (max-width: 390px) {
+  .community-item-button {
+    display: none;
+  }
+  .community-item-button-sm {
+    display: block;
+  }
 }
 
 .container input::placeholder {
@@ -205,6 +251,12 @@ body {
   margin-bottom: 1em;
 }
 
+@media only screen and (max-width: 350px) {
+  .navbar-brand {
+    font-size: 1.1rem;
+  }
+}
+
 .optional {
   color: rgb(126, 126, 126);
   float: right;
@@ -243,6 +295,12 @@ body {
   height: 60px;
   margin-bottom: 1em;
   width: 60px;
+}
+
+@media only screen and (max-width: 330px) {
+  .routineButton .btn-sm {
+    padding: 0.2rem;
+  }
 }
 
 .white {

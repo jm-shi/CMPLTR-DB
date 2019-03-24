@@ -55,77 +55,85 @@
 
   <div class="container">
     {{#each communityFeed.communityFeedData}}
-    <div class="text-white bg-dark mb-3 " style="padding: 1em; border-radius: 5px;">
-      <div style="display:flex;">
-        <i class="fas fa-user-circle fa-2x " style="margin-right: 10px; margin-top: 7px;"></i>
-        {{name}} completed Day {{completedDayNumber}} of their routine "{{routineName}}"
+    <div class="mb-3 community-item bg-dark flex">
+      <div class="community-item-left">
+        <i class="fas fa-user-circle fa-2x "></i>
       </div>
-      <span style="color:grey; margin-left: 40px;">
-        {{date}} at {{time}}
-      </span>
-      <div data-id={{id}} class="viewMore card-link" style="float:right;">
-        <button type="button" class="btn btn-light btn-rounded btn-sm edit-btn">
+      <div class="community-item-right mb-1">
+        <div class="community-item-top-right">
+          {{name}} completed Day {{completedDayNumber}} of their routine "{{routineName}}"
+        </div>
+        <div class="community-item-bottom-right">
+          <div>
+            {{date}} at {{time}}
+          </div>
+          <button data-id={{id}} type="button"
+            class="viewMore btn btn-light btn-rounded btn-sm community-item-button edit-btn">
+            <i class="fas fa-eye">
+              <span class="view" data-view={{id}} style="font-family:Helvetica"> View More</span>
+            </i>
+          </button>
+        </div>
+
+        <button data-id={{id}} type="button"
+          class="viewMore btn btn-light btn-rounded btn-sm community-item-button-sm edit-btn">
           <i class="fas fa-eye">
             <span class="view" data-view={{id}} style="font-family:Helvetica"> View More</span>
           </i>
         </button>
-      </div>
 
-      <div id={{id}} class="extraDetails mt-3 hidden">
-        {{#if goals}}
-        <div class="center-vertical">
-          <i class="fas fa-bullseye" style="margin-right: 10px;"></i>
-          <div style="margin-top:0.8px;">{{goals}}</div>
-        </div>
-        {{/if}}
-
-        {{#if alarm}}
-        <div class="center-vertical">
-          <i class="fas fa-bell" style="margin-right: 12px;"></i>
-          <span id="alarmTime">{{alarm}}</span>
-        </div>
-        {{/if}}
-
-        {{#if everyOtherDay}}
-        <div class="flex">
-          <i class="fas fa-running" style="margin-right: 13px;"></i>
-          <div>Every other day</div>
-        </div>
-        {{else}}
-        {{#if everyDay}}
-        <div class="center-vertical">
-          <i class="fas fa-running" style="margin-right: 13px;"></i>
-          <div>Everyday</div>
-        </div>
-        {{else}}
-        <div class="center-vertical">
-          <i class="fas fa-running" style="margin-right: 13px"></i>
-          <div>
-            {{#if repeatSunday}} Sun{{/if}}
-            {{#if repeatMonday}} Mon{{/if}}
-            {{#if repeatTuesday}} Tue{{/if}}
-            {{#if repeatWednesday}} Wed{{/if}}
-            {{#if repeatThursday}} Thu{{/if}}
-            {{#if repeatFriday}} Fri{{/if}}
-            {{#if repeatSaturday}} Sat{{/if}}
+        <div id={{id}} class="extraDetails mt-3 white hidden" style="position: relative; left: -42px;">
+          {{#if goals}}
+          <div class="center-vertical">
+            <i class="fas fa-bullseye" style="margin-right: 10px;"></i>
+            <div style="margin-top:0.8px;">{{goals}}</div>
           </div>
+          {{/if}}
 
+          {{#if alarm}}
+          <div class="center-vertical">
+            <i class="fas fa-bell" style="margin-right: 12px;"></i>
+            <span id="alarmTime">{{alarm}}</span>
+          </div>
+          {{/if}}
+
+          {{#if everyOtherDay}}
+          <div class="flex">
+            <i class="fas fa-running" style="margin-right: 13px;"></i>
+            <div>Every other day</div>
+          </div>
+          {{else}}
+          {{#if everyDay}}
+          <div class="center-vertical">
+            <i class="fas fa-running" style="margin-right: 13px;"></i>
+            <div>Everyday</div>
+          </div>
+          {{else}}
+          <div class="center-vertical">
+            <i class="fas fa-running" style="margin-right: 13px"></i>
+            <div>
+              {{#if repeatSunday}} Sun{{/if}}
+              {{#if repeatMonday}} Mon{{/if}}
+              {{#if repeatTuesday}} Tue{{/if}}
+              {{#if repeatWednesday}} Wed{{/if}}
+              {{#if repeatThursday}} Thu{{/if}}
+              {{#if repeatFriday}} Fri{{/if}}
+              {{#if repeatSaturday}} Sat{{/if}}
+            </div>
+          </div>
+          {{/if}}
+          {{/if}}
+
+          {{#if goalReward}}
+          <div class="center-vertical">
+            <i class="fa fa-gift" style="margin-right: 10px;"></i>
+            <div style="margin-top:0.8px;">{{goalReward}}</div>
+          </div>
+          {{/if}}
         </div>
-        {{/if}}
-        {{/if}}
-
-        {{#if goalReward}}
-        <div class="center-vertical">
-          <i class="fa fa-gift" style="margin-right: 10px;"></i>
-
-          <div style="margin-top:0.8px;">{{goalReward}}</div>
-
-        </div>
-        {{/if}}
       </div>
     </div>
     {{/each}}
-
   </div>
 
   {{> facebook}}
@@ -143,7 +151,6 @@
       $(".viewMore").click(function () {
         const routineID = $(this).attr("data-id");
         const currentToggleState = $(this).find(`[data-view=${routineID}]`)[0];
-
         if (currentToggleState.textContent.trim() === "View More") {
           currentToggleState.textContent = "View Less";
         } else {
